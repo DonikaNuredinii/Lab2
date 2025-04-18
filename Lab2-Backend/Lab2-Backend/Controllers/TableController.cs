@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Lab2_Backend.Models;  // Make sure this is added
+using Lab2_Backend.Model;  // Make sure this is added
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,14 +20,14 @@ namespace Lab2_Backend.Controllers
 
         // GET: api/Table
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Lab2_Backend.Models.Table>>> GetTables()  // Full namespace
+        public async Task<ActionResult<IEnumerable<Lab2_Backend.Model.Table>>> GetTables()  // Full namespace
         {
             return await _context.Tables.Include(t => t.Restaurant).ToListAsync();
         }
 
         // GET: api/Table/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Lab2_Backend.Models.Table>> GetTable(int id)  // Full namespace
+        public async Task<ActionResult<Lab2_Backend.Model.Table>> GetTable(int id)  // Full namespace
         {
             var table = await _context.Tables.Include(t => t.Restaurant).FirstOrDefaultAsync(t => t.ID == id);
 
@@ -41,8 +41,8 @@ namespace Lab2_Backend.Controllers
 
         // POST: api/Table
         [HttpPost]
-        public async Task<ActionResult<Lab2_Backend.Models.Table>> PostTable(Lab2_Backend.Models.Table table)  // Full namespace
-        {
+        public async Task<ActionResult<Lab2_Backend.Model.Table>> PostTable(Lab2_Backend.Model.Table table)  // Full namespace
+        {   
             _context.Tables.Add(table);
             await _context.SaveChangesAsync();
 
@@ -51,7 +51,7 @@ namespace Lab2_Backend.Controllers
 
         // PUT: api/Table/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTable(int id, Lab2_Backend.Models.Table table)  // Full namespace
+        public async Task<IActionResult> PutTable(int id, Lab2_Backend.Model.Table table)  // Full namespace
         {
             if (id != table.ID)
             {
@@ -81,7 +81,7 @@ namespace Lab2_Backend.Controllers
 
         // DELETE: api/Table/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Lab2_Backend.Models.Table>> DeleteTable(int id)  // Full namespace
+        public async Task<ActionResult<Lab2_Backend.Model.Table>> DeleteTable(int id)  // Full namespace
         {
             var table = await _context.Tables.FindAsync(id);
             if (table == null)

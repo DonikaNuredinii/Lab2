@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Lab2_Backend.Models
+namespace Lab2_Backend.Model
 {
     public class Restaurant
     {

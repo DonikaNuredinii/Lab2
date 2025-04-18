@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Lab2_Backend.Models;
+using Lab2_Backend.Model;
 
 namespace Lab2_Backend
 {
@@ -11,5 +11,7 @@ namespace Lab2_Backend
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Table> Tables { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
     }
 }

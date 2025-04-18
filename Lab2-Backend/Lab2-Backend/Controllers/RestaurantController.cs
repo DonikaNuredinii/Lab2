@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Lab2_Backend.Models;
+using Lab2_Backend.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
