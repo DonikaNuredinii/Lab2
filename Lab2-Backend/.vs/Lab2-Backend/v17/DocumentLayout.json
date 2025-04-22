@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\model\\subcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\model\\subcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422074118_MenuItems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250422074118_MenuItems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\model\\menuitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\model\\menuitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422073918_MenuItems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250422073918_MenuItems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\menuitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\menuitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\model\\subcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\model\\subcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\restaurantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418085504_Categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250418085504_Categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,20 +59,12 @@
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\model\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418084941_Categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250418084941_Categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250417205654_tablecreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\migrations\\20250417205654_tablecreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -65,6 +77,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250417131403_createrestaurant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\migrations\\20250417131403_createrestaurant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\hp\\onedrive\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250418085504_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\migrations\\20250418085504_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -99,71 +115,71 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SubcategoryController.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\SubcategoryController.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\SubcategoryController.cs",
-              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\SubcategoryController.cs",
-              "RelativeToolTip": "Lab2-Backend\\Controllers\\SubcategoryController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEcAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T09:04:21.592Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CategoryController.cs",
-              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "Lab2-Backend\\Controllers\\CategoryController.cs",
-              "ViewState": "AQIAAEYAAAAAAAAAAAAAwFoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T08:49:59.406Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "20250418084941_Categories.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
-              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
-              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
+              "Title": "20250422074118_MenuItems.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422074118_MenuItems.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250422074118_MenuItems.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422074118_MenuItems.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250422074118_MenuItems.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T08:49:41.856Z",
+              "WhenOpened": "2025-04-22T07:41:18.969Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "20250422073918_MenuItems.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422073918_MenuItems.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250422073918_MenuItems.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422073918_MenuItems.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250422073918_MenuItems.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:39:19.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MenuItemsController.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "ViewState": "AQIAACMAAAAAAAAAAAAwwBEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:37:21.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MenuItems.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\MenuItems.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Model\\MenuItems.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\MenuItems.cs",
+              "RelativeToolTip": "Lab2-Backend\\Model\\MenuItems.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAA9wBEAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T07:31:17.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Subcategory.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Subcategory.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Subcategory.cs",
               "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Subcategory.cs",
               "RelativeToolTip": "Lab2-Backend\\Model\\Subcategory.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAQwBEAAAAWAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAABMAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-18T08:49:11.573Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Category.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Category.cs",
-              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Category.cs",
-              "RelativeToolTip": "Lab2-Backend\\Model\\Category.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBAAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T08:47:53.707Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "20250417205654_TableCreate.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250417205654_TableCreate.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250417205654_TableCreate.cs",
@@ -171,12 +187,11 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250417205654_TableCreate.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T20:56:54.299Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T20:56:54.299Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "Table.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Table.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Table.cs",
@@ -184,12 +199,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Table.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T20:47:43.456Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T20:47:43.456Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "RestaurantController.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\RestaurantController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\RestaurantController.cs",
@@ -197,25 +211,86 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\RestaurantController.cs",
               "ViewState": "AQIAAFEAAAAAAAAAAAAAAFsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T20:32:09.041Z",
+              "WhenOpened": "2025-04-17T20:32:09.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "Lab2-Backend\\appsettings.json",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
+              "RelativeToolTip": "Lab2-Backend\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-28T22:02:00.193Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Category.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Category.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Category.cs",
+              "RelativeToolTip": "Lab2-Backend\\Model\\Category.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBAAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T08:47:53.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MyContext.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\MyContext.cs",
               "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
               "RelativeToolTip": "Lab2-Backend\\MyContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAA9AAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAYwBkAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-28T22:03:57.44Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
+              "Title": "20250418084941_Categories.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250418084941_Categories.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T08:49:41.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SubcategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\SubcategoryController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\SubcategoryController.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\SubcategoryController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\SubcategoryController.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAkwE4AAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T09:04:21.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\CategoryController.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAAwFoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T08:49:59.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Restaurant.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Restaurant.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Restaurant.cs",
@@ -223,12 +298,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Restaurant.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAQwAMAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T13:11:20.174Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T13:11:20.174Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 19,
               "Title": "20250418085504_Categories.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250418085504_Categories.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250418085504_Categories.cs",
@@ -236,12 +310,11 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250418085504_Categories.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T08:55:04.587Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-18T08:55:04.587Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "TableController.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\TableController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\TableController.cs",
@@ -249,12 +322,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\TableController.cs",
               "ViewState": "AQIAAEAAAAAAAAAAAAAuwE8AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T20:50:19.72Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T20:50:19.72Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "20250417131403_CreateRestaurant.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250417131403_CreateRestaurant.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250417131403_CreateRestaurant.cs",
@@ -266,19 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
-              "RelativeDocumentMoniker": "Lab2-Backend\\appsettings.json",
-              "ToolTip": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
-              "RelativeToolTip": "Lab2-Backend\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-28T22:02:00.193Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Program.cs",
@@ -290,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "Lab2-Backend.csproj",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.csproj",
               "RelativeDocumentMoniker": "Lab2-Backend\\Lab2-Backend.csproj",
