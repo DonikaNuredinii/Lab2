@@ -16,6 +16,7 @@ namespace Lab2_Backend
         public DbSet<MenuItems> MenuItems { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderItems> OrderItems { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<Role> Roles { get; set; }
