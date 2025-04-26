@@ -20,6 +20,11 @@ namespace Lab2_Backend
         public DbSet<User> Users { get; set; }
 
         public DbSet<Role> Roles { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerAddress> CustomerAddresses { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MenuItems>()
@@ -33,6 +38,13 @@ namespace Lab2_Backend
                 .WithMany()
                 .HasForeignKey(m => m.SubCategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Orders>()
+                .HasOne(o => o.Table)
+                .WithMany()
+                .HasForeignKey(o => o.TableID)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
 
     }

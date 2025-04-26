@@ -19,12 +19,12 @@ namespace Lab2_Backend.Controllers
         }
 
        
-        [HttpGet]
+        [HttpGet("roles")]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
-            return await _context.Roles.ToListAsync();
+            var roles = await _context.Roles.ToListAsync();
+            return Ok(roles);
         }
-
        
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> GetRole(int id)
@@ -41,12 +41,17 @@ namespace Lab2_Backend.Controllers
 
         
         [HttpPost]
-        public async Task<ActionResult<Role>> CreateRole(Role role)
+        public async Task<ActionResult<Role>> CreateRole([FromBody] Role role)
         {
+            if (role == null || string.IsNullOrWhiteSpace(role.RoleName))
+            {
+                return BadRequest("Role name is required.");
+            }
+
             _context.Roles.Add(role);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRole), new { id = role.RoleID }, role);
+            return CreatedAtAction(nameof(GetRoles), new { id = role.RoleID }, role);
         }
 
        

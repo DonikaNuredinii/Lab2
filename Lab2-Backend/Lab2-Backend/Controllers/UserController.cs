@@ -18,42 +18,84 @@ namespace Lab2_Backend.Controllers
             _context = context;
         }
 
-        // GET: api/User
+
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            return await _context.Users.Include(u => u.Role).ToListAsync();
+            var users = await _context.Users
+                                      .Include(u => u.Role)  // Include Role so we get RoleName
+                                      .Select(user => new UserDto
+                                      {
+                                          UserID = user.UserID,
+                                          FirstName = user.FirstName,
+                                          LastName = user.LastName,
+                                          Email = user.Email,
+                                          PhoneNumber = user.PhoneNumber,
+                                          CreationDate = user.CreationDate,
+                                          RoleID = user.RoleID,
+                                          RoleName = user.Role != null ? user.Role.RoleName : null
+                                      })
+                                      .ToListAsync();
+
+            return Ok(users);
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        //Get with ID
+       [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> GetUser(int id)
         {
-            var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.ID == id);
+            var user = await _context.Users
+                                     .Include(u => u.Role)
+                                     .FirstOrDefaultAsync(u => u.UserID == id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            var userDto = new UserDto
+            {
+                UserID = user.UserID,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                CreationDate = user.CreationDate,
+                RoleID = user.RoleID
+            };
+
+            return userDto;
         }
 
-        // POST: api/User
+
+    
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(User user)
+        public async Task<ActionResult<User>> CreateUser(UserCreateDto userDto)
         {
+            var user = new User
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                PhoneNumber = userDto.PhoneNumber,
+                Password = userDto.Password,
+                CreationDate = userDto.CreationDate,
+                RoleID = userDto.RoleID
+            };
+        
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.ID }, user);
+        
+            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, user);
         }
+
 
         // PUT: api/User/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, User user)
         {
-            if (id != user.ID)
+            if (id != user.UserID)
             {
                 return BadRequest();
             }
@@ -66,7 +108,7 @@ namespace Lab2_Backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Users.Any(e => e.ID == id))
+                if (!_context.Users.Any(e => e.UserID == id))
                 {
                     return NotFound();
                 }

@@ -1,0 +1,26 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace Lab2_Backend.Migrations
+{
+    /// <inheritdoc />
+    public partial class roleID : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<int>(
+                name: "RolesID",
+                table: "Roles",
+                type: "int",
+                nullable: true);
+        }
+    }
+}

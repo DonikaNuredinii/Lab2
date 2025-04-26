@@ -44,6 +44,51 @@ namespace Lab2_Backend.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Lab2_Backend.Model.Customer", b =>
+                {
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerAddressID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserID");
+
+                    b.HasIndex("CustomerAddressID");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.CustomerAddress", b =>
+                {
+                    b.Property<int>("CustomerAddressID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerAddressID"));
+
+                    b.Property<string>("AddressLine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerAddressID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("CustomerAddresses");
+                });
+
             modelBuilder.Entity("Lab2_Backend.Model.MenuItems", b =>
                 {
                     b.Property<int>("Id")
@@ -86,6 +131,80 @@ namespace Lab2_Backend.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("MenuItems");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.OrderItems", b =>
+                {
+                    b.Property<int>("OrderItemsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemsID"));
+
+                    b.Property<int>("MenuItemsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrdersID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderItemsID");
+
+                    b.HasIndex("MenuItemsID");
+
+                    b.HasIndex("OrdersID");
+
+                    b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.Orders", b =>
+                {
+                    b.Property<int>("OrdersID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrdersID"));
+
+                    b.Property<int>("CostumerAdressID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CostumerID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("RestaurantID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("TableID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrdersID");
+
+                    b.HasIndex("RestaurantID");
+
+                    b.HasIndex("TableID");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.Restaurant", b =>
@@ -131,9 +250,6 @@ namespace Lab2_Backend.Migrations
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RolesID")
-                        .HasColumnType("int");
 
                     b.HasKey("RoleID");
 
@@ -185,11 +301,11 @@ namespace Lab2_Backend.Migrations
 
             modelBuilder.Entity("Lab2_Backend.Model.User", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -217,7 +333,7 @@ namespace Lab2_Backend.Migrations
                     b.Property<int?>("RoleID")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("UserID");
 
                     b.HasIndex("RoleID");
 
@@ -233,6 +349,32 @@ namespace Lab2_Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.Customer", b =>
+                {
+                    b.HasOne("Lab2_Backend.Model.CustomerAddress", "CustomerAddress")
+                        .WithMany()
+                        .HasForeignKey("CustomerAddressID");
+
+                    b.HasOne("Lab2_Backend.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CustomerAddress");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.CustomerAddress", b =>
+                {
+                    b.HasOne("Lab2_Backend.Model.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerID");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.MenuItems", b =>
@@ -252,6 +394,44 @@ namespace Lab2_Backend.Migrations
                     b.Navigation("Restaurant");
 
                     b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.OrderItems", b =>
+                {
+                    b.HasOne("Lab2_Backend.Model.MenuItems", "MenuItems")
+                        .WithMany()
+                        .HasForeignKey("MenuItemsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lab2_Backend.Model.Orders", "Orders")
+                        .WithMany()
+                        .HasForeignKey("OrdersID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuItems");
+
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.Orders", b =>
+                {
+                    b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
+                        .WithMany()
+                        .HasForeignKey("RestaurantID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lab2_Backend.Model.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("Table");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.Subcategory", b =>

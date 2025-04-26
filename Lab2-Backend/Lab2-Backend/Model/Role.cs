@@ -6,12 +6,13 @@ using System.Text.Json.Serialization;
 
 namespace Lab2_Backend.Model
 {
-    public class Role{
+  public class Role
+    {
         
         [Key]
         public int RoleID { get; set; }
         public string RoleName { get; set; }
-        public int? RolesID { get; internal set; }
+        
     }
 
 }
