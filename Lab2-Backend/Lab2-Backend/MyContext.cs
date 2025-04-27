@@ -48,35 +48,41 @@ namespace Lab2_Backend
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ProductNotes>()
-              .HasOne(pn => pn.MenuItems)
-              .WithMany()
-              .HasForeignKey(pn => pn.MenuItemsID)
-              .OnDelete(DeleteBehavior.Cascade);
+                 .HasOne(pn => pn.MenuItems)
+                 .WithMany()
+                 .HasForeignKey(pn => pn.MenuItemsID)
+                 .HasPrincipalKey(m => m.Id)
+                 .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<MenuItemProducts>()
                 .HasOne(mip => mip.MenuItems)
                 .WithMany()
                 .HasForeignKey(mip => mip.MenuItemID)
+                .HasPrincipalKey(m => m.Id)    
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<MenuItemProducts>()
                 .HasOne(mip => mip.Products)
                 .WithMany()
                 .HasForeignKey(mip => mip.ProductsID)
+                .HasPrincipalKey(p => p.ProductsID) 
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<OrderItems_RemovedProducts>()
                 .HasOne(oirp => oirp.OrderItems)
                 .WithMany()
                 .HasForeignKey(oirp => oirp.OrderItemsID)
+                .HasPrincipalKey(oi => oi.OrderItemsID) 
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<OrderItems_RemovedProducts>()
                 .HasOne(oirp => oirp.Products)
                 .WithMany()
                 .HasForeignKey(oirp => oirp.ProductsID)
+                .HasPrincipalKey(p => p.ProductsID) 
                 .OnDelete(DeleteBehavior.Cascade);
-    }
+        }
 
     }
 }
