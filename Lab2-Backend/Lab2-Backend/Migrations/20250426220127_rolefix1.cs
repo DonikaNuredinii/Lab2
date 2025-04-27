@@ -10,24 +10,13 @@ namespace Lab2_Backend.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
-
-
-            migrationBuilder.AddColumn<string>(
-                name: "RoleName",
-                table: "Roles",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+     
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "RoleName",
-                table: "Roles");
-
+     ;
             migrationBuilder.AddColumn<int>(
                 name: "CustomerAddressID",
                 table: "Roles",
