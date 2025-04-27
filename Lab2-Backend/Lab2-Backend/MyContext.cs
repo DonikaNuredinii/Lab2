@@ -24,6 +24,8 @@ namespace Lab2_Backend
         public DbSet<ProductNotes> ProductNotes { get; set; }
         public DbSet<MenuItemProducts> MenuItemProducts { get; set; }
         public DbSet<OrderItems_RemovedProducts> OrderItems_RemovedProducts { get; set; }
+        public DbSet<Payments> Payments { get; set; }
+
 
 
 
@@ -82,6 +84,13 @@ namespace Lab2_Backend
                 .HasForeignKey(oirp => oirp.ProductsID)
                 .HasPrincipalKey(p => p.ProductsID) 
                 .OnDelete(DeleteBehavior.Cascade);
+
+                 modelBuilder.Entity<Payments>()
+        .HasOne(p => p.Orders)
+        .WithMany()
+        .HasForeignKey(p => p.OrderID)
+        .HasPrincipalKey(o => o.OrdersID)
+        .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

@@ -251,6 +251,43 @@ namespace Lab2_Backend.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Lab2_Backend.Model.Payments", b =>
+                {
+                    b.Property<int>("PaymentsID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentsID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TransactionID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PaymentsID");
+
+                    b.HasIndex("OrderID");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Lab2_Backend.Model.ProductNotes", b =>
                 {
                     b.Property<int>("ProductNotesID")
@@ -562,6 +599,17 @@ namespace Lab2_Backend.Migrations
                     b.Navigation("Restaurant");
 
                     b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.Payments", b =>
+                {
+                    b.HasOne("Lab2_Backend.Model.Orders", "Orders")
+                        .WithMany()
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.ProductNotes", b =>
