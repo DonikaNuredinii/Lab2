@@ -17,10 +17,11 @@ namespace Lab2_Backend.Model
     public string Password { get; set; }
     public DateTime CreationDate { get; set; }
 
+    [JsonIgnore]
     [ForeignKey("Role")]
     public int? RoleID { get; set; }
 
-    public virtual Role? Role { get; set; }
+    public virtual Role? Role { get; set; }  
 }
 
 }

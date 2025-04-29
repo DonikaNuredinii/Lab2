@@ -4,16 +4,19 @@ using System.Text.Json.Serialization;
 
 namespace Lab2_Backend.Model
 {
-    [Table("Customers")]
-    public class Customer : User
+    public class Staff : User
     {
-        [ForeignKey("CustomerAddress")]
-        public int? CustomerAddressID { get; set; } 
+        [ForeignKey("Restaurant")]
+        public int? RestaurantID { get; set; }
 
-        public virtual CustomerAddress? CustomerAddress { get; set; }
+        public DateTime? LastLogin { get; set; }
+
+        [JsonIgnore]
+        public virtual Restaurant? Restaurant { get; set; }
 
         [JsonIgnore]
         
         public virtual Role? Role { get; set; }
+
     }
 }

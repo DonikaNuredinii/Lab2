@@ -62,7 +62,8 @@ namespace Lab2_Backend.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 CreationDate = user.CreationDate,
-                RoleID = user.RoleID
+                RoleID = user.RoleID,
+                RoleName = user.Role != null ? user.Role.RoleName : null
             };
 
             return userDto;
@@ -71,24 +72,42 @@ namespace Lab2_Backend.Controllers
 
     
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(UserCreateDto userDto)
-        {
-            var user = new User
-            {
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                Email = userDto.Email,
-                PhoneNumber = userDto.PhoneNumber,
-                Password = userDto.Password,
-                CreationDate = userDto.CreationDate,
-                RoleID = userDto.RoleID
-            };
-        
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-        
-            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, user);
-        }
+public async Task<ActionResult<UserDto>> CreateUser(UserCreateDto userDto)
+{
+    var user = new User
+    {
+        FirstName = userDto.FirstName,
+        LastName = userDto.LastName,
+        Email = userDto.Email,
+        PhoneNumber = userDto.PhoneNumber,
+        Password = userDto.Password,
+        CreationDate = userDto.CreationDate,
+        RoleID = userDto.RoleID
+    };
+
+    _context.Users.Add(user);
+    await _context.SaveChangesAsync();
+
+    // Re-fetch with Role
+    var createdUser = await _context.Users
+        .Include(u => u.Role)
+        .FirstOrDefaultAsync(u => u.UserID == user.UserID);
+
+    var result = new UserDto
+    {
+        UserID = createdUser.UserID,
+        FirstName = createdUser.FirstName,
+        LastName = createdUser.LastName,
+        Email = createdUser.Email,
+        PhoneNumber = createdUser.PhoneNumber,
+        CreationDate = createdUser.CreationDate,
+        RoleID = createdUser.RoleID,
+        RoleName = createdUser.Role != null ? createdUser.Role.RoleName : null
+    };
+
+    return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, result);
+}
+
 
 
         // PUT: api/User/5
