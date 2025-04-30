@@ -70,8 +70,18 @@ namespace Lab2_Backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Staff>> PostStaff(Staff staff)
         {
-            _context.Staff.Add(staff);
-            await _context.SaveChangesAsync();
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "Staff");
+                if (role == null)
+                {
+                    return BadRequest("Staff role not found.");
+                }
+                
+                staff.RoleID = role.RoleID;
+                staff.CreationDate = DateTime.UtcNow;
+                
+                _context.Staff.Add(staff);
+                await _context.SaveChangesAsync();
+
 
             return CreatedAtAction("GetStaff", new { id = staff.UserID }, staff);
         }

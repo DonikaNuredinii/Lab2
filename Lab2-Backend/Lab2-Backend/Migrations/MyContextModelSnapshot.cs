@@ -60,16 +60,11 @@ namespace Lab2_Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CustomerID")
-                        .HasColumnType("int");
-
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerAddressID");
-
-                    b.HasIndex("CustomerID");
 
                     b.ToTable("CustomerAddresses");
                 });
@@ -409,8 +404,7 @@ namespace Lab2_Backend.Migrations
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
@@ -503,15 +497,6 @@ namespace Lab2_Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Restaurant");
-                });
-
-            modelBuilder.Entity("Lab2_Backend.Model.CustomerAddress", b =>
-                {
-                    b.HasOne("Lab2_Backend.Model.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.MenuItemProducts", b =>

@@ -11,14 +11,11 @@ namespace Lab2_Backend.Model
     {
         [Key]
         public int CustomerAddressID { get; set; }
-        
-        [ForeignKey("Customer")]
-        public int? CustomerID { get; set; }
-        
+
         public string AddressLine { get; set; }
         public string City { get; set; }
         public string PostalCode { get; set; }
 
-        public virtual Customer? Customer { get; set; }
+  
     }
 }

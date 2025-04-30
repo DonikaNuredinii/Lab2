@@ -20,7 +20,7 @@ namespace Lab2_Backend.Controllers
 
         // GET all customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
         {
             return await _context.Customers
                                  .Include(c => c.CustomerAddress)
@@ -43,26 +43,22 @@ namespace Lab2_Backend.Controllers
             return customer;
         }
 
-        // POST create new customer
+       
         [HttpPost]
-        public async Task<ActionResult<Customer>> CreateCustomer([FromBody] CustomerCreateDto customerDto)
+        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-            if (customerDto == null)
+            if (customer == null)
             {
                 return BadRequest("Customer data is missing");
             }
 
-            var user = await _context.Users.FindAsync(customerDto.UserID);
-            if (user == null)
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "Customer");
+            if (role == null)
             {
-                return BadRequest($"User with ID {customerDto.UserID} does not exist.");
+                return BadRequest("Customer role not found.");
             }
 
-            var customer = new Customer
-            {
-                UserID = customerDto.UserID,
-                CustomerAddressID = customerDto.CustomerAddressID
-            };
+            customer.RoleID = role.RoleID;
 
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
@@ -70,7 +66,8 @@ namespace Lab2_Backend.Controllers
             return CreatedAtAction(nameof(GetCustomer), new { id = customer.UserID }, customer);
         }
 
-        // PUT update customer
+
+        // PUT update the customer
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCustomer(int id, [FromBody] CustomerUpdateDto customerDto)
         {

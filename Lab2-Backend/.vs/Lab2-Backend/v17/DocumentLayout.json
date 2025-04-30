@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250429214443_Staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250429214443_Staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250430080633_stafffinalfix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\migrations\\20250430080633_stafffinalfix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250430075439_stafffixed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\migrations\\20250430075439_stafffixed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -118,28 +126,115 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20250429214443_Staff.cs",
-              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250429214443_Staff.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250429214443_Staff.cs",
-              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250429214443_Staff.cs",
-              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250429214443_Staff.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Title": "20250430230515_CustomerAddress.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T21:44:43.378Z",
+              "WhenOpened": "2025-04-30T23:05:16.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20250430080633_StaffFinalFix.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAAFEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T21:51:23.357Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "20250430075439_StaffFixed.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAswDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T21:51:12.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Lab2-Backend.http",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.http",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Lab2-Backend.http",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.http",
+              "RelativeToolTip": "Lab2-Backend\\Lab2-Backend.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-04-29T21:24:44.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Program.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
+              "RelativeToolTip": "Lab2-Backend\\Program.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T21:23:57.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20250427103522_ProductFix.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T10:35:22.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "OrderItemsRemovedProductDTO.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
+              "RelativeToolTip": "Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T10:03:43.598Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MyContext.cs",
+              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\MyContext.cs",
+              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
+              "RelativeToolTip": "Lab2-Backend\\MyContext.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAswBsAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:18:39.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
               "RelativeDocumentMoniker": "Lab2-Backend\\appsettings.json",
@@ -152,71 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Lab2-Backend.http",
-              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.http",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Lab2-Backend.http",
-              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.http",
-              "RelativeToolTip": "Lab2-Backend\\Lab2-Backend.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-04-29T21:24:44.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Program.cs",
-              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
-              "RelativeToolTip": "Lab2-Backend\\Program.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T21:23:57.019Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "20250427103522_ProductFix.cs",
-              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
-              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
-              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:35:22.314Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "OrderItemsRemovedProductDTO.cs",
-              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
-              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
-              "RelativeToolTip": "Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:03:43.598Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MyContext.cs",
-              "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\MyContext.cs",
-              "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
-              "RelativeToolTip": "Lab2-Backend\\MyContext.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA1wBsAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:18:39.178Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "MenuItemProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\MenuItemProductDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\MenuItemProductDTO.cs",
@@ -228,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "MenuItems.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\MenuItems.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\MenuItems.cs",
@@ -240,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "ProductNoteDTO.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\ProductNoteDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\ProductNoteDTO.cs",
@@ -252,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "ProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\ProductDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\ProductDTO.cs",
@@ -264,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "OrderItemsRemovedProductsController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\OrderItemsRemovedProductsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\OrderItemsRemovedProductsController.cs",
@@ -276,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "MenuItemProductsController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemProductsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MenuItemProductsController.cs",
@@ -288,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "ProductNotesController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductNotesController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ProductNotesController.cs",
@@ -300,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ProductsController.cs",
@@ -312,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CategoryController.cs",
@@ -324,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "MenuItemsController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
@@ -336,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "20250427093249_ProductsAndRelatedTables.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427093249_ProductsAndRelatedTables.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250427093249_ProductsAndRelatedTables.cs",
@@ -348,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "OrderItems_RemovedProducts.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\OrderItems_RemovedProducts.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\OrderItems_RemovedProducts.cs",
@@ -360,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "MenuItemProducts.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\MenuItemProducts.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\MenuItemProducts.cs",
@@ -372,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "ProductNotes.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\ProductNotes.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\ProductNotes.cs",
@@ -384,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "Products.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Products.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Products.cs",

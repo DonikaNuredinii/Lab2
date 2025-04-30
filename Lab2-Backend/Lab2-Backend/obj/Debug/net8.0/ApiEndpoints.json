@@ -120,7 +120,7 @@
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.CustomerController",
-    "Method": "GetCustomers",
+    "Method": "GetCustomer",
     "RelativePath": "api/Customer",
     "HttpMethod": "GET",
     "IsController": true,
@@ -140,15 +140,15 @@
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.CustomerController",
-    "Method": "CreateCustomer",
+    "Method": "PostCustomer",
     "RelativePath": "api/Customer",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "customerDto",
-        "Type": "CustomerCreateDto",
+        "Name": "customer",
+        "Type": "Lab2_Backend.Model.Customer",
         "IsRequired": true
       }
     ],
@@ -261,17 +261,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Lab2_Backend.Model.CustomerAddress",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.MenuItemProductsController",
