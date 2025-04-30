@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "jIQoQlTBKqnA46dquCWXy5HVwDS7dBLLacBsU9wJk4A=",
+  "Hash": "TsA4V8MsPqJIaiGanAYbcgjFa9o7xV5fA02wxJebhuQ=",
   "Source": "Lab2-Backend",
   "BasePath": "_content/Lab2-Backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

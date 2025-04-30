@@ -9,6 +9,7 @@ namespace Lab2_Backend.Model
     public class User
 {
     [Key]
+    [Column("ID")]
     public int UserID { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }

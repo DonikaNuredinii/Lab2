@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab2_Backend.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20250429214443_Staff")]
-    partial class Staff
+    [Migration("20250430080633_StaffFinalFix")]
+    partial class StaffFinalFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -412,7 +412,8 @@ namespace Lab2_Backend.Migrations
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 

@@ -1,5 +1,7 @@
 using Lab2_Backend;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices; // Add this at the top
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<MyContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Choose connection string based on OS
+var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+var connectionString = isWindows
+    ? builder.Configuration.GetConnectionString("TrustedConnection")
+    : builder.Configuration.GetConnectionString("SqlAuthConnection");
+
+// Register DbContext
+builder.Services.AddDbContext<MyContext>(options =>
+    options.UseSqlServer(connectionString));
 
 
 // Add services to the container.

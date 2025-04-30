@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Lab2_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Staff : Migration
+    public partial class StaffFixed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
