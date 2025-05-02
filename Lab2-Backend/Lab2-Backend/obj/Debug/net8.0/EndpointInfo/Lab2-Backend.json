@@ -252,17 +252,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CustomerCreateDto"
+                "$ref": "#/components/schemas/Customer"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CustomerCreateDto"
+                "$ref": "#/components/schemas/Customer"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CustomerCreateDto"
+                "$ref": "#/components/schemas/Customer"
               }
             }
           }
@@ -454,24 +454,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomerAddress"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomerAddress"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CustomerAddress"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -863,6 +846,18 @@
         }
       }
     },
+    "/api/MongoTest/ping": {
+      "get": {
+        "tags": [
+          "MongoTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/OrderItemsRemovedProducts": {
       "get": {
         "tags": [
@@ -1058,6 +1053,208 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OrderItems_RemovedProducts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Payments": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Payments"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Payments"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Payments"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Payments/{id}": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Payments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payments"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payments"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payments"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Payments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
                 }
               }
             }
@@ -1671,6 +1868,54 @@
         }
       }
     },
+    "/api/Restaurant/register-with-hours": {
+      "post": {
+        "tags": [
+          "Restaurant"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestaurantWithHoursDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestaurantWithHoursDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestaurantWithHoursDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Restaurant"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Restaurant"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Restaurant"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Role/roles": {
       "get": {
         "tags": [
@@ -1854,6 +2099,376 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Staff": {
+      "get": {
+        "tags": [
+          "Staff"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Staff"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Staff"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Staff"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Staff"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Staff"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Staff"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Staff"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Staff"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Staff"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Staff"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Staff/{id}": {
+      "get": {
+        "tags": [
+          "Staff"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Staff"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Staff"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Staff"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Staff"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Staff"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Staff"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Staff"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Staff"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StaffSchedule": {
+      "get": {
+        "tags": [
+          "StaffSchedule"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaffSchedule"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaffSchedule"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StaffSchedule"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "StaffSchedule"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffScheduleDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffScheduleDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffScheduleDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffSchedule"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffSchedule"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffSchedule"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/StaffSchedule/{id}": {
+      "get": {
+        "tags": [
+          "StaffSchedule"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffSchedule"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffSchedule"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffSchedule"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaffSchedule"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffScheduleDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffScheduleDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffScheduleDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaffSchedule"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -2328,17 +2943,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/UserDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/UserDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/UserDto"
                 }
               }
             }
@@ -2498,22 +3113,6 @@
           "creationDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "roleID": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "role": {
-            "$ref": "#/components/schemas/Role"
-          },
-          "customerAddressID": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "customerAddress": {
-            "$ref": "#/components/schemas/CustomerAddress"
           }
         },
         "additionalProperties": false
@@ -2525,11 +3124,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "customerID": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "addressLine": {
             "type": "string",
             "nullable": true
@@ -2541,9 +3135,6 @@
           "postalCode": {
             "type": "string",
             "nullable": true
-          },
-          "customer": {
-            "$ref": "#/components/schemas/Customer"
           }
         },
         "additionalProperties": false
@@ -2551,10 +3142,9 @@
       "CustomerAddressCreateDto": {
         "type": "object",
         "properties": {
-          "customerID": {
+          "userID": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "addressLine": {
             "type": "string",
@@ -2566,21 +3156,6 @@
           },
           "postalCode": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CustomerCreateDto": {
-        "type": "object",
-        "properties": {
-          "userID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "customerAddressID": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           }
         },
@@ -2596,6 +3171,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "DayOfWeek": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "MenuItemProductDTO": {
         "type": "object",
@@ -2681,6 +3269,31 @@
         },
         "additionalProperties": false
       },
+      "OpeningHourDTO": {
+        "required": [
+          "dita",
+          "oraHapjes",
+          "oraMbylljes"
+        ],
+        "type": "object",
+        "properties": {
+          "dita": {
+            "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "oraHapjes": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "oraMbylljes": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "isClosed": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "OrderItemsRemovedProductDTO": {
         "type": "object",
         "properties": {
@@ -2713,6 +3326,78 @@
           "productsID": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentCreateDto": {
+        "type": "object",
+        "properties": {
+          "orderID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "transactionID": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Payments": {
+        "required": [
+          "amount",
+          "orderID",
+          "paymentMethod",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentsID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentMethod": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "transactionID": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -2824,6 +3509,41 @@
         },
         "additionalProperties": false
       },
+      "RestaurantWithHoursDTO": {
+        "required": [
+          "adresa",
+          "emri"
+        ],
+        "type": "object",
+        "properties": {
+          "emri": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "adresa": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "numriTel": {
+            "type": "string",
+            "format": "tel",
+            "nullable": true
+          },
+          "orari": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpeningHourDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Role": {
         "type": "object",
         "properties": {
@@ -2833,6 +3553,130 @@
           },
           "roleName": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Staff": {
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "restaurantID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "lastLogin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaffSchedule": {
+        "required": [
+          "dayOfWeek"
+        ],
+        "type": "object",
+        "properties": {
+          "scheduleID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "staffID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tableID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dayOfWeek": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "assignedBy": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "staffUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "table": {
+            "$ref": "#/components/schemas/Table"
+          },
+          "assignedByUser": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaffScheduleDTO": {
+        "type": "object",
+        "properties": {
+          "staffID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tableID": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "assignedBy": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -2904,11 +3748,6 @@
           "creationDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "roleID": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           },
           "role": {
             "$ref": "#/components/schemas/Role"

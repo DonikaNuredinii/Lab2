@@ -1,6 +1,8 @@
 using Lab2_Backend;
+using Lab2_Backend.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices; // Add this at the top
+using MongoDB.Driver;
+using System.Runtime.InteropServices;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,14 @@ var connectionString = isWindows
 // Register DbContext
 builder.Services.AddDbContext<MyContext>(options =>
     options.UseSqlServer(connectionString));
+
+// MongoDB setup
+builder.Services.Configure<MongoDBSettings>(
+    builder.Configuration.GetSection("MongoDBSettings"));
+
+builder.Services.AddSingleton<IMongoClient>(s =>
+    new MongoClient(builder.Configuration["MongoDBSettings:ConnectionString"]));
+
 
 
 // Add services to the container.

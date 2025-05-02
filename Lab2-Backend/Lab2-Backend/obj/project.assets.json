@@ -1034,7 +1034,7 @@
           }
         }
       },
-      "MongoDB.Bson/3.3.0": {
+      "MongoDB.Bson/3.4.0": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.5",
@@ -1051,12 +1051,12 @@
           }
         }
       },
-      "MongoDB.Driver/3.3.0": {
+      "MongoDB.Driver/3.4.0": {
         "type": "package",
         "dependencies": {
           "DnsClient": "1.6.1",
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
-          "MongoDB.Bson": "3.3.0",
+          "MongoDB.Bson": "3.4.0",
           "SharpCompress": "0.30.1",
           "Snappier": "1.0.0",
           "System.Buffers": "4.5.1",
@@ -4062,10 +4062,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "MongoDB.Bson/3.3.0": {
-      "sha512": "6y1uFFmU3O7tIAOcWmOkFImar+VtSeaia3bzaZTDXc30CP1zsPaUNLhM8CzUCzEzGc02rQlEaWQwV/LzA0NlXA==",
+    "MongoDB.Bson/3.4.0": {
+      "sha512": "0fBbXqO/ADhWLcgq0cUNizcKEFAuz5klxUc5CWTWV8vdnlOl5QTeAI7Kh64bCoz654ZN7WWOjz9WRw0QGHcqQA==",
       "type": "package",
-      "path": "mongodb.bson/3.3.0",
+      "path": "mongodb.bson/3.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4076,15 +4076,15 @@
         "lib/net6.0/MongoDB.Bson.xml",
         "lib/netstandard2.1/MongoDB.Bson.dll",
         "lib/netstandard2.1/MongoDB.Bson.xml",
-        "mongodb.bson.3.3.0.nupkg.sha512",
+        "mongodb.bson.3.4.0.nupkg.sha512",
         "mongodb.bson.nuspec",
         "packageIcon.png"
       ]
     },
-    "MongoDB.Driver/3.3.0": {
-      "sha512": "1EVdMMTsUllMJC+4BPQlcxGzn1pB43vAQ03VCx0QpfbhzaYTqnuHKBp3rAPG5aSo2az4JXKXwrQca7GhP/NhUQ==",
+    "MongoDB.Driver/3.4.0": {
+      "sha512": "+8vGdlbbzfPfQzCI00nPX59vH+5Nfumb2lyXf7xdIcAa05JPBdXFc/vWw0rPQOqIWYWfTmvQsxUgUXyzk0AKGw==",
       "type": "package",
-      "path": "mongodb.driver/3.3.0",
+      "path": "mongodb.driver/3.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4095,7 +4095,7 @@
         "lib/net6.0/MongoDB.Driver.xml",
         "lib/netstandard2.1/MongoDB.Driver.dll",
         "lib/netstandard2.1/MongoDB.Driver.xml",
-        "mongodb.driver.3.3.0.nupkg.sha512",
+        "mongodb.driver.3.4.0.nupkg.sha512",
         "mongodb.driver.nuspec",
         "packageIcon.png"
       ]
@@ -5532,30 +5532,38 @@
       "Microsoft.EntityFrameworkCore >= 9.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.4",
-      "MongoDB.Driver >= 3.3.0",
+      "MongoDB.Driver >= 3.4.0",
       "Swashbuckle.AspNetCore >= 8.1.1",
       "Yarp.ReverseProxy >= 2.3.0"
     ]
   },
   "packageFolders": {
-    "/Users/eragashi/.nuget/packages/": {}
+    "C:\\Users\\DN\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eragashi/Documents/Lab2/Lab2-Backend/Lab2-Backend/Lab2-Backend.csproj",
+      "projectUniqueName": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.csproj",
       "projectName": "Lab2-Backend",
-      "projectPath": "/Users/eragashi/Documents/Lab2/Lab2-Backend/Lab2-Backend/Lab2-Backend.csproj",
-      "packagesPath": "/Users/eragashi/.nuget/packages/",
-      "outputPath": "/Users/eragashi/Documents/Lab2/Lab2-Backend/Lab2-Backend/obj/",
+      "projectPath": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.csproj",
+      "packagesPath": "C:\\Users\\DN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/eragashi/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\DN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5596,7 +5604,7 @@
           },
           "MongoDB.Driver": {
             "target": "Package",
-            "version": "[3.3.0, )"
+            "version": "[3.4.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -5618,20 +5626,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5640,7 +5634,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
