@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Lab2_Backend.Model;
+using Lab2_Backend.DTOs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+
 namespace Lab2_Backend.Controllers
 {
     [Route("api/[controller]")]
@@ -11,34 +14,69 @@ namespace Lab2_Backend.Controllers
     public class RestaurantController : ControllerBase
     {
         private readonly MyContext _context;
-        //Basic controller add more functions later
+
         public RestaurantController(MyContext context)
         {
             _context = context;
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants()
         {
             return await _context.Restaurants.ToListAsync();
         }
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Restaurant>> GetRestaurant(int id )
+        public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
         {
-            var restaurant =await _context.Restaurants.FindAsync(id);
-            if(restaurant == null)
+            var restaurant = await _context.Restaurants.FindAsync(id);
+            if (restaurant == null)
             {
                 return NotFound();
             }
-            return restaurant;
 
+            return restaurant;
         }
+
         [HttpPost]
         public async Task<ActionResult<Restaurant>> PostRestaurant(Restaurant restaurant)
         {
             _context.Restaurants.Add(restaurant);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetRestaurant", new {id=restaurant.ID},restaurant);
+
+            return CreatedAtAction("GetRestaurant", new { id = restaurant.ID }, restaurant);
         }
+
+        [HttpPost("register-with-hours")]
+        public async Task<ActionResult<Restaurant>> RegisterRestaurantWithHours(RestaurantWithHoursDTO dto)
+        {
+            var restaurant = new Restaurant
+            {
+                Emri = dto.Emri,
+                Adresa = dto.Adresa,
+                Email = dto.Email,
+                NumriTel = dto.NumriTel,
+                DataEKrijimit = DateTime.UtcNow
+            };
+
+            _context.Restaurants.Add(restaurant);
+            await _context.SaveChangesAsync();
+
+            var hours = dto.Orari.Select(h => new RestaurantHours
+            {
+                RestaurantID = restaurant.ID,
+                Dita = h.Dita,
+                OraHapjes = h.OraHapjes,
+                OraMbylljes = h.OraMbylljes,
+                IsClosed = h.IsClosed
+            }).ToList();
+
+            _context.RestaurantHours.AddRange(hours);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRestaurant", new { id = restaurant.ID }, restaurant);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRestaurant(int id, Restaurant restaurant)
         {
@@ -68,7 +106,6 @@ namespace Lab2_Backend.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Restaurant/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Restaurant>> DeleteRestaurant(int id)
         {
@@ -90,4 +127,3 @@ namespace Lab2_Backend.Controllers
         }
     }
 }
-
