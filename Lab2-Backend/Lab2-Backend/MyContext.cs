@@ -27,6 +27,7 @@ namespace Lab2_Backend
         public DbSet<Payments> Payments { get; set; }
         public DbSet<Staff> Staff { get; set; }
         public DbSet<RestaurantHours>  RestaurantHours { get; set; }
+        public DbSet<StaffSchedule> StaffSchedules { get; set; }
 
 
 
@@ -87,12 +88,27 @@ namespace Lab2_Backend
                 .HasPrincipalKey(p => p.ProductsID) 
                 .OnDelete(DeleteBehavior.Cascade);
 
-                 modelBuilder.Entity<Payments>()
-        .HasOne(p => p.Orders)
-        .WithMany()
-        .HasForeignKey(p => p.OrderID)
-        .HasPrincipalKey(o => o.OrdersID)
-        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Payments>()
+                .HasOne(p => p.Orders)
+                .WithMany()
+                .HasForeignKey(p => p.OrderID)
+                .HasPrincipalKey(o => o.OrdersID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StaffSchedule>()
+               .HasOne(ss => ss.StaffUser)
+               .WithMany()
+               .HasForeignKey(ss => ss.StaffID)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<StaffSchedule>()
+                .HasOne(ss => ss.AssignedByUser)
+                .WithMany()
+                .HasForeignKey(ss => ss.AssignedBy)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            
         }
 
     }
