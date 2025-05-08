@@ -33,6 +33,11 @@ namespace Lab2_Backend.Model
         [Required]
         public decimal TotalAmount { get; set; }
 
+        public decimal? Tip { get; set; }  // Bakshishi (opsional)
+
+        [Required]
+        public int UserID { get; set; }  // Kamarieri (User - staf)
+
         public DateTime CreatedAt { get; set; }
 
         // ========================
@@ -49,8 +54,9 @@ namespace Lab2_Backend.Model
         [ValidateNever]
         public Table Table { get; set; }
 
-        
-
-        
+        [ForeignKey(nameof(UserID))]
+        [JsonIgnore]
+        [ValidateNever]
+        public User User { get; set; } // Navigim drejt kamarierit (User - staf)
     }
 }
