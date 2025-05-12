@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab2_Backend.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20250508195152_AddWaiterUserAndTipToOrders")]
+    [Migration("20250512210727_AddWaiterUserAndTipToOrders")]
     partial class AddWaiterUserAndTipToOrders
     {
         /// <inheritdoc />
