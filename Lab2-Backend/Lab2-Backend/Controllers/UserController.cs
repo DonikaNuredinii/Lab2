@@ -4,6 +4,8 @@ using Lab2_Backend.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lab2_Backend.Helpers;
+
 
 namespace Lab2_Backend.Controllers
 {
@@ -72,41 +74,72 @@ namespace Lab2_Backend.Controllers
 
     
         [HttpPost]
-public async Task<ActionResult<UserDto>> CreateUser(UserCreateDto userDto)
-{
-    var user = new User
-    {
-        FirstName = userDto.FirstName,
-        LastName = userDto.LastName,
-        Email = userDto.Email,
-        PhoneNumber = userDto.PhoneNumber,
-        Password = userDto.Password,
-        CreationDate = userDto.CreationDate,
-        RoleID = userDto.RoleID
-    };
+        public async Task<ActionResult<UserDto>> CreateUser(UserCreateDto userDto)
+        {
+            var user = new User
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                PhoneNumber = userDto.PhoneNumber,
+                Password = userDto.Password,
+                CreationDate = userDto.CreationDate,
+                RoleID = userDto.RoleID
+            };
 
-    _context.Users.Add(user);
-    await _context.SaveChangesAsync();
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
 
-    // Re-fetch with Role
-    var createdUser = await _context.Users
-        .Include(u => u.Role)
-        .FirstOrDefaultAsync(u => u.UserID == user.UserID);
+            // Re-fetch with Role
+            var createdUser = await _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(u => u.UserID == user.UserID);
 
-    var result = new UserDto
-    {
-        UserID = createdUser.UserID,
-        FirstName = createdUser.FirstName,
-        LastName = createdUser.LastName,
-        Email = createdUser.Email,
-        PhoneNumber = createdUser.PhoneNumber,
-        CreationDate = createdUser.CreationDate,
-        RoleID = createdUser.RoleID,
-        RoleName = createdUser.Role != null ? createdUser.Role.RoleName : null
-    };
+            var result = new UserDto
+            {
+                UserID = createdUser.UserID,
+                FirstName = createdUser.FirstName,
+                LastName = createdUser.LastName,
+                Email = createdUser.Email,
+                PhoneNumber = createdUser.PhoneNumber,
+                CreationDate = createdUser.CreationDate,
+                RoleID = createdUser.RoleID,
+                RoleName = createdUser.Role != null ? createdUser.Role.RoleName : null
+            };
 
-    return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, result);
-}
+            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, result);
+        }
+
+
+        // Signup
+        [HttpPost("signup")]
+        public async Task<ActionResult<UserDto>> SignUp(UserCreateDto userDto)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == userDto.Email);
+            if (existingUser != null)
+                return BadRequest("Email already exists.");
+        
+            var defaultRole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "Customer");
+            if (defaultRole == null)
+                return BadRequest("Default role 'Customer' not found.");
+        
+            var user = new User
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                PhoneNumber = userDto.PhoneNumber,
+                Password = PasswordHelper.HashPassword(userDto.Password),
+                CreationDate = DateTime.UtcNow,
+                RoleID = defaultRole.RoleID  // 👈 Assign "Customer"
+            };
+        
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+        
+            return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, userDto);
+        }
+
 
 
 
@@ -155,5 +188,9 @@ public async Task<ActionResult<UserDto>> CreateUser(UserCreateDto userDto)
 
             return NoContent();
         }
+
+
+        
+
     }
 }
