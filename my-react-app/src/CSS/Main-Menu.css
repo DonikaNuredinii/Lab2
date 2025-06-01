@@ -1,0 +1,135 @@
+.menu-white-page {
+  background-color: #f8f5f0;
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  font-family: "Playfair Display", serif;
+}
+
+.menu-white-title {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.menu-white-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: #888;
+}
+
+.menu-card-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 0 1rem;
+}
+
+.menu-card {
+  border-radius: 5px;
+  padding: 0.8rem;
+  width: 250px;
+  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+.menu-card::before {
+  content: none;
+}
+
+.menu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 3px;
+  margin-bottom: 0.8rem;
+  border: none;
+  box-shadow: none;
+  transition: none;
+}
+
+.menu-card:hover img {
+  transform: none;
+}
+
+.menu-card .category {
+  font-size: 0.7rem;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+}
+
+.menu-card h2 {
+  font-size: 1.6rem;
+  color: #222;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.menu-card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  font-family: "Lato", sans-serif;
+}
+
+.menu-card .date {
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+  font-family: "Lato", sans-serif;
+}
+
+.menu-nav-tip {
+  font-size: 0.85rem;
+  color: #8b5e3c;
+  margin-top: 3rem;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .menu-white-title {
+    font-size: 0.9rem;
+  }
+
+  .menu-card-grid {
+    gap: 0.8rem;
+  }
+
+  .menu-card {
+    width: 90%;
+    max-width: 280px;
+  }
+
+  .menu-card img {
+    height: 120px;
+  }
+}

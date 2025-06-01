@@ -1,0 +1,53 @@
+<mxfile host="Electron" modified="2024-05-31T08:25:25.240Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="BoLBuN6uDw1EbOR140Vc" version="22.0.3" type="device">
+  <diagram name="Page-1" id="ynQhngREvuwKiNp4X7nO">
+    <mxGraphModel dx="864" dy="516" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wiztkSpeHgxU0_thcmG9-1" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="120" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-2" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="wiztkSpeHgxU0_thcmG9-1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="415" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-4" value="verifikimi" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="360" y="220" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-5" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="wiztkSpeHgxU0_thcmG9-4" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-8" value="perzgjedhjae programit" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="365" y="320" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-9" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="wiztkSpeHgxU0_thcmG9-8" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="425" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-10" value="ngarkimi i dokumenteve" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="365" y="420" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-11" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="wiztkSpeHgxU0_thcmG9-10" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="425" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-12" value="marrja e konfirmimit" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="365" y="520" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-13" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" source="wiztkSpeHgxU0_thcmG9-12" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="425" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wiztkSpeHgxU0_thcmG9-14" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="410" y="620" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
