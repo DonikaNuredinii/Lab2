@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Lab2_Backend.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Lab2_Backend.Controllers
 {
@@ -9,54 +11,69 @@ namespace Lab2_Backend.Controllers
     [Route("api/[controller]")]
     public class MenuItemsController : ControllerBase
     {
-        private static List<MenuItems> _menuItems = new List<MenuItems>();
+        private readonly MyContext _context;
+
+        public MenuItemsController(MyContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<MenuItems>> GetAll()
+        public async Task<ActionResult<IEnumerable<MenuItems>>> GetAll()
         {
-            return Ok(_menuItems);
+            var items = await _context.MenuItems.ToListAsync();
+            return Ok(items);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<MenuItems> GetById(int id)
+        public async Task<ActionResult<MenuItems>> GetById(int id)
         {
-            var item = _menuItems.FirstOrDefault(m => m.Id == id);
+            var item = await _context.MenuItems.FindAsync(id);
             if (item == null) return NotFound();
             return Ok(item);
         }
 
         [HttpPost]
-        public ActionResult<MenuItems> Create(MenuItems menuItem)
+        public async Task<ActionResult<MenuItems>> Create(MenuItems menuItem)
         {
-            menuItem.Id = _menuItems.Count > 0 ? _menuItems.Max(m => m.Id) + 1 : 1;
-            _menuItems.Add(menuItem);
+            _context.MenuItems.Add(menuItem);
+            await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetById), new { id = menuItem.Id }, menuItem);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, MenuItems updatedItem)
+        public async Task<IActionResult> Update(int id, MenuItems updatedItem)
         {
-            var item = _menuItems.FirstOrDefault(m => m.Id == id);
-            if (item == null) return NotFound();
+            if (id != updatedItem.Id)
+                return BadRequest();
 
-            item.Name = updatedItem.Name;
-            item.Description = updatedItem.Description;
-            item.Image = updatedItem.Image;
-            item.Price = updatedItem.Price;
-            item.IsActive = updatedItem.IsActive;
-            item.RestaurantId = updatedItem.RestaurantId;
-            item.SubCategoryId = updatedItem.SubCategoryId;
+            _context.Entry(updatedItem).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.MenuItems.Any(m => m.Id == id))
+                    return NotFound();
+                else
+                    throw;
+            }
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var item = _menuItems.FirstOrDefault(m => m.Id == id);
+            var item = await _context.MenuItems.FindAsync(id);
             if (item == null) return NotFound();
 
-            _menuItems.Remove(item);
+            _context.MenuItems.Remove(item);
+            await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }
