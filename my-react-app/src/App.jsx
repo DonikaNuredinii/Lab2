@@ -10,12 +10,10 @@ import {
   ChakraProvider,
   // extendTheme
 } from "@chakra-ui/react";
-import initialTheme from "./theme/theme"; //  { themeGreen }
+import initialTheme from "./theme/theme";
 import { useState } from "react";
-// Chakra imports
 
 export default function Main() {
-  // eslint-disable-next-line
   const [currentTheme, setCurrentTheme] = useState(initialTheme);
   return (
     <ChakraProvider theme={currentTheme}>
