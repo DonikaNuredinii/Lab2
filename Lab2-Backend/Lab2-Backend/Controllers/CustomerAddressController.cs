@@ -22,6 +22,19 @@ namespace Lab2_Backend.Controllers
             return await _context.CustomerAddresses.ToListAsync(); 
         }
 
+        [HttpGet("byuser/{userId}")]
+        public async Task<ActionResult<CustomerAddress>> GetCustomerAddressByUserId(int userId)
+        {
+            var customer = await _context.Customers.Include(c => c.CustomerAddress).FirstOrDefaultAsync(c => c.UserID == userId);
+
+            if (customer == null || customer.CustomerAddress == null)
+            {
+                return NotFound();
+            }
+
+            return customer.CustomerAddress;
+        }
+
         [HttpPost]
 public async Task<ActionResult<object>> CreateCustomerAddress([FromBody] CustomerAddressCreateDto addressDto)
 {

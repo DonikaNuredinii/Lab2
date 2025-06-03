@@ -24,6 +24,7 @@ namespace Lab2_Backend.Controllers
         {
             return await _context.Customers
                                  .Include(c => c.CustomerAddress)
+                                 .Include(c => c.Role)
                                  .ToListAsync();
         }
 

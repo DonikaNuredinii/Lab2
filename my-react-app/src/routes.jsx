@@ -8,6 +8,7 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdRestaurantMenu,
+  MdPeople,
 } from "react-icons/md";
 
 // Admin Imports
@@ -17,6 +18,7 @@ import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
 import MenuItemsTable from "../src/views/admin/dataTables/MenuItemsTable";
+import CustomersTable from "../src/views/admin/dataTables/CustomersTable";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
@@ -37,6 +39,13 @@ const routes = [
       <Icon as={MdRestaurantMenu} width="20px" height="20px" color="inherit" />
     ),
     component: <MenuItemsTable />,
+  },
+  {
+    name: "Customers",
+    layout: "/admin",
+    path: "/customers",
+    icon: <Icon as={MdPeople} width="20px" height="20px" color="inherit" />,
+    component: <CustomersTable />,
   },
   {
     name: "NFT Marketplace",

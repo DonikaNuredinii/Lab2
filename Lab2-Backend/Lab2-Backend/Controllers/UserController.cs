@@ -149,10 +149,17 @@ namespace Lab2_Backend.Controllers
         {
             if (id != user.UserID)
             {
-                return BadRequest();
+                return BadRequest("User ID in URL does not match User ID in body.");
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            // Update existing user properties from the incoming user object
+            _context.Entry(existingUser).CurrentValues.SetValues(user);
 
             try
             {

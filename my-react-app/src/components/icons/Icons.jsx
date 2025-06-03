@@ -1,4 +1,5 @@
 import { createIcon } from "@chakra-ui/icons";
+import { useState, useEffect } from "react";
 
 export const AdobexdLogo = createIcon({
   displayName: "AdobexdLogo",
@@ -461,10 +462,51 @@ export const SpotifyLogo = createIcon({
   ),
 });
 
+// Add RestaurantName component before HorizonLogo
+export const RestaurantName = () => {
+  const [restaurantName, setRestaurantName] = useState("Loading...");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRestaurantName = async () => {
+      try {
+        const response = await fetch("https://localhost:7076/api/Restaurant/2");
+        if (!response.ok) {
+          throw new Error("Failed to fetch restaurant data");
+        }
+        const data = await response.json();
+        setRestaurantName(data.emri || "Restaurant");
+      } catch (err) {
+        console.error("Error fetching restaurant name:", err);
+        setError("Failed to load restaurant name");
+        setRestaurantName("Restaurant");
+      }
+    };
+
+    fetchRestaurantName();
+  }, []);
+
+  return (
+    <g width="179" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text
+        x="50%"
+        y="50%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill="currentColor"
+        fontSize="30"
+        fontFamily="Arial"
+      >
+        {restaurantName}
+      </text>
+    </g>
+  );
+};
+
 export const HorizonLogo = createIcon({
   displayName: "horizonLogo",
-  viewBox: "0 0 179 20",
-  path: <g width="179" height="20" fill="none" xmlns=""></g>,
+  viewBox: "0 0 179 10",
+  path: <RestaurantName />,
 });
 
 export const SupportIcon = createIcon({
