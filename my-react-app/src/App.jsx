@@ -6,6 +6,7 @@ import AdminLayout from "./layouts/admin";
 import RTLLayout from "./layouts/rtl";
 import MenuCover from "./Pages/MenuCover";
 import MainMenu from "./Pages/Main-Menu";
+import OnlineMenu from "./Pages/OnlineMenu";
 import {
   ChakraProvider,
   // extendTheme
@@ -33,6 +34,7 @@ export default function Main() {
         />
         <Route path="/" element={<MenuCover />} />
         <Route path="/main-menu" element={<MainMenu />} />
+        <Route path="/online-menu/:id?" element={<OnlineMenu />} />
       </Routes>
     </ChakraProvider>
   );

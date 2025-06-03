@@ -22,6 +22,7 @@ import CustomersTable from "../src/views/admin/dataTables/CustomersTable";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
+import OnlineMenu from "./Pages/OnlineMenu";
 
 const routes = [
   {
@@ -89,6 +90,13 @@ const routes = [
     path: "/rtl-default",
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     component: <RTL />,
+  },
+  {
+    name: "Online Menu",
+    layout: "/",
+    path: "/online-menu",
+    component: <OnlineMenu />,
+    hidden: true,
   },
 ];
 
