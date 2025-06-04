@@ -292,10 +292,6 @@
   margin-top: 0.5rem;
 }
 
-.menu-card-grid {
-  display: none;
-}
-
 .menu-card {
   display: none;
 }
@@ -312,10 +308,6 @@
   .menu-items-display {
     width: 100%;
     margin-bottom: 2rem;
-  }
-
-  .menu-card-grid {
-    justify-content: center;
   }
 
   .online-menu-title {
@@ -369,8 +361,7 @@
     font-size: 1rem;
   }
 
-  .restaurant-list-grid,
-  .menu-card-grid {
+  .restaurant-list-grid {
     gap: 0.8rem;
   }
 

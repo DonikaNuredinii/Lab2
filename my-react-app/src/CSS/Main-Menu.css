@@ -32,13 +32,12 @@
 }
 
 .menu-card-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem 1.5rem;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  max-width: 1200px;
-  margin: 100px auto;
-  padding: 0 1rem;
+  margin: 0 auto 9rem 9rem;
+  max-width: 1000px;
 }
 
 .menu-card {
@@ -118,10 +117,6 @@
 @media (max-width: 768px) {
   .menu-white-title {
     font-size: 0.9rem;
-  }
-
-  .menu-card-grid {
-    gap: 0.8rem;
   }
 
   .menu-card {

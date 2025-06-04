@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import "../CSS/Main-Menu.css";
+import { Box, Text } from "@chakra-ui/react";
 
 const MainMenu = () => {
   const [pageIndex, setPageIndex] = useState(0);
@@ -14,10 +15,9 @@ const MainMenu = () => {
     const fetchData = async () => {
       try {
         const [itemsRes, categoriesRes, subcategoriesRes] = await Promise.all([
-        fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
-        fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
-        fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`)
- 
+          fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
+          fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+          fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
         ]);
 
         if (!itemsRes.ok || !categoriesRes.ok || !subcategoriesRes.ok) {
@@ -30,21 +30,12 @@ const MainMenu = () => {
         const categoriesJson = await categoriesRes.json();
         const subcategoriesJson = await subcategoriesRes.json();
 
-        console.log("Fetched ItemsJson (before filter):", itemsJson);
-        console.log("Fetched CategoriesJson:", categoriesJson);
-        console.log("Fetched SubcategoriesJson:", subcategoriesJson);
-
         const filteredItems = itemsJson.filter(
           (item) => item.restaurantId === 2
         );
-        console.log("Filtered Items (restaurantId === 2):", filteredItems);
 
         const structuredData = categoriesJson
           .map((category) => {
-            console.log(
-              `Processing Category: ${category.name} (ID: ${category.id})`
-            );
-
             const subcats = subcategoriesJson
               .filter((sub) => sub.categoryID === category.id)
               .map((sub) => {
@@ -52,36 +43,20 @@ const MainMenu = () => {
                   (item) => item.subCategoryId === sub.id
                 );
 
-                console.log(
-                  `  Subcategory: ${sub.name} (ID: ${sub.id}) - Items found: ${itemsForSubcategory.length}`
-                );
-
                 return {
                   title: sub.name,
                   items: itemsForSubcategory,
                 };
-              });
-
-            console.log(
-              `Category ${category.name} processed. Subcategories with items: ${
-                subcats.filter((s) => s.items.length > 0).length
-              }`
-            );
+              })
+              .filter((sub) => sub.items.length > 0);
 
             return {
               category: category.name,
               subcategories: subcats,
             };
           })
-          .filter((c) => {
-            const hasItems = c.subcategories.some(
-              (sub) => sub.items.length > 0
-            );
-            console.log(`Category ${c.category} has items? ${hasItems}`);
-            return hasItems;
-          });
+          .filter((c) => c.subcategories.length > 0);
 
-        console.log("Structured Data:", structuredData);
         setMenuData(structuredData);
       } catch (err) {
         console.error("Menu fetch failed:", err);
@@ -118,16 +93,29 @@ const MainMenu = () => {
       <h1 className="menu-white-title">{currentPage?.category}</h1>
 
       <div className="menu-card-grid">
-        {currentPage.subcategories.flatMap((sub, subIndex) =>
+        {currentPage?.subcategories?.flatMap((sub) =>
           sub.items.map((item) => (
-            <div className="menu-card" key={item.id}>
-              <img src={item.image} alt={item.name} />
-              <div className="category">
-                {currentPage.category} - {sub.title}
+            <div className="menu-item-card" key={item.id}>
+              <div className="menu-item-image-container">
+                {item.image && (
+                  <img
+                    src={
+                      item.image.startsWith("/") ? item.image : "/" + item.image
+                    }
+                    alt={item.name}
+                  />
+                )}
               </div>
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <div className="date">Price: ${item.price?.toFixed(2)}</div>
+              <div className="menu-item-text-content">
+                {console.log(item.name)}
+                <div className="menu-item-name">{item.name}</div>
+                <div className="menu-item-description">{item.description}</div>
+                {item.price !== undefined && (
+                  <div className="menu-item-price">
+                    Price: ${item.price?.toFixed(2)}
+                  </div>
+                )}
+              </div>
             </div>
           ))
         )}
