@@ -52,7 +52,7 @@ const CustomersTable = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch("https://localhost:7076/api/Customer");
+      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Customer`);
       if (!response.ok) {
         throw new Error("Error fetching customer data.");
       }
@@ -221,9 +221,8 @@ const CustomersTable = () => {
             onClick={async () => {
               try {
                 const customerId = info.row.original.userID; // Assuming userID is the correct property for the user ID
-                const response = await fetch(
-                  `https://localhost:7076/api/CustomerAddress/byuser/${customerId}`
-                );
+               const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/CustomerAddress/byuser/${customerId}`);
+
                 if (!response.ok) {
                   throw new Error("Failed to fetch customer address");
                 }
@@ -262,7 +261,7 @@ const CustomersTable = () => {
 
     try {
       const response = await fetch(
-        `https://localhost:7076/api/User/${customerId}`,
+       `${import.meta.env.VITE_API_BASE}/api/User/${customerId}`,
         {
           method: "DELETE",
           headers: {
@@ -317,7 +316,7 @@ const CustomersTable = () => {
 
   const handleAddCustomer = async (newCustomerData) => {
     try {
-      const response = await fetch("https://localhost:7076/api/Customer", {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Customer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

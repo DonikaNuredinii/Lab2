@@ -48,9 +48,10 @@ const MenuItemsFullView = () => {
   const fetchData = async () => {
     try {
       const [itemsRes, categoriesRes, subcategoriesRes] = await Promise.all([
-        fetch("https://localhost:7076/api/MenuItems"),
-        fetch("https://localhost:7076/api/Category"),
-        fetch("https://localhost:7076/api/Subcategory"),
+  fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
+fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
+
       ]);
 
       if (!itemsRes.ok || !categoriesRes.ok || !subcategoriesRes.ok) {
@@ -307,7 +308,7 @@ const MenuItemsFullView = () => {
   const handleAddItem = async (newItemData) => {
     console.log("New item added:", newItemData);
     try {
-      const response = await fetch("https://localhost:7076/api/MenuItems", {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -353,7 +354,7 @@ const MenuItemsFullView = () => {
 
     try {
       const response = await fetch(
-        `https://localhost:7076/api/MenuItems/${itemId}`,
+        `${import.meta.env.VITE_API_BASE}/api/MenuItems/${itemId}`,
         {
           method: "DELETE",
           headers: {
@@ -396,8 +397,7 @@ const MenuItemsFullView = () => {
 
   const handleEditItem = async (updatedItemData) => {
     try {
-      const response = await fetch(
-        `https://localhost:7076/api/MenuItems/${updatedItemData.id}`,
+   const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems/${updatedItemData.id}`,
         {
           method: "PUT",
           headers: {

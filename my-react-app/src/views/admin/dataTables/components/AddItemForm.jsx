@@ -37,8 +37,8 @@ const AddItemForm = ({
     const fetchDropdownData = async () => {
       try {
         const [categoriesRes, subcategoriesRes] = await Promise.all([
-          fetch("https://localhost:7076/api/Category"),
-          fetch("https://localhost:7076/api/Subcategory"),
+       fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+        fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`)
         ]);
 
         if (!categoriesRes.ok || !subcategoriesRes.ok) {

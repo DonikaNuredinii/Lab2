@@ -49,9 +49,9 @@ const CustomerForm = ({ onAddCustomer, initialData, isEdit = false }) => {
     e.preventDefault();
 
     try {
-      const url = isEdit
-        ? `https://localhost:7076/api/User/${initialData.userID}`
-        : "https://localhost:7076/api/User/signup";
+     const url = isEdit
+  ? `${import.meta.env.VITE_API_BASE}/api/User/${initialData.userID}`
+  : `${import.meta.env.VITE_API_BASE}/api/User/signup`;
 
       const dataToSend = isEdit
         ? formData

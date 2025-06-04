@@ -15,9 +15,9 @@ const MainMenu = () => {
       try {
         const [itemsRes, categoriesRes, subcategoriesRes] = await Promise.all([
         fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
-        fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
-        fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`)
- 
+fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`)
+
         ]);
 
         if (!itemsRes.ok || !categoriesRes.ok || !subcategoriesRes.ok) {

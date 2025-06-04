@@ -17,7 +17,7 @@ const OnlineMenu = () => {
     if (!id) {
       const fetchRestaurants = async () => {
         try {
-          const response = await fetch("https://localhost:7076/api/Restaurant");
+          const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Restaurant`);
           if (!response.ok) {
             throw new Error("Error fetching restaurants.");
           }
@@ -66,7 +66,7 @@ const OnlineMenu = () => {
           selectedRestaurant.ID !== restaurantIdToFetch
         ) {
           const restaurantRes = await fetch(
-            `https://localhost:7076/api/Restaurant/${restaurantIdToFetch}`
+            `${import.meta.env.VITE_API_BASE}/api/Restaurant/${restaurantIdToFetch}`
           );
           if (!restaurantRes.ok) {
             throw new Error("Error fetching restaurant details.");
@@ -76,9 +76,10 @@ const OnlineMenu = () => {
         }
 
         const [itemsRes, categoriesRes, subcategoriesRes] = await Promise.all([
-          fetch("https://localhost:7076/api/MenuItems"),
-          fetch("https://localhost:7076/api/Category"),
-          fetch("https://localhost:7076/api/Subcategory"),
+        fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
+fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
+ 
         ]);
 
         if (!itemsRes.ok || !categoriesRes.ok || !subcategoriesRes.ok) {
