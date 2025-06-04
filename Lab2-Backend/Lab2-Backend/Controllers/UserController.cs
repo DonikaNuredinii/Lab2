@@ -82,7 +82,7 @@ namespace Lab2_Backend.Controllers
                 LastName = userDto.LastName,
                 Email = userDto.Email,
                 PhoneNumber = userDto.PhoneNumber,
-                Password = userDto.Password,
+                Password = PasswordHelper.HashPassword(userDto.Password),
                 CreationDate = userDto.CreationDate,
                 RoleID = userDto.RoleID
             };
@@ -140,6 +140,24 @@ namespace Lab2_Backend.Controllers
             return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, userDto);
         }
 
+        //[HttpPost("migrate-passwords")]
+        //public async Task<IActionResult> MigratePasswords()
+        //{
+        //    var users = await _context.Users.ToListAsync();
+
+        //    foreach (var user in users)
+        //    {
+                
+        //        if (!user.Password.StartsWith("$2"))
+        //        {
+        //            user.Password = PasswordHelper.HashPassword(user.Password);
+        //        }
+        //    }
+
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok("Passwords migrated successfully.");
+        //}
 
 
 

@@ -1430,3 +1430,4 @@ C:\Users\hp\OneDrive\Desktop\Lab2\Lab2-Backend\Lab2-Backend\obj\Debug\net8.0\ref
 C:\Users\hp\OneDrive\Desktop\Lab2\Lab2-Backend\Lab2-Backend\obj\Debug\net8.0\Lab2-Backend.pdb
 C:\Users\hp\OneDrive\Desktop\Lab2\Lab2-Backend\Lab2-Backend\obj\Debug\net8.0\Lab2-Backend.genruntimeconfig.cache
 C:\Users\hp\OneDrive\Desktop\Lab2\Lab2-Backend\Lab2-Backend\obj\Debug\net8.0\ref\Lab2-Backend.dll
+C:\Users\DN\Desktop\Lab2\Lab2-Backend\Lab2-Backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
