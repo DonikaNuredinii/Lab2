@@ -27,6 +27,12 @@ export default function Main() {
           }
         />
         <Route
+          path="superadmin/*"
+          element={
+            <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+          }
+        />
+        <Route
           path="rtl/*"
           element={
             <RTLLayout theme={currentTheme} setTheme={setCurrentTheme} />

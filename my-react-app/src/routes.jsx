@@ -20,6 +20,10 @@ import RTL from "views/admin/rtl";
 import MenuItemsTable from "../src/views/admin/dataTables/MenuItemsTable";
 import CustomersTable from "../src/views/admin/dataTables/CustomersTable";
 
+// Superadmin Imports
+import SuperAdminDashboard from "../src/views/superadmin/default";
+import RestaurantsTable from "../src/views/superadmin/dataTables/RestaurantsTable";
+
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 import OnlineMenu from "./Pages/OnlineMenu";
@@ -31,6 +35,22 @@ const routes = [
     path: "/default",
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     component: <MainDashboard />,
+  },
+  {
+    name: "Superadmin Dashboard",
+    layout: "/superadmin",
+    path: "/default",
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    component: <SuperAdminDashboard />,
+  },
+  {
+    name: "Restaurants Table",
+    layout: "/superadmin",
+    path: "/restaurants",
+    icon: (
+      <Icon as={MdRestaurantMenu} width="20px" height="20px" color="inherit" />
+    ),
+    component: <RestaurantsTable />,
   },
   {
     name: "Menu Items",

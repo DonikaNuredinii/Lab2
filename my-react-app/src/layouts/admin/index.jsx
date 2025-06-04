@@ -6,18 +6,22 @@ import Navbar from "../../components/navbar/NavbarAdmin";
 import Sidebar from "components/sidebar/Sidebar.jsx";
 import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import routes from "routes";
 
 // Custom Chakra theme
 export default function Dashboard(props) {
   const { ...rest } = props;
+  const location = useLocation();
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
+    return (
+      window.location.pathname.startsWith("/admin") ||
+      window.location.pathname.startsWith("/superadmin")
+    );
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -36,6 +40,9 @@ export default function Dashboard(props) {
         if (
           window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
         ) {
+          if (routes[i].layout === "/superadmin") {
+            return "Super Admin";
+          }
           return routes[i].name;
         }
       }
@@ -90,7 +97,7 @@ export default function Dashboard(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((route, key) => {
-      if (route.layout === "/admin") {
+      if (route.layout === "/admin" || route.layout === "/superadmin") {
         return (
           <Route path={`${route.path}`} element={route.component} key={key} />
         );
@@ -102,6 +109,23 @@ export default function Dashboard(props) {
       }
     });
   };
+
+  const getFilteredRoutes = (allRoutes) => {
+    const currentLayout = location.pathname.split("/")[1];
+    if (currentLayout === "admin" || currentLayout === "superadmin") {
+      return allRoutes.filter((route) => route.layout === `/${currentLayout}`);
+    } else if (currentLayout === "") {
+      // Handle the root path if needed
+      return allRoutes.filter((route) => route.layout === "/");
+    }
+    return []; // Return empty array for other paths
+  };
+
+  const sidebarRoutes = getFilteredRoutes(routes);
+
+  // Determine if the current layout is superadmin
+  const isSuperAdminLayout = location.pathname.startsWith("/superadmin");
+
   document.documentElement.dir = "ltr";
   const { onOpen } = useDisclosure();
   document.documentElement.dir = "ltr";
@@ -114,7 +138,12 @@ export default function Dashboard(props) {
             setToggleSidebar,
           }}
         >
-          <Sidebar routes={routes} display="none" {...rest} />
+          <Sidebar
+            routes={sidebarRoutes}
+            isSuperAdminLayout={isSuperAdminLayout}
+            display="none"
+            {...rest}
+          />
           <Box
             float="right"
             minHeight="100vh"
