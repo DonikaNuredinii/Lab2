@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Lab2_Backend.Model
 {
@@ -11,7 +13,8 @@ namespace Lab2_Backend.Model
 
         [ForeignKey("Restaurant")]
         public int RestaurantID { get; set; }
-
+        [JsonIgnore]
+        [ValidateNever]
         public Restaurant Restaurant { get; set; }
 
         [Required]

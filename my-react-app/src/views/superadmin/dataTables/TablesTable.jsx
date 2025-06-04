@@ -23,16 +23,16 @@ import {
 } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Card from "components/card/Card";
-import AddRestaurantForm from "./components/AddRestaurantForm";
+import AddTableForm from "./components/AddTableForm";
 import { MdEdit, MdDelete } from "react-icons/md";
 
 const columnHelper = createColumnHelper();
 
-const RestaurantsTable = () => {
-  const [restaurants, setRestaurants] = useState([]);
+const TablesTable = () => {
+  const [tables, setTables] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+  const [selectedTable, setSelectedTable] = useState(null);
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,27 +43,27 @@ const RestaurantsTable = () => {
   } = useDisclosure();
   const toast = useToast();
 
-  const fetchRestaurants = async () => {
+  const fetchTables = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE}/api/Restaurant`
+        `${import.meta.env.VITE_API_BASE}/api/Table`
       );
       if (!response.ok) {
-        throw new Error("Error fetching restaurants.");
+        throw new Error("Error fetching tables.");
       }
       const data = await response.json();
-      console.log("Fetched Restaurants Data:", data);
-      setRestaurants(data);
+      console.log("Fetched Tables Data:", data);
+      setTables(data);
     } catch (err) {
-      console.error("Restaurant fetch failed:", err);
-      setError("Failed to load restaurants.");
+      console.error("Table fetch failed:", err);
+      setError("Failed to load tables.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchRestaurants();
+    fetchTables();
   }, []);
 
   const columns = [
@@ -90,8 +90,8 @@ const RestaurantsTable = () => {
         </Text>
       ),
     }),
-    columnHelper.accessor("emri", {
-      id: "emri",
+    columnHelper.accessor("restaurantID", {
+      id: "restaurantID",
       header: () => (
         <Text
           fontSize="12px"
@@ -99,7 +99,7 @@ const RestaurantsTable = () => {
           color="gray.400"
           textAlign="center"
         >
-          NAME
+          RESTAURANT ID
         </Text>
       ),
       cell: (info) => (
@@ -113,8 +113,8 @@ const RestaurantsTable = () => {
         </Text>
       ),
     }),
-    columnHelper.accessor("adresa", {
-      id: "adresa",
+    columnHelper.accessor("restaurant.emri", {
+      id: "restaurantName",
       header: () => (
         <Text
           fontSize="12px"
@@ -122,7 +122,7 @@ const RestaurantsTable = () => {
           color="gray.400"
           textAlign="center"
         >
-          ADDRESS
+          RESTAURANT NAME
         </Text>
       ),
       cell: (info) => (
@@ -136,8 +136,8 @@ const RestaurantsTable = () => {
         </Text>
       ),
     }),
-    columnHelper.accessor("email", {
-      id: "email",
+    columnHelper.accessor("qrCode", {
+      id: "qrCode",
       header: () => (
         <Text
           fontSize="12px"
@@ -145,7 +145,7 @@ const RestaurantsTable = () => {
           color="gray.400"
           textAlign="center"
         >
-          EMAIL
+          QR CODE
         </Text>
       ),
       cell: (info) => (
@@ -156,105 +156,6 @@ const RestaurantsTable = () => {
           textAlign="center"
         >
           {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("numriTel", {
-      id: "numriTel",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          PHONE
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="400"
-          textAlign="center"
-        >
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("openingHours", {
-      id: "openingHours",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          OPENING HOURS
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="400"
-          textAlign="center"
-        >
-          {info.row.original.restaurantHours &&
-          info.row.original.restaurantHours.length > 0
-            ? info.row.original.restaurantHours
-                .filter((h) => !h.isClosed)
-                .map((h) => `${h.oraHapjes}`)
-                .join(", ") || "Closed Today"
-            : "N/A"}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("closingHours", {
-      id: "closingHours",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          CLOSING HOURS
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="400"
-          textAlign="center"
-        >
-          {info.row.original.restaurantHours &&
-          info.row.original.restaurantHours.length > 0
-            ? info.row.original.restaurantHours
-                .filter((h) => !h.isClosed)
-                .map((h) => `${h.oraMbylljes}`)
-                .join(", ") || "Closed Today"
-            : "N/A"}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("dataEKrijimit", {
-      id: "dataEKrijimit",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          CREATED AT
-        </Text>
-      ),
-      cell: (info) => (
-        <Text fontSize="sm" color={textColor} textAlign="center">
-          {new Date(info.getValue()).toLocaleString()}
         </Text>
       ),
     }),
@@ -273,63 +174,70 @@ const RestaurantsTable = () => {
       cell: (info) => (
         <Flex justifyContent="center">
           <IconButton
-            aria-label="Edit restaurant"
+            aria-label="Edit table"
             icon={<MdEdit />}
             size="sm"
             variant="ghost"
             colorScheme="gray"
             onClick={() => {
-              setSelectedRestaurant(info.row.original);
+              setSelectedTable(info.row.original);
               onEditOpen();
             }}
             mr={2}
           />
           <IconButton
-            aria-label="Delete restaurant"
+            aria-label="Delete table"
             icon={<MdDelete />}
             size="sm"
             variant="ghost"
             colorScheme="red"
-            onClick={() => handleDeleteRestaurant(info.row.original.id)}
+            onClick={() => handleDeleteTable(info.row.original.id)}
           />
         </Flex>
       ),
     }),
   ];
 
-  const handleAddRestaurant = async (newRestaurantData) => {
-    console.log("Add Restaurant Data:", newRestaurantData);
+  const handleAddTable = async (newTableData) => {
+    console.log("Add Table Data:", newTableData);
     try {
+      const dataToSubmit = { ...newTableData };
+      dataToSubmit.restaurant = {
+        id: newTableData.restaurantID,
+        emri: "Placeholder",
+      };
+      delete dataToSubmit.id;
+
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE}/api/Restaurant/register-with-hours`,
+        `${import.meta.env.VITE_API_BASE}/api/Table`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newRestaurantData),
+          body: JSON.stringify(dataToSubmit),
         }
       );
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
         throw new Error(
-          errorData?.message || `Failed to add restaurant: ${response.status}`
+          errorData?.message || `Failed to add table: ${response.status}`
         );
       }
 
       toast({
-        title: "Restaurant added.",
+        title: "Table added.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      fetchRestaurants();
+      fetchTables();
       onClose();
     } catch (error) {
-      console.error("Error adding restaurant:", error);
+      console.error("Error adding table:", error);
       toast({
-        title: "Adding restaurant failed.",
+        title: "Adding table failed.",
         description: error.message || error.toString(),
         status: "error",
         duration: 5000,
@@ -338,13 +246,14 @@ const RestaurantsTable = () => {
     }
   };
 
-  const handleDeleteRestaurant = async (restaurantId) => {
-    if (!window.confirm("Are you sure you want to delete this restaurant?")) {
+  const handleDeleteTable = async (tableId) => {
+    if (!window.confirm("Are you sure you want to delete this table?")) {
       return;
     }
+    console.log("Delete Table ID:", tableId);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE}/api/Restaurant/${restaurantId}`,
+        `${import.meta.env.VITE_API_BASE}/api/Table/${tableId}`,
         {
           method: "DELETE",
         }
@@ -353,23 +262,22 @@ const RestaurantsTable = () => {
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
         throw new Error(
-          errorData?.message ||
-            `Failed to delete restaurant: ${response.status}`
+          errorData?.message || `Failed to delete table: ${response.status}`
         );
       }
 
       toast({
-        title: "Restaurant deleted successfully.",
+        title: "Table deleted successfully.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      fetchRestaurants();
+      fetchTables();
     } catch (error) {
-      console.error("Error deleting restaurant:", error);
+      console.error("Error deleting table:", error);
       toast({
-        title: "Deleting restaurant failed.",
-        description: error.message,
+        title: "Deleting table failed.",
+        description: error.message || error.toString(),
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -377,46 +285,40 @@ const RestaurantsTable = () => {
     }
   };
 
-  const handleEditRestaurant = async (updatedRestaurantData) => {
-    console.log(
-      "Data received in handleEditRestaurant:",
-      updatedRestaurantData
-    );
+  const handleEditTable = async (updatedTableData) => {
+    console.log("Edit Table Data:", updatedTableData);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE}/api/Restaurant/${
-          updatedRestaurantData.id
-        }`,
+        `${import.meta.env.VITE_API_BASE}/api/Table/${updatedTableData.id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(updatedRestaurantData),
+          body: JSON.stringify(updatedTableData),
         }
       );
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
         throw new Error(
-          errorData?.message ||
-            `Failed to update restaurant: ${response.status}`
+          errorData?.message || `Failed to update table: ${response.status}`
         );
       }
 
       toast({
-        title: "Restaurant updated successfully.",
+        title: "Table updated successfully.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-      fetchRestaurants();
+      fetchTables();
       onEditClose();
     } catch (error) {
-      console.error("Error updating restaurant:", error);
+      console.error("Error updating table:", error);
       toast({
-        title: "Updating restaurant failed.",
-        description: error.message,
+        title: "Updating table failed.",
+        description: error.message || error.toString(),
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -424,20 +326,20 @@ const RestaurantsTable = () => {
     }
   };
 
-  if (loading) return <Box>Loading restaurants...</Box>;
+  if (loading) return <Box>Loading tables...</Box>;
   if (error) return <Box>Error: {error}</Box>;
-  if (!restaurants.length) return <Box>No restaurants found.</Box>;
+  if (!tables.length) return <Box>No tables found.</Box>;
 
   return (
-    <Card flexDirection="column" w="100%" px="0px" mt="65px" overflowX="auto">
+    <Card flexDirection="column" w="100%" px="0px" mt="135px" overflowX="auto">
       <Flex px="25px" mb="8px" justifyContent="flex-end" align="center">
         <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
-          Add Restaurant
+          Add Table
         </Button>
       </Flex>
       <Box px="25px">
         <Text color={textColor} fontSize="23px" fontWeight="700" mb="16px">
-          Restaurants
+          Tables
         </Text>
         <Table variant="simple" color="gray.500" mb="24px">
           <Thead>
@@ -454,8 +356,8 @@ const RestaurantsTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {restaurants.map((restaurant) => (
-              <Tr key={restaurant.id} h="100px">
+            {tables.map((table) => (
+              <Tr key={table.id} h="100px">
                 {columns.map((column) => (
                   <Td
                     key={column.id}
@@ -465,22 +367,10 @@ const RestaurantsTable = () => {
                     textAlign="center"
                   >
                     {column.id === "actions"
-                      ? column.cell({ row: { original: restaurant } })
-                      : column.id === "dataEKrijimit"
-                      ? new Date(restaurant[column.id]).toLocaleString()
-                      : column.id === "openingHours" &&
-                        restaurant.restaurantHours
-                      ? restaurant.restaurantHours
-                          .filter((h) => !h.isClosed)
-                          .map((h) => h.oraHapjes)
-                          .join(", ") || "Closed Today"
-                      : column.id === "closingHours" &&
-                        restaurant.restaurantHours
-                      ? restaurant.restaurantHours
-                          .filter((h) => !h.isClosed)
-                          .map((h) => h.oraMbylljes)
-                          .join(", ") || "Closed Today"
-                      : restaurant[column.id]}
+                      ? column.cell({ row: { original: table } })
+                      : column.id === "restaurantName"
+                      ? table.restaurant?.emri || "N/A"
+                      : table[column.id]}
                   </Td>
                 ))}
               </Tr>
@@ -491,10 +381,10 @@ const RestaurantsTable = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Restaurant</ModalHeader>
+          <ModalHeader>Add New Table</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AddRestaurantForm onSubmit={handleAddRestaurant} />
+            <AddTableForm onSubmit={handleAddTable} />
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -502,12 +392,12 @@ const RestaurantsTable = () => {
       <Modal isOpen={isEditOpen} onClose={onEditClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Restaurant</ModalHeader>
+          <ModalHeader>Edit Table</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AddRestaurantForm
-              onSubmit={handleEditRestaurant}
-              initialData={selectedRestaurant}
+            <AddTableForm
+              onSubmit={handleEditTable}
+              initialData={selectedTable}
               isEdit={true}
             />
           </ModalBody>
@@ -517,4 +407,4 @@ const RestaurantsTable = () => {
   );
 };
 
-export default RestaurantsTable;
+export default TablesTable;

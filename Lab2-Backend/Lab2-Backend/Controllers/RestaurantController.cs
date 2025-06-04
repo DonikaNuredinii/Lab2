@@ -23,13 +23,13 @@ namespace Lab2_Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants()
         {
-            return await _context.Restaurants.ToListAsync();
+            return await _context.Restaurants.Include(r => r.RestaurantHours).ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
         {
-            var restaurant = await _context.Restaurants.FindAsync(id);
+            var restaurant = await _context.Restaurants.Include(r => r.RestaurantHours).FirstOrDefaultAsync(r => r.ID == id);
             if (restaurant == null)
             {
                 return NotFound();
@@ -50,28 +50,25 @@ namespace Lab2_Backend.Controllers
         [HttpPost("register-with-hours")]
         public async Task<ActionResult<Restaurant>> RegisterRestaurantWithHours(RestaurantWithHoursDTO dto)
         {
+            Console.WriteLine($"Received DTO: {System.Text.Json.JsonSerializer.Serialize(dto)}");
             var restaurant = new Restaurant
             {
                 Emri = dto.Emri,
                 Adresa = dto.Adresa,
                 Email = dto.Email,
                 NumriTel = dto.NumriTel,
-                DataEKrijimit = DateTime.UtcNow
+                DataEKrijimit = DateTime.UtcNow,
+                RestaurantHours = dto.Orari.Select(h => new RestaurantHours
+                {
+                    Dita = h.Dita,
+                    OraHapjes = h.OraHapjes,
+                    OraMbylljes = h.OraMbylljes,
+                    IsClosed = h.IsClosed
+                }).ToList()
             };
 
+            // Add and save everything at once
             _context.Restaurants.Add(restaurant);
-            await _context.SaveChangesAsync();
-
-            var hours = dto.Orari.Select(h => new RestaurantHours
-            {
-                RestaurantID = restaurant.ID,
-                Dita = h.Dita,
-                OraHapjes = h.OraHapjes,
-                OraMbylljes = h.OraMbylljes,
-                IsClosed = h.IsClosed
-            }).ToList();
-
-            _context.RestaurantHours.AddRange(hours);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRestaurant", new { id = restaurant.ID }, restaurant);

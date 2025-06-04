@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Lab2_Backend.Model
 {
@@ -21,5 +22,8 @@ namespace Lab2_Backend.Model
         public string NumriTel { get; set; }
 
         public DateTime DataEKrijimit { get; set; }
+
+        public ICollection<RestaurantHours> RestaurantHours { get; set; } = new List<RestaurantHours>();
+
     }
 }

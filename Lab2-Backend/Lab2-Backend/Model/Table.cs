@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Lab2_Backend.Model;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 namespace Lab2_Backend.Model
 { 
     public class Table
@@ -13,6 +14,7 @@ namespace Lab2_Backend.Model
 
         public string? QRCode { get; set; }
         [JsonIgnore]
+        [ValidateNever]
         public Restaurant Restaurant { get; set; }
     }
 }
