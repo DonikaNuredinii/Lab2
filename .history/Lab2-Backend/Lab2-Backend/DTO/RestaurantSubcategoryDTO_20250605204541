@@ -1,0 +1,6 @@
+// DTO/AssignSubcategoryToRestaurantsDTO.cs
+public class AssignSubcategoryToRestaurantsDTO
+{
+    public int SubcategoryId { get; set; }
+    public List<int> RestaurantIds { get; set; }
+}

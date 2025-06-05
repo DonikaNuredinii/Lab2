@@ -1,0 +1,5 @@
+public class RestaurantSubcategoryDTO
+{
+    public int RestaurantId { get; set; }
+    public int SubcategoryId { get; set; }
+}

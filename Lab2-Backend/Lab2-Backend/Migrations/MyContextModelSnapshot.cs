@@ -564,6 +564,21 @@ namespace Lab2_Backend.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("RestaurantSubcategory", b =>
+                {
+                    b.Property<int>("RestaurantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubcategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RestaurantId", "SubcategoryId");
+
+                    b.HasIndex("SubcategoryId");
+
+                    b.ToTable("RestaurantSubcategories");
+                });
+
             modelBuilder.Entity("Lab2_Backend.Model.Customer", b =>
                 {
                     b.HasBaseType("Lab2_Backend.Model.User");
@@ -804,6 +819,25 @@ namespace Lab2_Backend.Migrations
                     b.Navigation("Restaurant");
                 });
 
+            modelBuilder.Entity("RestaurantSubcategory", b =>
+                {
+                    b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
+                        .WithMany("RestaurantSubcategories")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Lab2_Backend.Model.Subcategory", "Subcategory")
+                        .WithMany("RestaurantSubcategories")
+                        .HasForeignKey("SubcategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("Subcategory");
+                });
+
             modelBuilder.Entity("Lab2_Backend.Model.Customer", b =>
                 {
                     b.HasOne("Lab2_Backend.Model.CustomerAddress", "CustomerAddress")
@@ -838,6 +872,13 @@ namespace Lab2_Backend.Migrations
             modelBuilder.Entity("Lab2_Backend.Model.Restaurant", b =>
                 {
                     b.Navigation("RestaurantHours");
+
+                    b.Navigation("RestaurantSubcategories");
+                });
+
+            modelBuilder.Entity("Lab2_Backend.Model.Subcategory", b =>
+                {
+                    b.Navigation("RestaurantSubcategories");
                 });
 
             modelBuilder.Entity("Products", b =>
