@@ -4,6 +4,7 @@ using Lab2_Backend;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab2_Backend.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20250605134748_products")]
+    partial class products
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -543,9 +546,6 @@ namespace Lab2_Backend.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("RestaurantId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
@@ -558,8 +558,6 @@ namespace Lab2_Backend.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("ProductsID");
-
-                    b.HasIndex("RestaurantId");
 
                     b.ToTable("Products");
                 });
@@ -596,7 +594,7 @@ namespace Lab2_Backend.Migrations
                     b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
                         .WithMany()
                         .HasForeignKey("RestaurantID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Restaurant");
@@ -691,13 +689,13 @@ namespace Lab2_Backend.Migrations
                     b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
                         .WithMany()
                         .HasForeignKey("RestaurantID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Lab2_Backend.Model.Table", "Table")
                         .WithMany()
                         .HasForeignKey("TableID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Restaurant");
@@ -732,7 +730,7 @@ namespace Lab2_Backend.Migrations
                     b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
                         .WithMany("RestaurantHours")
                         .HasForeignKey("RestaurantID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Restaurant");
@@ -778,7 +776,7 @@ namespace Lab2_Backend.Migrations
                     b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
                         .WithMany()
                         .HasForeignKey("RestaurantID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Restaurant");
@@ -791,17 +789,6 @@ namespace Lab2_Backend.Migrations
                         .HasForeignKey("RoleID");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Products", b =>
-                {
-                    b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.Customer", b =>
@@ -823,8 +810,7 @@ namespace Lab2_Backend.Migrations
                 {
                     b.HasOne("Lab2_Backend.Model.Restaurant", "Restaurant")
                         .WithMany()
-                        .HasForeignKey("RestaurantID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("RestaurantID");
 
                     b.HasOne("Lab2_Backend.Model.User", null)
                         .WithOne()

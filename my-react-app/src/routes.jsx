@@ -9,13 +9,13 @@ import {
   MdOutlineShoppingCart,
   MdRestaurantMenu,
   MdPeople,
-   MdShoppingCart,
+  MdShoppingCart,
   MdSchedule,
-  MdAccessTime
+  MdAccessTime,
+  MdInventory,
 } from "react-icons/md";
 // import { MdShoppingCart } from "react-icons/md";
 // import { MdPeople } from "react-icons/md";
-
 
 // Admin Imports
 import MainDashboard from "../src/views/admin/default";
@@ -28,8 +28,7 @@ import CustomersTable from "../src/views/admin/dataTables/CustomersTable";
 import OrdersTable from "../src/views/admin/dataTables/OrdersTable";
 import StaffTable from "views/admin/dataTables/StaffTable";
 import StaffSchedule from "views/admin/dataTables/StaffSchedule";
-
-
+import ProductsTable from "../src/views/admin/dataTables/ProductsTable";
 
 // Superadmin Imports
 import SuperAdminDashboard from "../src/views/superadmin/default";
@@ -90,28 +89,35 @@ const routes = [
     component: <CustomersTable />,
   },
   {
-  name: "Orders",
-  layout: "/admin",
-  path: "/orders",
-  icon: <Icon as={MdShoppingCart} width="20px" height="20px" color="inherit" />,
-  component: <OrdersTable />,
-},
-{
-  name: "Staff",
-  layout: "/admin",
-  path: "/staff",
-  icon: <Icon as={MdPeople} width="20px" height="20px" color="inherit" />,
-  component: <StaffTable />,
-},
-{
-  name: "Staff Schedule",
-  layout: "/admin",
-  path: "/staff-schedule",
-  icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
-  component: <StaffSchedule />
-},
-
-
+    name: "Orders",
+    layout: "/admin",
+    path: "/orders",
+    icon: (
+      <Icon as={MdShoppingCart} width="20px" height="20px" color="inherit" />
+    ),
+    component: <OrdersTable />,
+  },
+  {
+    name: "Staff",
+    layout: "/admin",
+    path: "/staff",
+    icon: <Icon as={MdPeople} width="20px" height="20px" color="inherit" />,
+    component: <StaffTable />,
+  },
+  {
+    name: "Staff Schedule",
+    layout: "/admin",
+    path: "/staff-schedule",
+    icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
+    component: <StaffSchedule />,
+  },
+  {
+    name: "Products",
+    layout: "/admin",
+    path: "/products",
+    icon: <Icon as={MdInventory} width="20px" height="20px" color="inherit" />,
+    component: <ProductsTable />,
+  },
 
   {
     name: "NFT Marketplace",
@@ -163,7 +169,6 @@ const routes = [
     component: <OnlineMenu />,
     hidden: true,
   },
-  
 ];
 
 export default routes;
