@@ -234,22 +234,14 @@ namespace Lab2_Backend.Migrations
                     b.Property<int>("TableID")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("Tip")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
 
                     b.HasKey("OrdersID");
 
                     b.HasIndex("RestaurantID");
 
                     b.HasIndex("TableID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Orders");
                 });
@@ -673,17 +665,9 @@ namespace Lab2_Backend.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Lab2_Backend.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Restaurant");
 
                     b.Navigation("Table");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Lab2_Backend.Model.Payments", b =>
