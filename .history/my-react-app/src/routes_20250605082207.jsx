@@ -96,20 +96,6 @@ const routes = [
   icon: <Icon as={MdShoppingCart} width="20px" height="20px" color="inherit" />,
   component: <OrdersTable />,
 },
-{
-  name: "Staff",
-  layout: "/admin",
-  path: "/staff",
-  icon: <Icon as={MdPeople} width="20px" height="20px" color="inherit" />,
-  component: <StaffTable />,
-},
-{
-  name: "Staff Schedule",
-  layout: "/admin",
-  path: "/staff-schedule",
-  icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
-  component: <StaffSchedule />
-},
 
 
 
