@@ -45,6 +45,27 @@ namespace Lab2_Backend.Controllers
             return CreatedAtAction(nameof(GetProductNote), new { id = note.ProductNotesID }, note);
         }
 
+
+        [HttpPost("multiple")]
+        public async Task<IActionResult> PostMultipleProductNotes(List<ProductNoteDTO> notes)
+        {
+            foreach (var dto in notes)
+            {
+                var note = new ProductNotes
+                {
+                    MenuItemsID = dto.MenuItemsID,
+                    Note = dto.Note,
+                    CreatedAt = dto.CreatedAt
+                };
+
+                _context.ProductNotes.Add(note);
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Product notes saved successfully." });
+        }
+
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProductNote(int id, ProductNoteDTO dto)
         {

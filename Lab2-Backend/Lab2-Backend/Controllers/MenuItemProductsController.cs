@@ -29,6 +29,18 @@ namespace Lab2_Backend.Controllers
             return item;
         }
 
+        [HttpGet("menuitem/{menuItemId}")]
+        public async Task<ActionResult<IEnumerable<string>>> GetProductsForMenuItem(int menuItemId)
+        {
+            var productNames = await _context.MenuItemProducts
+                .Where(mip => mip.MenuItemID == menuItemId)
+                .Include(mip => mip.Products)
+                .Select(mip => mip.Products.Emri)
+                .ToListAsync();
+
+            return Ok(productNames);
+        }
+
         [HttpPost]
         public async Task<ActionResult<MenuItemProducts>> PostMenuItemProduct(MenuItemProductDTO dto)
         {
@@ -44,6 +56,7 @@ namespace Lab2_Backend.Controllers
 
             return CreatedAtAction(nameof(GetMenuItemProduct), new { id = item.MIProducts }, item);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMenuItemProduct(int id, MenuItemProductDTO dto)

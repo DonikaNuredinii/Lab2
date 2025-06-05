@@ -435,6 +435,32 @@
     ]
   },
   {
+    "ContainingType": "Lab2_Backend.Controllers.MenuItemProductsController",
+    "Method": "GetProductsForMenuItem",
+    "RelativePath": "api/MenuItemProducts/menuitem/{menuItemId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "menuItemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Lab2_Backend.Controllers.MenuItemsController",
     "Method": "GetAll",
     "RelativePath": "api/MenuItems",
@@ -1049,6 +1075,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.ProductNotesController",
+    "Method": "PostMultipleProductNotes",
+    "RelativePath": "api/ProductNotes/multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notes",
+        "Type": "System.Collections.Generic.List\u00601[[Lab2_Backend.DTO.ProductNoteDTO, Lab2-Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.ProductsController",

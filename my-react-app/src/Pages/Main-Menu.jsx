@@ -16,6 +16,7 @@ const MainMenu = () => {
   const [selectedItemProducts, setSelectedItemProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,15 +121,34 @@ const MainMenu = () => {
                     size="sm"
                     aria-label="Add Note"
                     className="note-icon-button"
-                    onClick={() => {
-                      setSelectedItemProducts([
-                        "Ketchup",
-                        "Cheese",
-                        "Olives",
-                        "Mushrooms",
-                      ]);
-                      setSelectedProducts(["Ketchup", "Cheese"]);
-                      onOpen();
+                    onClick={async () => {
+                      try {
+                        const res = await fetch(
+                          `${
+                            import.meta.env.VITE_API_BASE
+                          }/api/MenuItemProducts/menuitem/${item.id}`
+                        );
+                        if (!res.ok)
+                          throw new Error("Failed to fetch products");
+
+                        const data = await res.json();
+
+                        if (data.length > 0) {
+                          setSelectedItemProducts(data);
+                          setSelectedProducts(data);
+                          setSelectedMenuItemId(item.id);
+                          onOpen();
+                        } else {
+                          alert(
+                            "This dish has no removable ingredients configured."
+                          );
+                        }
+                      } catch (error) {
+                        console.error(
+                          "Failed to load product ingredients:",
+                          error
+                        );
+                      }
                     }}
                   />
                 </div>
@@ -150,6 +170,7 @@ const MainMenu = () => {
         products={selectedItemProducts}
         selected={selectedProducts}
         setSelected={setSelectedProducts}
+        menuItemId={selectedMenuItemId}
       />
 
       <div className="menu-nav-tip">

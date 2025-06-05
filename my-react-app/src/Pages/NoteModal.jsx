@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import {
   Modal,
   ModalOverlay,
@@ -15,7 +16,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const NoteModal = ({ isOpen, onClose, products, selected, setSelected }) => {
+const NoteModal = ({
+  isOpen,
+  onClose,
+  products,
+  selected,
+  setSelected,
+  menuItemId,
+}) => {
   const toggleCheck = (product) => {
     if (selected.includes(product)) {
       setSelected(selected.filter((p) => p !== product));
@@ -29,6 +37,26 @@ const NoteModal = ({ isOpen, onClose, products, selected, setSelected }) => {
       setSelected(products);
     }
   }, [isOpen, products, setSelected]);
+
+  const handleDone = async () => {
+    const uncheckedProducts = products.filter((p) => !selected.includes(p));
+
+    try {
+      for (const product of uncheckedProducts) {
+        await axios.post(`${import.meta.env.VITE_API_BASE}/api/ProductNotes`, {
+          menuItemsID: menuItemId,
+          note: product,
+          createdAt: new Date().toISOString(),
+        });
+      }
+
+      console.log("Notes saved successfully");
+      onClose();
+    } catch (error) {
+      console.error("Failed to save notes", error);
+      alert("Something went wrong while saving notes.");
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
@@ -87,7 +115,7 @@ const NoteModal = ({ isOpen, onClose, products, selected, setSelected }) => {
               variant="solid"
               borderRadius="full"
               px={6}
-              onClick={onClose}
+              onClick={handleDone}
             >
               Done
             </Button>
@@ -99,3 +127,4 @@ const NoteModal = ({ isOpen, onClose, products, selected, setSelected }) => {
 };
 
 export default NoteModal;
+    
