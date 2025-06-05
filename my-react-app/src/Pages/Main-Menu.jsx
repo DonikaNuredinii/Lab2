@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import "../CSS/Main-Menu.css";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, IconButton, useDisclosure } from "@chakra-ui/react";
+import { MdNoteAdd } from "react-icons/md";
+import NoteModal from "./NoteModal";
 
 const MainMenu = () => {
   const [pageIndex, setPageIndex] = useState(0);
@@ -10,6 +12,10 @@ const MainMenu = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const [selectedItemProducts, setSelectedItemProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,8 +113,25 @@ const MainMenu = () => {
                 )}
               </div>
               <div className="menu-item-text-content">
-                {console.log(item.name)}
-                <div className="menu-item-name">{item.name}</div>
+                <div className="menu-item-name-with-icon">
+                  <span className="menu-item-name">{item.name}</span>
+                  <IconButton
+                    icon={<MdNoteAdd size={18} />}
+                    size="sm"
+                    aria-label="Add Note"
+                    className="note-icon-button"
+                    onClick={() => {
+                      setSelectedItemProducts([
+                        "Ketchup",
+                        "Cheese",
+                        "Olives",
+                        "Mushrooms",
+                      ]);
+                      setSelectedProducts(["Ketchup", "Cheese"]);
+                      onOpen();
+                    }}
+                  />
+                </div>
                 <div className="menu-item-description">{item.description}</div>
                 {item.price !== undefined && (
                   <div className="menu-item-price">
@@ -120,6 +143,14 @@ const MainMenu = () => {
           ))
         )}
       </div>
+
+      <NoteModal
+        isOpen={isOpen}
+        onClose={onClose}
+        products={selectedItemProducts}
+        selected={selectedProducts}
+        setSelected={setSelectedProducts}
+      />
 
       <div className="menu-nav-tip">
         {pageIndex > 0 && "← Swipe Back"}{" "}

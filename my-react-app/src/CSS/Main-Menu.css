@@ -128,3 +128,25 @@
     height: 120px;
   }
 }
+
+.menu-item-name-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.menu-item-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.note-icon-button {
+  background: transparent;
+  color: #9c6f4e;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  width: auto;
+}
