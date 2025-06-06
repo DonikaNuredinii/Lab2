@@ -78,13 +78,17 @@ const StaffSchedule = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
 body: JSON.stringify({
-  StaffID: parseInt(formData.staffID),
-  TableID: formData.tableID ? parseInt(formData.tableID) : null,
-  DayOfWeek: formData.dayOfWeek,
-  StartTime: formData.startTime + ":00",
-  EndTime: formData.endTime + ":00",
-  AssignedBy: formData.assignedBy ? parseInt(formData.assignedBy) : null
+  dto: {
+    StaffID: parseInt(formData.staffID),
+    TableID: formData.tableID ? parseInt(formData.tableID) : null,
+    DayOfWeek: formData.dayOfWeek,
+    StartTime: formData.startTime + ":00",
+    EndTime: formData.endTime + ":00",
+    AssignedBy: formData.assignedBy ? parseInt(formData.assignedBy) : null
+  }
 })
+
+
       });
 
       if (!res.ok) throw new Error("Failed to add schedule");
@@ -166,16 +170,9 @@ body: JSON.stringify({
             </FormControl>
 
             <FormControl>
-            <FormLabel>Assigned By</FormLabel>
-             <Select placeholder="Select a user" value={formData.assignedBy}onChange={(e) =>setFormData({ ...formData, assignedBy: e.target.value }) }>
-            {staff.map((user) => (
-           <option key={user.userID} value={user.userID}>
-           {user.firstName} {user.lastName}
-          </option>
-          ))}
-         </Select>
-     </FormControl>
-
+              <FormLabel>Assigned By (User ID)</FormLabel>
+              <Input value={formData.assignedBy} onChange={(e) => setFormData({ ...formData, assignedBy: e.target.value })} />
+            </FormControl>
 
             <Box pt={6}>
               <Button colorScheme="teal" onClick={handleSubmit}>Save Schedule</Button>

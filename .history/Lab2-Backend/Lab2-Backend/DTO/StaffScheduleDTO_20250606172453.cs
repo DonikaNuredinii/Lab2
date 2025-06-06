@@ -1,7 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Swashbuckle.AspNetCore.Annotations;
-
 
 namespace Lab2_Backend.DTOs
 {
@@ -18,6 +16,6 @@ namespace Lab2_Backend.DTOs
         [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
 
-        public int? AssignedBy { get; set; } 
+        public int? AssignedBy { get; set; } /
     }
 }

@@ -1,7 +1,4 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using Swashbuckle.AspNetCore.Annotations;
-
 
 namespace Lab2_Backend.DTOs
 {
@@ -10,14 +7,11 @@ namespace Lab2_Backend.DTOs
         public int StaffID { get; set; }
         public int? TableID { get; set; }
 
+        [Required(ErrorMessage = "DayOfWeek is required.")]
         public string DayOfWeek { get; set; }
 
-        [DataType(DataType.Time)]
         public TimeSpan StartTime { get; set; }
-
-        [DataType(DataType.Time)]
         public TimeSpan EndTime { get; set; }
-
-        public int? AssignedBy { get; set; } 
+        public int? AssignedBy { get; set; }
     }
 }

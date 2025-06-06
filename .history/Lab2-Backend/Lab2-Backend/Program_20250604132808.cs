@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
 var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 var connectionString = isWindows
     ? builder.Configuration.GetConnectionString("TrustedConnection")

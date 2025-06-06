@@ -11,6 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.MapType<TimeSpan>(() => new Microsoft.OpenApi.Models.OpenApiSchema
+    {
+        Type = "string",
+        Format = "time"
+    });
+});
+
 
 var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 var connectionString = isWindows

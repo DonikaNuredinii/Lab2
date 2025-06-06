@@ -174,7 +174,7 @@ body: JSON.stringify({
           </option>
           ))}
          </Select>
-     </FormControl>
+</FormControl>
 
 
             <Box pt={6}>
