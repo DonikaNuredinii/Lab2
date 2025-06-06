@@ -116,12 +116,13 @@ const StaffManagement = () => {
     <>
       <Box h="250px" />
       <Box px="25px" mb="24px" maxW="1300px" mx="auto">
-        <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
-          <Flex px="25px" mt="6" justifyContent="flex-end">
-            <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
-              Add Staff
-            </Button>
-          </Flex>
+        <Flex mb="8px" justifyContent="flex-end" align="center">
+          <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
+            Add Staff
+          </Button>
+        </Flex>
+
+        <Box overflowX="auto" borderRadius="lg" boxShadow="base" bg="white">
           <Table variant="simple" color="gray.500" mb="24px">
             <Thead>
               <Tr h="60px">
@@ -211,11 +212,9 @@ const StaffManagement = () => {
                   ))}
                 </Select>
               </FormControl>
-              <Flex justifyContent="flex-end" pt={4}>
-                <Button colorScheme="teal" onClick={handleSubmit}>
-                  {formData.userID ? "Update Staff" : "Save Staff"}
-                </Button>
-              </Flex>
+              <Button colorScheme="teal" mt={4} onClick={handleSubmit}>
+                {formData.userID ? "Update Staff" : "Save Staff"}
+              </Button>
             </VStack>
           </ModalBody>
         </ModalContent>

@@ -115,13 +115,8 @@ const StaffManagement = () => {
   return (
     <>
       <Box h="250px" />
-      <Box px="25px" mb="24px" maxW="1300px" mx="auto">
+      <Box px="50px" mb="24px" maxW="1600px" mx="auto">
         <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
-          <Flex px="25px" mt="6" justifyContent="flex-end">
-            <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
-              Add Staff
-            </Button>
-          </Flex>
           <Table variant="simple" color="gray.500" mb="24px">
             <Thead>
               <Tr h="60px">

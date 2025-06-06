@@ -21,25 +21,13 @@ import {
   ModalCloseButton,
   VStack,
   useColorModeValue,
-  FormControl,
-  FormLabel,
-  Input,
-  Select,
 } from "@chakra-ui/react";
 import { MdEdit, MdDelete } from "react-icons/md";
 
 const StaffManagement = () => {
   const [staff, setStaff] = useState([]);
   const [roles, setRoles] = useState([]);
-  const [formData, setFormData] = useState({
-    userID: null,
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    roleID: "",
-  });
+  const [selectedStaff, setSelectedStaff] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const textColor = useColorModeValue("secondaryGray.900", "white");
@@ -70,37 +58,6 @@ const StaffManagement = () => {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      const method = formData.userID ? "PUT" : "POST";
-      const endpoint = formData.userID
-        ? `${import.meta.env.VITE_API_BASE}/api/User/${formData.userID}`
-        : `${import.meta.env.VITE_API_BASE}/api/User`;
-
-      const res = await fetch(endpoint, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!res.ok) throw new Error("Failed to save staff");
-      toast({ title: "Success", description: "Staff member saved.", status: "success" });
-      fetchStaff();
-      onClose();
-      setFormData({
-        userID: null,
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        password: "",
-        roleID: "",
-      });
-    } catch (error) {
-      toast({ title: "Error", description: error.message, status: "error" });
-    }
-  };
-
   const handleDeleteStaff = async (id) => {
     if (!window.confirm("Are you sure you want to delete this staff member?")) return;
     try {
@@ -116,12 +73,13 @@ const StaffManagement = () => {
     <>
       <Box h="250px" />
       <Box px="25px" mb="24px" maxW="1300px" mx="auto">
-        <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
-          <Flex px="25px" mt="6" justifyContent="flex-end">
-            <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
-              Add Staff
-            </Button>
-          </Flex>
+        <Flex mb="8px" justifyContent="flex-end" align="center">
+          <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
+            Add Staff
+          </Button>
+        </Flex>
+
+        <Box overflowX="auto" borderRadius="lg" boxShadow="base" bg="white">
           <Table variant="simple" color="gray.500" mb="24px">
             <Thead>
               <Tr h="60px">
@@ -146,18 +104,7 @@ const StaffManagement = () => {
                       size="sm"
                       variant="ghost"
                       colorScheme="gray"
-                      onClick={() => {
-                        setFormData({
-                          userID: user.userID,
-                          firstName: user.firstName,
-                          lastName: user.lastName,
-                          email: user.email,
-                          phoneNumber: user.phoneNumber,
-                          password: "",
-                          roleID: user.roleID,
-                        });
-                        onOpen();
-                      }}
+                      onClick={() => setSelectedStaff(user)}
                       mr={2}
                     />
                     <IconButton
@@ -176,47 +123,13 @@ const StaffManagement = () => {
         </Box>
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{formData.userID ? "Edit Staff" : "Add New Staff"}</ModalHeader>
+          <ModalHeader>Add New Staff</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <VStack spacing={4} align="stretch" pb={6}>
-              <FormControl isRequired>
-                <FormLabel>First Name</FormLabel>
-                <Input value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Last Name</FormLabel>
-                <Input value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Phone Number</FormLabel>
-                <Input value={formData.phoneNumber} onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Password</FormLabel>
-                <Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Role</FormLabel>
-                <Select placeholder="Select role" value={formData.roleID} onChange={(e) => setFormData({ ...formData, roleID: parseInt(e.target.value) })}>
-                  {roles.map((role) => (
-                    <option key={role.roleID} value={role.roleID}>{role.roleName}</option>
-                  ))}
-                </Select>
-              </FormControl>
-              <Flex justifyContent="flex-end" pt={4}>
-                <Button colorScheme="teal" onClick={handleSubmit}>
-                  {formData.userID ? "Update Staff" : "Save Staff"}
-                </Button>
-              </Flex>
-            </VStack>
+            <Text>Form component will be added here</Text>
           </ModalBody>
         </ModalContent>
       </Modal>

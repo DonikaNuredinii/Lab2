@@ -32,7 +32,6 @@ const StaffManagement = () => {
   const [staff, setStaff] = useState([]);
   const [roles, setRoles] = useState([]);
   const [formData, setFormData] = useState({
-    userID: null,
     firstName: "",
     lastName: "",
     email: "",
@@ -72,23 +71,17 @@ const StaffManagement = () => {
 
   const handleSubmit = async () => {
     try {
-      const method = formData.userID ? "PUT" : "POST";
-      const endpoint = formData.userID
-        ? `${import.meta.env.VITE_API_BASE}/api/User/${formData.userID}`
-        : `${import.meta.env.VITE_API_BASE}/api/User`;
-
-      const res = await fetch(endpoint, {
-        method,
+      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/User`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!res.ok) throw new Error("Failed to save staff");
-      toast({ title: "Success", description: "Staff member saved.", status: "success" });
+      if (!res.ok) throw new Error("Failed to add staff");
+      toast({ title: "Success", description: "Staff member added.", status: "success" });
       fetchStaff();
       onClose();
       setFormData({
-        userID: null,
         firstName: "",
         lastName: "",
         email: "",
@@ -116,12 +109,13 @@ const StaffManagement = () => {
     <>
       <Box h="250px" />
       <Box px="25px" mb="24px" maxW="1300px" mx="auto">
-        <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
-          <Flex px="25px" mt="6" justifyContent="flex-end">
-            <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
-              Add Staff
-            </Button>
-          </Flex>
+        <Flex mb="8px" justifyContent="flex-end" align="center">
+          <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
+            Add Staff
+          </Button>
+        </Flex>
+
+        <Box overflowX="auto" borderRadius="lg" boxShadow="base" bg="white">
           <Table variant="simple" color="gray.500" mb="24px">
             <Thead>
               <Tr h="60px">
@@ -146,18 +140,7 @@ const StaffManagement = () => {
                       size="sm"
                       variant="ghost"
                       colorScheme="gray"
-                      onClick={() => {
-                        setFormData({
-                          userID: user.userID,
-                          firstName: user.firstName,
-                          lastName: user.lastName,
-                          email: user.email,
-                          phoneNumber: user.phoneNumber,
-                          password: "",
-                          roleID: user.roleID,
-                        });
-                        onOpen();
-                      }}
+                      onClick={() => console.log("Edit staff")}
                       mr={2}
                     />
                     <IconButton
@@ -179,7 +162,7 @@ const StaffManagement = () => {
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{formData.userID ? "Edit Staff" : "Add New Staff"}</ModalHeader>
+          <ModalHeader>Add New Staff</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={4} align="stretch" pb={6}>
@@ -211,11 +194,9 @@ const StaffManagement = () => {
                   ))}
                 </Select>
               </FormControl>
-              <Flex justifyContent="flex-end" pt={4}>
-                <Button colorScheme="teal" onClick={handleSubmit}>
-                  {formData.userID ? "Update Staff" : "Save Staff"}
-                </Button>
-              </Flex>
+              <Button colorScheme="teal" mt={4} onClick={handleSubmit}>
+                Save Staff
+              </Button>
             </VStack>
           </ModalBody>
         </ModalContent>

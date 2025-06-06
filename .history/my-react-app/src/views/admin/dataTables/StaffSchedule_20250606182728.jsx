@@ -15,6 +15,7 @@ import {
   VStack,
   useToast,
   Flex,
+  Collapse,
   IconButton,
   Text,
   useDisclosure,
@@ -31,6 +32,7 @@ const StaffSchedule = () => {
   const [schedules, setSchedules] = useState([]);
   const [staff, setStaff] = useState([]);
   const [tables, setTables] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     scheduleID: null,
     staffID: "",
@@ -102,6 +104,7 @@ const StaffSchedule = () => {
       if (!res.ok) throw new Error("Failed to save schedule");
       toast({ title: "Success", description: "Schedule saved.", status: "success" });
       fetchSchedules();
+      setShowForm(false);
       onClose();
       setFormData({
         scheduleID: null,
@@ -130,67 +133,77 @@ const StaffSchedule = () => {
   };
 
   return (
-    <>
-      <Box h="250px" />
-      <Box px="25px" mb="24px" maxW="1300px" mx="auto">
-        <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
-          <Flex px="25px" mt="6" justifyContent="flex-end">
-            <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
-              Add Schedule
-            </Button>
-          </Flex>
-          <Table variant="simple" color="gray.800" mb="24px">
-            <Thead bg="gray.100">
-              <Tr>
-                <Th textAlign="center" fontWeight="bold">Staff</Th>
-                <Th textAlign="center" fontWeight="bold">Day</Th>
-                <Th textAlign="center" fontWeight="bold">Start</Th>
-                <Th textAlign="center" fontWeight="bold">End</Th>
-                <Th textAlign="center" fontWeight="bold">Table</Th>
-                <Th textAlign="center" fontWeight="bold">Assigned By</Th>
-                <Th textAlign="center" fontWeight="bold">Actions</Th>
+    <Box pt={20} px={12} maxW="1600px" mx="auto">
+      <Flex justifyContent="space-between" alignItems="center" mb={4}>
+        <Text fontSize="3xl" fontWeight="bold">Staff Schedules</Text>
+        <Button colorScheme="blue" onClick={() => {
+          setFormData({
+            scheduleID: null,
+            staffID: "",
+            tableID: "",
+            dayOfWeek: "Monday",
+            startTime: "",
+            endTime: "",
+            assignedBy: "",
+          });
+          onOpen();
+        }}>
+          Add Schedule
+        </Button>
+      </Flex>
+
+      <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
+        <Table variant="simple" color="gray.500" mb="24px">
+          <Thead bg="gray.100">
+            <Tr>
+              <Th textAlign="center" fontWeight="bold">Staff</Th>
+              <Th textAlign="center" fontWeight="bold">Day</Th>
+              <Th textAlign="center" fontWeight="bold">Start</Th>
+              <Th textAlign="center" fontWeight="bold">End</Th>
+              <Th textAlign="center" fontWeight="bold">Table</Th>
+              <Th textAlign="center" fontWeight="bold">Assigned By</Th>
+              <Th textAlign="center" fontWeight="bold">Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {schedules.map((s) => (
+              <Tr key={s.scheduleID}>
+               <Td textAlign="center" fontWeight="bold" color="gray.900">{s.staffUser?.firstName} {s.staffUser?.lastName}</Td>
+                 <Td textAlign="center" fontWeight="bold" color="gray.900">{s.dayOfWeek}</Td>
+                 <Td textAlign="center" fontWeight="bold" color="gray.900">{s.startTime}</Td>
+                 <Td textAlign="center" fontWeight="bold" color="gray.900">{s.endTime}</Td>
+                <Td textAlign="center" fontWeight="bold" color="gray.900">{s.table?.tableNumber || "-"}</Td>
+                <Td textAlign="center" fontWeight="bold">{s.assignedByUser?.firstName || "-"}</Td>
+                <Td textAlign="center">
+                  <IconButton
+                    icon={<MdEdit />}
+                    size="sm"
+                    mr={2}
+                    onClick={() => {
+                      setFormData({
+                        scheduleID: s.scheduleID,
+                        staffID: s.staffID,
+                        tableID: s.tableID,
+                        dayOfWeek: s.dayOfWeek,
+                        startTime: s.startTime?.slice(0, 5),
+                        endTime: s.endTime?.slice(0, 5),
+                        assignedBy: s.assignedBy,
+                      });
+                      onOpen();
+                    }}
+                  />
+                  <IconButton
+                    icon={<MdDelete />}
+                    colorScheme="red"
+                    size="sm"
+                    aria-label="Delete"
+                    onClick={() => handleDelete(s.scheduleID)}
+                  />
+                </Td>
               </Tr>
-            </Thead>
-            <Tbody>
-              {schedules.map((s) => (
-                <Tr key={s.scheduleID}>
-                  <Td textAlign="center" fontWeight="bold">{s.staffUser?.firstName} {s.staffUser?.lastName}</Td>
-                  <Td textAlign="center" fontWeight="bold">{s.dayOfWeek}</Td>
-                  <Td textAlign="center" fontWeight="bold">{s.startTime}</Td>
-                  <Td textAlign="center" fontWeight="bold">{s.endTime}</Td>
-                  <Td textAlign="center" fontWeight="bold">{s.table?.tableNumber || "-"}</Td>
-                  <Td textAlign="center" fontWeight="bold">{s.assignedByUser?.firstName || "-"}</Td>
-                  <Td textAlign="center">
-                    <IconButton
-                      icon={<MdEdit />}
-                      size="sm"
-                      mr={2}
-                      onClick={() => {
-                        setFormData({
-                          scheduleID: s.scheduleID,
-                          staffID: s.staffID,
-                          tableID: s.tableID,
-                          dayOfWeek: s.dayOfWeek,
-                          startTime: s.startTime?.slice(0, 5),
-                          endTime: s.endTime?.slice(0, 5),
-                          assignedBy: s.assignedBy,
-                        });
-                        onOpen();
-                      }}
-                    />
-                    <IconButton
-                      icon={<MdDelete />}
-                      colorScheme="red"
-                      size="sm"
-                      aria-label="Delete"
-                      onClick={() => handleDelete(s.scheduleID)}
-                    />
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </Box>
+            ))}
+          </Tbody>
+        </Table>
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -240,12 +253,14 @@ const StaffSchedule = () => {
                   ))}
                 </Select>
               </FormControl>
-              <Button colorScheme="teal" alignSelf="flex-end" onClick={handleSubmit}>{formData.scheduleID ? "Update Schedule" : "Save Schedule"}</Button>
+              <Flex justifyContent="flex-end" pt={4}>
+                <Button colorScheme="teal" onClick={handleSubmit}>{formData.scheduleID ? "Update Schedule" : "Save Schedule"}</Button>
+              </Flex>
             </VStack>
           </ModalBody>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 };
 
