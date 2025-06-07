@@ -12,19 +12,21 @@ namespace Lab2_Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly MyContext _context;
-        private readonly AuditLogService _auditLogService;
+        private readonly IConfiguration _config;
 
-        // Injektim i AuditLogService në konstruktor
-        public AuthController(MyContext context, AuditLogService auditLogService)
+        public AuthController(MyContext context, AuditLogService auditLogService, IConfiguration config)
         {
             _context = context;
             _auditLogService = auditLogService;
+            _config = config;
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<object>> Login([FromBody] LoginDto loginDto)
         {
-            var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+            var user = await _context.Users.Include(u => u.Role)
+                                           .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+
             if (user == null || !PasswordHelper.VerifyPassword(loginDto.Password, user.Password))
             {
                 return Unauthorized("Invalid credentials.");
@@ -37,7 +39,7 @@ namespace Lab2_Backend.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            
+    
             await _auditLogService.CreateAsync(new AuditLog
             {
                 Action = "Login",
@@ -48,26 +50,32 @@ namespace Lab2_Backend.Controllers
                 RequestPath = HttpContext.Request.Path
             });
 
-            var result = new
-            {
-                user.UserID,
-                user.FirstName,
-                user.LastName,
-                user.Email,
-                Role = user.Role?.RoleName,
-                Type = user.GetType().Name
-            };
+            
+            var token = TokenHelper.GenerateToken(user, _config); 
 
-            return Ok(result);
+    
+            return Ok(new
+            {
+                Token = token,
+                User = new
+                {
+                    user.UserID,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email,
+                    Role = user.Role?.RoleName,
+                    Type = user.GetType().Name
+                }
+            });
         }
 
+
+        [Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-         
             var userId = User.FindFirst("id")?.Value ?? "unknown";
 
-           
             await _auditLogService.CreateAsync(new AuditLog
             {
                 Action = "Logout",
@@ -78,9 +86,9 @@ namespace Lab2_Backend.Controllers
                 RequestPath = HttpContext.Request.Path
             });
 
-
-            return Ok(new { message = "Logged out successfully" });
+            return Ok(new { message = "Logged out successfully. Please delete the token on client side." });
         }
+
 
     }
 }
