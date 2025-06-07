@@ -4,6 +4,8 @@ using Lab2_Backend.Model;
 using System.Threading.Tasks;
 using Lab2_Backend.Helpers;
 using Lab2_Backend.MongoService;  // AuditLogService namespace
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Lab2_Backend.Controllers
 {
@@ -13,6 +15,8 @@ namespace Lab2_Backend.Controllers
     {
         private readonly MyContext _context;
         private readonly IConfiguration _config;
+        private readonly AuditLogService _auditLogService;
+
 
         public AuthController(MyContext context, AuditLogService auditLogService, IConfiguration config)
         {

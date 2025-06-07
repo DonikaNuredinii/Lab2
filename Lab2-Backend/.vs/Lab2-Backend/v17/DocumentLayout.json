@@ -297,11 +297,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
@@ -313,8 +313,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\MenuItemProductsController.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAYwCAAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:43:22.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:43:22.409Z"
             },
             {
               "$type": "Document",
@@ -326,8 +325,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\MenuItemProductDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:03:28.747Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:03:28.747Z"
             },
             {
               "$type": "Document",
@@ -339,8 +337,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\ProductNoteDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:03:02.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:03:02.729Z"
             },
             {
               "$type": "Document",
@@ -352,8 +349,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\ProductDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:02:45.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:02:45.519Z"
             },
             {
               "$type": "Document",
@@ -363,7 +359,7 @@
               "RelativeDocumentMoniker": "Lab2-Backend\\appsettings.json",
               "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
               "RelativeToolTip": "Lab2-Backend\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-04-29T21:24:45.437Z",
               "EditorCaption": ""
@@ -376,7 +372,7 @@
               "RelativeDocumentMoniker": "Lab2-Backend\\MyContext.cs",
               "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
               "RelativeToolTip": "Lab2-Backend\\MyContext.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAADwv5AAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAAAKYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-05T14:21:09.8Z",
               "EditorCaption": ""
@@ -389,7 +385,7 @@
               "RelativeDocumentMoniker": "Lab2-Backend\\Program.cs",
               "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
               "RelativeToolTip": "Lab2-Backend\\Program.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAADQAAAAAAAAAAAAQwEgAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-29T21:23:57.019Z",
               "EditorCaption": ""
@@ -404,8 +400,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAwwFAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:39:15.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:39:15.764Z"
             },
             {
               "$type": "Document",
@@ -417,8 +412,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\ProductNotesController.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAkwDMAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:42:59.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:42:59.953Z"
             },
             {
               "$type": "Document",
@@ -430,8 +424,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\ProductsController.cs",
               "ViewState": "AgIAAGgAAAAAAAAAAAAswIwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:41:58.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:41:58.273Z"
             },
             {
               "$type": "Document",
@@ -443,8 +436,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\MenuItemProducts.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:17:07.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:17:07.792Z"
             },
             {
               "$type": "Document",
@@ -456,8 +448,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\MenuItems.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:10:34.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:10:34.311Z"
             },
             {
               "$type": "Document",
@@ -469,8 +460,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\ProductNotes.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:15:44.34Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:15:44.34Z"
             },
             {
               "$type": "Document",
@@ -482,8 +472,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Products.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAxwDIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:14:23.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:14:23.653Z"
             },
             {
               "$type": "Document",
@@ -528,8 +517,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\MyContextModelSnapshot.cs",
               "ViewState": "AgIAAD0DAAAAAAAAAADwv00DAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T14:11:50.083Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T14:11:50.083Z"
             },
             {
               "$type": "Document",
@@ -574,8 +562,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\RestaurantsController.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAUwB8AAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T13:57:39.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T13:57:39.809Z"
             },
             {
               "$type": "Document",
@@ -587,8 +574,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250605134748_products.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T13:47:48.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-05T13:47:48.442Z"
             },
             {
               "$type": "Document",
@@ -600,8 +586,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Restaurant.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAA3wBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T21:40:41.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T21:40:41.974Z"
             },
             {
               "$type": "Document",
@@ -624,8 +609,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:19:13.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:19:13.829Z"
             },
             {
               "$type": "Document",
@@ -637,8 +621,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Table.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T21:36:12.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T21:36:12.466Z"
             },
             {
               "$type": "Document",
@@ -650,8 +633,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\RestaurantWithHoursDTO.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAmwBMAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T21:57:34.143Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T21:57:34.143Z"
             },
             {
               "$type": "Document",
@@ -663,8 +645,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\RestaurantController.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAkwDQAAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T18:32:17.11Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T18:32:17.11Z"
             },
             {
               "$type": "Document",
@@ -676,8 +657,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\RestaurantHours.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAmwA8AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T21:40:46.992Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T21:40:46.992Z"
             },
             {
               "$type": "Document",
@@ -711,8 +691,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\LoginDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:55.427Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:55.427Z"
             },
             {
               "$type": "Document",
@@ -724,8 +703,7 @@
               "RelativeToolTip": "Lab2-Backend\\Helpers\\PasswordHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:36.854Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:36.854Z"
             },
             {
               "$type": "Document",
@@ -737,8 +715,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\UserController.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAgwIUAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:53:52.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:53:52.957Z"
             },
             {
               "$type": "Document",
@@ -750,8 +727,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\StaffScheduleDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:51.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:51.669Z"
             },
             {
               "$type": "Document",
@@ -763,8 +739,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAIBQwFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:39:56.722Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:39:56.722Z"
             },
             {
               "$type": "Document",
@@ -776,8 +751,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\RoleController.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAgwGcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:46:25.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:46:25.429Z"
             },
             {
               "$type": "Document",
@@ -789,8 +763,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\UserCreateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:47.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:47.404Z"
             },
             {
               "$type": "Document",
@@ -802,8 +775,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\UserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:42.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:42.775Z"
             },
             {
               "$type": "Document",
@@ -815,8 +787,7 @@
               "RelativeToolTip": "Lab2-Backend\\MongoService\\AuditLogService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:18:27.266Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:18:27.266Z"
             },
             {
               "$type": "Document",
@@ -828,8 +799,7 @@
               "RelativeToolTip": "Lab2-Backend\\Lab2-Backend.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-04-29T21:24:44.21Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-29T21:24:44.21Z"
             },
             {
               "$type": "Document",
@@ -841,8 +811,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:54:40.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:54:40.088Z"
             },
             {
               "$type": "Document",
@@ -854,8 +823,7 @@
               "RelativeToolTip": "Lab2-Backend\\Configurations\\MongoDBSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:21:36.343Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:21:36.343Z"
             },
             {
               "$type": "Document",
@@ -867,8 +835,7 @@
               "RelativeToolTip": "Lab2-Backend\\Lab2-Backend.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-03T23:17:52.424Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:17:52.424Z"
             },
             {
               "$type": "Document",
@@ -880,8 +847,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\AuditLog.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:17:39.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:17:39.852Z"
             },
             {
               "$type": "Document",
@@ -893,8 +859,7 @@
               "RelativeToolTip": "Lab2-Backend\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-03T14:15:26.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T14:15:26.002Z"
             },
             {
               "$type": "Document",
@@ -906,8 +871,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250426220422_Role4.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T21:06:30.716Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T21:06:30.716Z"
             },
             {
               "$type": "Document",
@@ -919,8 +883,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Role.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:49:02.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T18:49:02.273Z"
             },
             {
               "$type": "Document",
@@ -932,8 +895,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250417205654_TableCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T21:06:28.425Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T21:06:28.425Z"
             },
             {
               "$type": "Document",
@@ -945,8 +907,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\CustomerController.cs",
               "ViewState": "AgIAAF0AAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:59:32.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T18:59:32.118Z"
             },
             {
               "$type": "Document",
@@ -958,8 +919,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\CustomerAddressController.cs",
               "ViewState": "AgIAADEAAAAAAAAAAADwv0AAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:59:44.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T18:59:44.414Z"
             },
             {
               "$type": "Document",
@@ -971,8 +931,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250512210727_AddWaiterUserAndTipToOrders.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T21:07:28.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T21:07:28.154Z"
             },
             {
               "$type": "Document",
@@ -984,8 +943,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T18:30:16.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T18:30:16.929Z"
             },
             {
               "$type": "Document",
@@ -997,8 +955,7 @@
               "RelativeToolTip": "Lab2-Backend\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-03T14:15:09.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T14:15:09.688Z"
             },
             {
               "$type": "Document",
@@ -1010,8 +967,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Subcategory.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAuwA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T18:30:35.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T18:30:35.856Z"
             },
             {
               "$type": "Document",
@@ -1023,8 +979,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250427093249_ProductsAndRelatedTables.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:32:50.044Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:32:50.044Z"
             },
             {
               "$type": "Document",
@@ -1036,8 +991,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250422230300_FixedRoles.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T21:06:29.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T21:06:29.652Z"
             },
             {
               "$type": "Document",
@@ -1049,8 +1003,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250422225605_Roles.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T21:06:27.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T21:06:27.2Z"
             },
             {
               "$type": "Document",
@@ -1062,8 +1015,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250426221241_roleID.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T21:06:25.666Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T21:06:25.666Z"
             },
             {
               "$type": "Document",
@@ -1075,8 +1027,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\MongoTestController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:25:12.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:25:12.252Z"
             },
             {
               "$type": "Document",
@@ -1088,8 +1039,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250502080324_RestaurantHours.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T08:03:24.514Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T08:03:24.514Z"
             },
             {
               "$type": "Document",
@@ -1101,8 +1051,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAIBZwFEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T21:51:23.357Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T21:51:23.357Z"
             },
             {
               "$type": "Document",
@@ -1114,8 +1063,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T23:05:16.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T23:05:16.213Z"
             },
             {
               "$type": "Document",
@@ -1127,8 +1075,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAswDMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T21:51:12.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T21:51:12.816Z"
             },
             {
               "$type": "Document",
@@ -1140,8 +1087,7 @@
               "RelativeToolTip": "Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:35:22.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:35:22.314Z"
             },
             {
               "$type": "Document",
@@ -1153,8 +1099,7 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:03:43.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:03:43.598Z"
             },
             {
               "$type": "Document",
@@ -1166,8 +1111,7 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\OrderItemsRemovedProductsController.cs",
               "ViewState": "AgIAADwAAAAAAAAAAAAwwEYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:43:40.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:43:40.863Z"
             },
             {
               "$type": "Document",
@@ -1179,8 +1123,7 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\OrderItems_RemovedProducts.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:18:01.226Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:18:01.226Z"
             }
           ]
         }
