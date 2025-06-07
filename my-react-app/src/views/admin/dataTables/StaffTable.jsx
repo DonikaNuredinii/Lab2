@@ -11,7 +11,6 @@ import {
   Flex,
   useToast,
   IconButton,
-  Text,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -28,6 +27,8 @@ import {
 } from "@chakra-ui/react";
 import { MdEdit, MdDelete } from "react-icons/md";
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 const StaffManagement = () => {
   const [staff, setStaff] = useState([]);
   const [roles, setRoles] = useState([]);
@@ -40,10 +41,10 @@ const StaffManagement = () => {
     password: "",
     roleID: "",
   });
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
 
   useEffect(() => {
     fetchStaff();
@@ -52,21 +53,29 @@ const StaffManagement = () => {
 
   const fetchStaff = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/User`);
+      const res = await fetch(`${API_BASE}/api/User`);
       const data = await res.json();
       setStaff(data);
     } catch (error) {
-      toast({ title: "Error", description: "Failed to load staff.", status: "error" });
+      toast({
+        title: "Error",
+        description: "Failed to load staff.",
+        status: "error",
+      });
     }
   };
 
   const fetchRoles = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Role/roles`);
+      const res = await fetch(`${API_BASE}/api/Role/roles`);
       const data = await res.json();
       setRoles(data);
     } catch (error) {
-      toast({ title: "Error", description: "Failed to load roles.", status: "error" });
+      toast({
+        title: "Error",
+        description: "Failed to load roles.",
+        status: "error",
+      });
     }
   };
 
@@ -74,8 +83,8 @@ const StaffManagement = () => {
     try {
       const method = formData.userID ? "PUT" : "POST";
       const endpoint = formData.userID
-        ? `${import.meta.env.VITE_API_BASE}/api/User/${formData.userID}`
-        : `${import.meta.env.VITE_API_BASE}/api/User`;
+        ? `${API_BASE}/api/User/${formData.userID}`
+        : `${API_BASE}/api/User`;
 
       const res = await fetch(endpoint, {
         method,
@@ -84,32 +93,54 @@ const StaffManagement = () => {
       });
 
       if (!res.ok) throw new Error("Failed to save staff");
-      toast({ title: "Success", description: "Staff member saved.", status: "success" });
+
+      toast({
+        title: "Success",
+        description: "Staff member saved.",
+        status: "success",
+      });
+
       fetchStaff();
       onClose();
-      setFormData({
-        userID: null,
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "",
-        password: "",
-        roleID: "",
-      });
+      resetForm();
     } catch (error) {
-      toast({ title: "Error", description: error.message, status: "error" });
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+      });
     }
   };
 
   const handleDeleteStaff = async (id) => {
     if (!window.confirm("Are you sure you want to delete this staff member?")) return;
     try {
-      await fetch(`${import.meta.env.VITE_API_BASE}/api/User/${id}`, { method: "DELETE" });
-      toast({ title: "Deleted", description: "Staff member removed.", status: "info" });
+      await fetch(`${API_BASE}/api/User/${id}`, { method: "DELETE" });
+      toast({
+        title: "Deleted",
+        description: "Staff member removed.",
+        status: "info",
+      });
       fetchStaff();
     } catch (error) {
-      toast({ title: "Error", description: "Failed to delete staff.", status: "error" });
+      toast({
+        title: "Error",
+        description: "Failed to delete staff.",
+        status: "error",
+      });
     }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      userID: null,
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      roleID: "",
+    });
   };
 
   return (
@@ -135,7 +166,9 @@ const StaffManagement = () => {
             <Tbody>
               {staff.map((user) => (
                 <Tr key={user.userID} h="100px">
-                  <Td textAlign="center" fontWeight="700" color={textColor}>{user.firstName} {user.lastName}</Td>
+                  <Td textAlign="center" fontWeight="700" color={textColor}>
+                    {user.firstName} {user.lastName}
+                  </Td>
                   <Td textAlign="center" fontWeight="400" color={textColor}>{user.email}</Td>
                   <Td textAlign="center" fontWeight="700" color={textColor}>{user.phoneNumber}</Td>
                   <Td textAlign="center" fontWeight="500" color={textColor}>{user.roleName}</Td>
