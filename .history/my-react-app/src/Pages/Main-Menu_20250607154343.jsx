@@ -236,7 +236,7 @@ const MainMenu = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">Your Cart</DrawerHeader>
+          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">My Cart</DrawerHeader>
           <DrawerBody>
             <VStack align="stretch" spacing={3}>
               {cartItems.length === 0 ? (

@@ -64,7 +64,7 @@ const MainMenu = () => {
       if (!res.ok) throw new Error("Failed to place order");
 
       const data = await res.json();
-      alert(`Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati.`);
+      alert(`Faleminderit! Porosia juaj po përgatitet dhe do të shërbehet së shpejti.`);
       setCartItems([]);
       setIsCartOpen(false);
     } catch (err) {
@@ -236,7 +236,7 @@ const MainMenu = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">Your Cart</DrawerHeader>
+          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">🛒 Porosia juaj</DrawerHeader>
           <DrawerBody>
             <VStack align="stretch" spacing={3}>
               {cartItems.length === 0 ? (
@@ -262,9 +262,14 @@ const MainMenu = () => {
               )}
               <Button
                 mt={4}
-                colorScheme="teal"
+                bgGradient="linear(to-r, teal.400, green.400)"
+                color="white"
+                fontWeight="semibold"
                 borderRadius="full"
-                onClick={handleSubmitOrder}>
+                boxShadow="md"
+                _hover={{ bgGradient: "linear(to-r, teal.500, green.500)", boxShadow: "lg" }}
+                onClick={handleSubmitOrder}
+              >
                 Place Order
               </Button>
             </VStack>

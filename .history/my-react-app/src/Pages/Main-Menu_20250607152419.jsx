@@ -1,4 +1,4 @@
-// updated to POST directly to /api/Orders without items
+// updated file with price summary
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
@@ -25,6 +25,43 @@ import { MdNoteAdd } from "react-icons/md";
 import NoteModal from "./NoteModal";
 
 const MainMenu = () => {
+  const handleSubmitOrder = async () => {
+    const orderDto = {
+      restaurantID: 2,
+      tableID: 1,
+      costumerID: 2,
+      costumerAdressID: 1,
+      orderType: "Dine-in",
+      status: "Pending",
+      totalAmount: cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0),
+      items: cartItems.map((item) => ({
+        menuItemsID: item.id,
+        quantity: item.quantity,
+        price: item.price
+      }))
+    };
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders/with-items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderDto)
+      });
+
+      if (!res.ok) throw new Error("Failed to place order");
+
+      const data = await res.json();
+      alert(`Order placed successfully! Order ID: ${data.orderId}`);
+      setCartItems([]);
+      setIsCartOpen(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to place order");
+    }
+  };
+
   const [pageIndex, setPageIndex] = useState(0);
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,41 +74,6 @@ const MainMenu = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
-
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  const handleSubmitOrder = async () => {
-    const orderDto = {
-      restaurantID: 2,
-      tableID: 1,
-      costumerID: 0,
-      costumerAdressID: 0,
-      orderType: "Dine-in",
-      status: "Pending",
-      totalAmount: total,
-      createdAt: new Date().toISOString()
-    };
-
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(orderDto)
-      });
-
-      if (!res.ok) throw new Error("Failed to place order");
-
-      const data = await res.json();
-      alert(`Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati.`);
-      setCartItems([]);
-      setIsCartOpen(false);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to place order");
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -151,6 +153,8 @@ const MainMenu = () => {
   });
 
   const currentPage = menuData[pageIndex];
+
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   if (loading) return <div className="menu-white-page">Loading menu...</div>;
   if (error) return <div className="menu-white-page">Error: {error}</div>;
@@ -236,7 +240,7 @@ const MainMenu = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">Your Cart</DrawerHeader>
+          <DrawerHeader>My Cart</DrawerHeader>
           <DrawerBody>
             <VStack align="stretch" spacing={3}>
               {cartItems.length === 0 ? (
@@ -264,7 +268,8 @@ const MainMenu = () => {
                 mt={4}
                 colorScheme="teal"
                 borderRadius="full"
-                onClick={handleSubmitOrder}>
+                onClick={handleSubmitOrder}
+              >
                 Place Order
               </Button>
             </VStack>

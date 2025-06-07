@@ -64,7 +64,7 @@ const MainMenu = () => {
       if (!res.ok) throw new Error("Failed to place order");
 
       const data = await res.json();
-      alert(`Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati.`);
+      alert(`Faleminderit! Porosia juaj po përgatitet dhe do të shërbehet së shpejti.`);
       setCartItems([]);
       setIsCartOpen(false);
     } catch (err) {
@@ -236,7 +236,7 @@ const MainMenu = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">Your Cart</DrawerHeader>
+          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700"></DrawerHeader>
           <DrawerBody>
             <VStack align="stretch" spacing={3}>
               {cartItems.length === 0 ? (

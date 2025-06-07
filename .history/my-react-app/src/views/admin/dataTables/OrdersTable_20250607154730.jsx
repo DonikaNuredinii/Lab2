@@ -110,13 +110,7 @@ const OrdersTable = () => {
                       fontWeight="medium"
                       px={4}
                       _hover={{ bg: "#EADFB4" }}
-                      onClick={() => {
-                        const updated = orders.map(o =>
-                          o.ordersID === order.ordersID ? { ...o, status: "Preparing" } : o
-                        );
-                        setOrders(updated);
-                        alert("This order is now being prepared.");
-                      }}
+                      onClick={() => updateOrderStatus(order.ordersID, "Preparing")}
                     >
                       Preparing
                     </Button>
@@ -128,13 +122,7 @@ const OrdersTable = () => {
                       fontWeight="medium"
                       px={4}
                       _hover={{ bg: "#B6F2CF" }}
-                      onClick={() => {
-                        const updated = orders.map(o =>
-                          o.ordersID === order.ordersID ? { ...o, status: "Completed" } : o
-                        );
-                        setOrders(updated);
-                        alert("This order has been completed.");
-                      }}
+                      onClick={() => updateOrderStatus(order.ordersID, "Completed")}
                     >
                       Complete
                     </Button>
@@ -146,13 +134,7 @@ const OrdersTable = () => {
                       fontWeight="medium"
                       px={4}
                       _hover={{ bg: "#FECDCA" }}
-                      onClick={() => {
-                        const updated = orders.map(o =>
-                          o.ordersID === order.ordersID ? { ...o, status: "Cancelled" } : o
-                        );
-                        setOrders(updated);
-                        alert("This order has been cancelled.");
-                      }}
+                      onClick={() => updateOrderStatus(order.ordersID, "Cancelled")}
                     >
                       Cancel
                     </Button>

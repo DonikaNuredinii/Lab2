@@ -64,7 +64,7 @@ const MainMenu = () => {
       if (!res.ok) throw new Error("Failed to place order");
 
       const data = await res.json();
-      alert(`Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati.`);
+      alert(`Order placed successfully! Order ID: ${data.ordersID}`);
       setCartItems([]);
       setIsCartOpen(false);
     } catch (err) {
@@ -236,7 +236,7 @@ const MainMenu = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">Your Cart</DrawerHeader>
+          <DrawerHeader>My Cart</DrawerHeader>
           <DrawerBody>
             <VStack align="stretch" spacing={3}>
               {cartItems.length === 0 ? (
@@ -264,7 +264,8 @@ const MainMenu = () => {
                 mt={4}
                 colorScheme="teal"
                 borderRadius="full"
-                onClick={handleSubmitOrder}>
+                onClick={handleSubmitOrder}
+              >
                 Place Order
               </Button>
             </VStack>

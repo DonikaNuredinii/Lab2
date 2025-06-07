@@ -1,26 +1,8 @@
-// updated to POST directly to /api/Orders without items
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import "../CSS/Main-Menu.css";
-import {
-  Box,
-  Text,
-  IconButton,
-  useDisclosure,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  VStack,
-  Divider,
-  HStack,
-  Stack,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Text, IconButton, useDisclosure } from "@chakra-ui/react";
 import { MdNoteAdd } from "react-icons/md";
 import NoteModal from "./NoteModal";
 
@@ -29,49 +11,12 @@ const MainMenu = () => {
   const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
 
   const [selectedItemProducts, setSelectedItemProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
-
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  const handleSubmitOrder = async () => {
-    const orderDto = {
-      restaurantID: 2,
-      tableID: 1,
-      costumerID: 0,
-      costumerAdressID: 0,
-      orderType: "Dine-in",
-      status: "Pending",
-      totalAmount: total,
-      createdAt: new Date().toISOString()
-    };
-
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(orderDto)
-      });
-
-      if (!res.ok) throw new Error("Failed to place order");
-
-      const data = await res.json();
-      alert(`Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati.`);
-      setCartItems([]);
-      setIsCartOpen(false);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to place order");
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +28,9 @@ const MainMenu = () => {
         ]);
 
         if (!itemsRes.ok || !categoriesRes.ok || !subcategoriesRes.ok) {
-          throw new Error("Failed to fetch menu data");
+          throw new Error(
+            `Failed to fetch: Statuses: Items ${itemsRes.status}, Categories ${categoriesRes.status}, Subcategories ${subcategoriesRes.status}`
+          );
         }
 
         const itemsJson = await itemsRes.json();
@@ -129,15 +76,6 @@ const MainMenu = () => {
     fetchData();
   }, []);
 
-  const addToCart = (item) => {
-    setCartItems((prev) => {
-      const exists = prev.find((i) => i.id === item.id);
-      if (exists) return prev;
-      return [...prev, { ...item, quantity: 1 }];
-    });
-    setIsCartOpen(true);
-  };
-
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
       if (pageIndex < menuData.length - 1) setPageIndex((prev) => prev + 1);
@@ -168,7 +106,9 @@ const MainMenu = () => {
               <div className="menu-item-image-container">
                 {item.image && (
                   <img
-                    src={item.image.startsWith("/") ? item.image : "/" + item.image}
+                    src={
+                      item.image.startsWith("/") ? item.image : "/" + item.image
+                    }
                     alt={item.name}
                   />
                 )}
@@ -184,40 +124,52 @@ const MainMenu = () => {
                     onClick={async () => {
                       try {
                         const res = await fetch(
-                          `${import.meta.env.VITE_API_BASE}/api/MenuItemProducts/menuitem/${item.id}`
+                          `${
+                            import.meta.env.VITE_API_BASE
+                          }/api/MenuItemProducts/menuitem/${item.id}`
                         );
-                        if (!res.ok) throw new Error("Failed to fetch products");
+                        if (!res.ok)
+                          throw new Error("Failed to fetch products");
 
                         const data = await res.json();
+
                         if (data.length > 0) {
                           setSelectedItemProducts(data);
                           setSelectedProducts(data);
                           setSelectedMenuItemId(item.id);
                           onOpen();
                         } else {
-                          alert("This dish has no removable ingredients configured.");
+                          alert(
+                            "This dish has no removable ingredients configured."
+                          );
                         }
                       } catch (error) {
-                        console.error("Failed to load product ingredients:", error);
+                        console.error(
+                          "Failed to load product ingredients:",
+                          error
+                        );
                       }
                     }}
                   />
                 </div>
                 <div className="menu-item-description">{item.description}</div>
-                <div className="menu-item-price">Price: ${item.price?.toFixed(2)}</div>
-                <Button
-                  mt={2}
-                  size="sm"
-                  variant="solid"
-                  bg="white"
-                  color="black"
-                  borderRadius="full"
-                  _hover={{ bg: "gray.100" }}
-                  onClick={() => addToCart(item)}
-                >
-                  Add to Cart
-                </Button>
+                {item.price !== undefined && (
+                  <div className="menu-item-price">
+                    Price: ${item.price?.toFixed(2)}
+                  </div>
+                )}
               </div>
+              <Button
+  size="sm"
+  colorScheme="teal"
+  variant="outline"
+  borderRadius="full"
+  mt={2}
+  onClick={() => handleAddToCart(item)}
+>
+  Add to Cart
+</Button>
+
             </div>
           ))
         )}
@@ -232,48 +184,9 @@ const MainMenu = () => {
         menuItemId={selectedMenuItemId}
       />
 
-      <Drawer isOpen={isCartOpen} placement="right" onClose={() => setIsCartOpen(false)}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader fontSize="2xl" fontWeight="bold" color="teal.700">Your Cart</DrawerHeader>
-          <DrawerBody>
-            <VStack align="stretch" spacing={3}>
-              {cartItems.length === 0 ? (
-                <Text fontSize="sm">Cart is empty</Text>
-              ) : (
-                <>
-                  {cartItems.map((item) => (
-                    <Box key={item.id}>
-                      <HStack justify="space-between">
-                        <Text>{item.name}</Text>
-                        <Text fontWeight="bold">${item.price.toFixed(2)}</Text>
-                      </HStack>
-                      <Divider />
-                    </Box>
-                  ))}
-                  <Box pt={4}>
-                    <HStack justify="space-between">
-                      <Text fontSize="lg" fontWeight="bold">Total</Text>
-                      <Text fontSize="lg" fontWeight="bold">${total.toFixed(2)}</Text>
-                    </HStack>
-                  </Box>
-                </>
-              )}
-              <Button
-                mt={4}
-                colorScheme="teal"
-                borderRadius="full"
-                onClick={handleSubmitOrder}>
-                Place Order
-              </Button>
-            </VStack>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-
       <div className="menu-nav-tip">
-        {pageIndex > 0 && "← Swipe Back"} {pageIndex < menuData.length - 1 && "Swipe Forward →"}
+        {pageIndex > 0 && "← Swipe Back"}{" "}
+        {pageIndex < menuData.length - 1 && "Swipe Forward →"}
       </div>
     </div>
   );
