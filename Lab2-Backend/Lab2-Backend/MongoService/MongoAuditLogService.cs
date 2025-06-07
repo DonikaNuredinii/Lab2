@@ -5,11 +5,11 @@ using MongoDB.Driver;
 
 namespace Lab2_Backend.MongoService
 {
-    public class AuditLogService
+    public class MongoAuditLogService
     {
         private readonly IMongoCollection<AuditLog> _auditLogs;
 
-        public AuditLogService(IOptions<MongoDBSettings> mongoSettings)
+        public MongoAuditLogService(IOptions<MongoDBSettings> mongoSettings)
         {
             var client = new MongoClient(mongoSettings.Value.ConnectionString);
             var database = client.GetDatabase(mongoSettings.Value.DatabaseName);

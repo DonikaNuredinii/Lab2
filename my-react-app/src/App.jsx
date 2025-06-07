@@ -7,6 +7,8 @@ import RTLLayout from "./layouts/rtl";
 import MenuCover from "./Pages/MenuCover";
 import MainMenu from "./Pages/Main-Menu";
 import OnlineMenu from "./Pages/OnlineMenu";
+import AuthForm from './Pages/AuthForm';
+
 import {
   ChakraProvider,
   // extendTheme
@@ -19,6 +21,7 @@ export default function Main() {
   return (
     <ChakraProvider theme={currentTheme}>
       <Routes>
+        <Route path="/login" element={<AuthForm />} />
         <Route path="auth/*" element={<AuthLayout />} />
         <Route
           path="admin/*"

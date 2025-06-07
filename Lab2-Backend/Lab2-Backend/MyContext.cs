@@ -29,6 +29,8 @@ namespace Lab2_Backend
         public DbSet<RestaurantHours>  RestaurantHours { get; set; }
         public DbSet<StaffSchedule> StaffSchedules { get; set; }
         public DbSet<RestaurantSubcategory> RestaurantSubcategories { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
+
 
 
 

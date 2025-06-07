@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Lab2_Backend.Helpers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,9 +26,15 @@ var connectionString = isWindows
 builder.Services.AddDbContext<MyContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<AuditLogService>();               // SQL version
+
+
+
 // MongoDB
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
-builder.Services.AddSingleton<AuditLogService>();
+builder.Services.AddScoped<MongoAuditLogService>();
+
+
 
 // CORS
 builder.Services.AddCors(options =>
@@ -65,12 +73,12 @@ if (!string.IsNullOrEmpty(jwtKey))
     builder.Services.AddAuthorization(options =>
     {
         options.AddPolicy("AdminPolicy", policy =>
-            policy.RequireClaim("RolesID", "3"));
+            policy.RequireClaim("RolesID", "1"));
     });
 }
 else
 {
-    Console.WriteLine("⚠️ JWT SecretKey is missing. Skipping JWT configuration.");
+    Console.WriteLine("JWT SecretKey is missing. Skipping JWT configuration.");
 }
 
 

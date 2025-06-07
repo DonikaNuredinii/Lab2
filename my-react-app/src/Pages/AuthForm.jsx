@@ -1,0 +1,96 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import '../CSS/AuthForm.css';
+
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+
+const AuthForm = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: ''
+  });
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+    setMessage('');
+    setMessageType('');
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    setMessageType('');
+
+    try {
+      if (isLogin) {
+        const response = await axios.post(`${API_BASE}/api/User/login`, {
+          email: form.email,
+          password: form.password,
+        });
+        localStorage.setItem('token', response.data.token);
+         alert('✅ Login successful!');
+        setMessageType('success');
+      } else {
+        await axios.post(`${API_BASE}/api/User/signup`, form);
+        alert('✅ Signup successful. Please log in.');
+        setMessageType('success');
+        setIsLogin(true);
+      }
+    } catch (error) {
+      const errMsg =
+        typeof error.response?.data === 'string'
+          ? error.response.data
+          : 'Something went wrong.';
+      setMessage(` ${errMsg}`);
+      setMessageType('error');
+    }
+  };
+
+  return (
+    <div className="auth-wrapper">
+      <div className={`auth-container ${isLogin ? '' : 'slide-left'}`}>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+
+          {message && (
+            <p className={`message ${messageType === 'success' ? 'success' : 'error'}`}>
+                {message}
+            </p>
+          )}
+
+          {!isLogin && (
+            <>
+              <input name="firstName" placeholder="First Name" onChange={handleChange} required />
+              <input name="lastName" placeholder="Last Name" onChange={handleChange} required />
+              <input name="phoneNumber" placeholder="Phone Number" onChange={handleChange} required />
+            </>
+          )}
+
+          <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+          <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+
+          <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
+
+          <p className="toggle-text">
+            {isLogin ? "Don't have an account?" : 'Already have an account?'}
+            <button type="button" onClick={toggleForm}>
+              {isLogin ? ' Register now' : ' Login here'}
+            </button>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default AuthForm;

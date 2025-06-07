@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lab2_Backend.Helpers;
+using Microsoft.AspNetCore.Authorization;
+
 
 
 namespace Lab2_Backend.Controllers
@@ -14,10 +16,14 @@ namespace Lab2_Backend.Controllers
     public class UserController : ControllerBase
     {
         private readonly MyContext _context;
+        private readonly IConfiguration _config;
+        private readonly AuditLogService _auditLogService;
 
-        public UserController(MyContext context)
+        public UserController(MyContext context, IConfiguration config, AuditLogService auditLogService)
         {
             _context = context;
+            _config = config;
+            _auditLogService = auditLogService;
         }
 
 
@@ -111,6 +117,70 @@ namespace Lab2_Backend.Controllers
         }
 
 
+
+        [HttpPost("login")]
+        public async Task<ActionResult<object>> Login([FromBody] LoginDto loginDto)
+        {
+            try
+            {
+                Console.WriteLine("Login attempt: " + loginDto.Email);
+
+                var user = await _context.Users.Include(u => u.Role)
+                                               .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+
+                if (user == null)
+                {
+                    Console.WriteLine("User not found.");
+                    return Unauthorized("Invalid credentials.");
+                }
+
+                Console.WriteLine("User found: " + user.Email);
+
+                if (!PasswordHelper.VerifyPassword(loginDto.Password, user.Password))
+                {
+                    Console.WriteLine("Password mismatch.");
+                    return Unauthorized("Invalid credentials.");
+                }
+
+                Console.WriteLine("Password verified.");
+
+                string token;
+                try
+                {
+                    token = TokenHelper.GenerateToken(user, _config);
+                }
+                catch (Exception tokenEx)
+                {
+                    Console.WriteLine("Token generation failed: " + tokenEx.Message);
+                    return StatusCode(500, $"Token generation failed: {tokenEx.Message}");
+                }
+
+                Console.WriteLine("Token generated successfully.");
+
+                return Ok(new
+                {
+                    Token = token,
+                    User = new
+                    {
+                        user.UserID,
+                        user.FirstName,
+                        user.LastName,
+                        user.Email,
+                        Role = user.Role?.RoleName ?? "Unknown",
+                        Type = user.GetType().Name
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Login error in UserController: " + ex.ToString());
+                return StatusCode(500, $"Login failed: {ex.Message}");
+            }
+        }
+
+
+
+
         // Signup
         [HttpPost("signup")]
         public async Task<ActionResult<UserDto>> SignUp(UserCreateDto userDto)
@@ -131,7 +201,7 @@ namespace Lab2_Backend.Controllers
                 PhoneNumber = userDto.PhoneNumber,
                 Password = PasswordHelper.HashPassword(userDto.Password),
                 CreationDate = DateTime.UtcNow,
-                RoleID = defaultRole.RoleID  // 👈 Assign "Customer"
+                RoleID = defaultRole.RoleID 
             };
         
             _context.Users.Add(user);
@@ -139,6 +209,34 @@ namespace Lab2_Backend.Controllers
         
             return CreatedAtAction(nameof(GetUser), new { id = user.UserID }, userDto);
         }
+
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var userId = User.FindFirst("id")?.Value ?? "unknown";
+
+            try
+            {
+                await _auditLogService.CreateAsync(new AuditLog
+                {
+                    Action = "Logout",
+                    UserId = userId,
+                    Timestamp = DateTime.UtcNow,
+                    IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                    UserAgent = Request.Headers["User-Agent"].ToString(),
+                    RequestPath = HttpContext.Request.Path
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Audit log during logout failed: " + ex.Message);
+            }
+
+            return Ok(new { message = "Logged out successfully. Please delete the token on client side." });
+        }
+
 
         //[HttpPost("migrate-passwords")]
         //public async Task<IActionResult> MigratePasswords()

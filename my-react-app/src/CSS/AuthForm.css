@@ -1,0 +1,84 @@
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.auth-container {
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 25px rgba(34, 82, 63, 0.2);
+  padding: 30px;
+  transition: transform 0.9s ease-in-out;
+}
+
+.slide-left {
+  transform: translateX(-10px);
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #52726d;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+ border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: border 0.3s;
+}
+
+.auth-form input:focus {
+  outline: none;
+  box-shadow:
+    0 8px 22px rgba(87, 87, 87, 0.1),
+    0 4px 32px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.auth-form button[type="submit"] {
+  width: 100%;
+  background-color: #32524d;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.auth-form button[type="submit"]:hover {
+  background-color: #52726d;
+}
+
+.message {
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+  font-size: 0.9rem;
+}
+
+.toggle-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.toggle-text button {
+  background: none;
+  border: none;
+  color: #32524d;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 5px;
+}
