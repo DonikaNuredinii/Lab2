@@ -189,9 +189,9 @@ namespace Lab2_Backend.Controllers
             if (existingUser != null)
                 return BadRequest("Email already exists.");
         
-            var defaultRole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "Customer");
+            var defaultRole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "User");
             if (defaultRole == null)
-                return BadRequest("Default role 'Customer' not found.");
+                return BadRequest("Default role 'User' not found.");
         
             var user = new User
             {
@@ -311,6 +311,39 @@ namespace Lab2_Backend.Controllers
 
             return NoContent();
         }
+
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var userId = User.FindFirst("id")?.Value;
+        
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int id))
+                return Unauthorized();
+        
+            var user = await _context.Users
+                                     .Include(u => u.Role)
+                                     .FirstOrDefaultAsync(u => u.UserID == id);
+        
+            if (user == null)
+                return NotFound();
+        
+            var userDto = new UserDto
+            {
+                UserID = user.UserID,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                CreationDate = user.CreationDate,
+                RoleID = user.RoleID,
+                RoleName = user.Role?.RoleName
+            };
+        
+            return Ok(userDto);
+        }
+        
 
 
         

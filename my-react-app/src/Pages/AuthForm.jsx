@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../CSS/AuthForm.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
 
@@ -14,7 +16,9 @@ const AuthForm = () => {
     password: ''
   });
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [messageType, setMessageType] = useState(''); 
+  const navigate = useNavigate();
+
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
@@ -40,6 +44,8 @@ const AuthForm = () => {
         localStorage.setItem('token', response.data.token);
          alert('✅ Login successful!');
         setMessageType('success');
+        navigate('/online-menu');
+        
       } else {
         await axios.post(`${API_BASE}/api/User/signup`, form);
         alert('✅ Signup successful. Please log in.');

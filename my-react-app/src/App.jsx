@@ -8,6 +8,7 @@ import MenuCover from "./Pages/MenuCover";
 import MainMenu from "./Pages/Main-Menu";
 import OnlineMenu from "./Pages/OnlineMenu";
 import AuthForm from './Pages/AuthForm';
+import ProfilePage from './Pages/ProfilePage';
 
 import {
   ChakraProvider,
@@ -23,6 +24,7 @@ export default function Main() {
       <Routes>
         <Route path="/login" element={<AuthForm />} />
         <Route path="auth/*" element={<AuthLayout />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route
           path="admin/*"
           element={

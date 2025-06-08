@@ -38,6 +38,7 @@ import TablesTable from "../src/views/superadmin/dataTables/TablesTable";
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 import OnlineMenu from "./Pages/OnlineMenu";
+import ProfilePage from './Pages/ProfilePage';
 
 const routes = [
   {
@@ -169,6 +170,14 @@ const routes = [
     component: <OnlineMenu />,
     hidden: true,
   },
+  {
+  name: "Profile",
+  layout: "/admin",
+  path: "/profile",
+  icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+  component: <ProfilePage />, // swapped out
+},
+
 ];
 
 export default routes;

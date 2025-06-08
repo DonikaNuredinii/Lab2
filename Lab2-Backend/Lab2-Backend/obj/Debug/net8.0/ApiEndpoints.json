@@ -2198,6 +2198,26 @@
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.UserController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/User/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "UserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.UserController",
     "Method": "SignUp",
     "RelativePath": "api/User/signup",
     "HttpMethod": "POST",
