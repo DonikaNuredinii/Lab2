@@ -127,4 +127,3 @@ const NoteModal = ({
 };
 
 export default NoteModal;
-    

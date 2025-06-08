@@ -25,7 +25,8 @@ import { createColumnHelper } from "@tanstack/react-table";
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
 import AddItemForm from "./components/AddItemForm";
-import { MdEdit, MdDelete } from "react-icons/md";
+import ManageIngredientsModal from "./components/ManageIngredientsModal";
+import { MdEdit, MdDelete, MdNoteAdd } from "react-icons/md";
 
 const columnHelper = createColumnHelper();
 
@@ -43,15 +44,20 @@ const MenuItemsFullView = () => {
     onClose: onEditClose,
   } = useDisclosure();
   const toast = useToast();
+  const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
+  const {
+    isOpen: isManageOpen,
+    onOpen: onManageOpen,
+    onClose: onManageClose,
+  } = useDisclosure();
 
   // Define fetchData outside of useEffect
   const fetchData = async () => {
     try {
       const [itemsRes, categoriesRes, subcategoriesRes] = await Promise.all([
-  fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
-fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
-fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
-
+        fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`),
+        fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+        fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
       ]);
 
       if (!itemsRes.ok || !categoriesRes.ok || !subcategoriesRes.ok) {
@@ -266,6 +272,7 @@ fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
         );
       },
     }),
+
     columnHelper.accessor("actions", {
       id: "actions",
       header: () => (
@@ -299,6 +306,18 @@ fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
             variant="ghost"
             colorScheme="red"
             onClick={() => handleDeleteItem(info.row.original.id)}
+            mr={2}
+          />
+          <IconButton
+            aria-label="Manage Ingredients"
+            icon={<MdNoteAdd />}
+            size="sm"
+            variant="ghost"
+            colorScheme="teal"
+            onClick={() => {
+              setSelectedMenuItemId(info.row.original.id);
+              onManageOpen();
+            }}
           />
         </Flex>
       ),
@@ -308,13 +327,16 @@ fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
   const handleAddItem = async (newItemData) => {
     console.log("New item added:", newItemData);
     try {
-    const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newItemData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE}/api/MenuItems`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newItemData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to add item: ${response.status}`);
@@ -397,7 +419,8 @@ fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
 
   const handleEditItem = async (updatedItemData) => {
     try {
-   const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/MenuItems/${updatedItemData.id}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE}/api/MenuItems/${updatedItemData.id}`,
         {
           method: "PUT",
           headers: {
@@ -513,6 +536,12 @@ fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
           </ModalBody>
         </ModalContent>
       </Modal>
+
+      <ManageIngredientsModal
+        isOpen={isManageOpen}
+        onClose={onManageClose}
+        menuItemId={selectedMenuItemId}
+      />
 
       <Modal isOpen={isEditOpen} onClose={onEditClose}>
         <ModalOverlay />

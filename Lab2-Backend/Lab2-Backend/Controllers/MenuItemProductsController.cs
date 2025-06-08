@@ -28,18 +28,18 @@ namespace Lab2_Backend.Controllers
             if (item == null) return NotFound();
             return item;
         }
-
         [HttpGet("menuitem/{menuItemId}")]
-        public async Task<ActionResult<IEnumerable<string>>> GetProductsForMenuItem(int menuItemId)
+        public async Task<ActionResult<IEnumerable<object>>> GetProductsForMenuItem(int menuItemId)
         {
-            var productNames = await _context.MenuItemProducts
+            var productIds = await _context.MenuItemProducts
                 .Where(mip => mip.MenuItemID == menuItemId)
-                .Include(mip => mip.Products)
-                .Select(mip => mip.Products.Emri)
+                .Select(mip => new { productsID = mip.ProductsID }) // <-- kjo është e saktë
                 .ToListAsync();
 
-            return Ok(productNames);
+            return Ok(productIds);
         }
+
+
 
         [HttpPost]
         public async Task<ActionResult<MenuItemProducts>> PostMenuItemProduct(MenuItemProductDTO dto)
@@ -81,5 +81,20 @@ namespace Lab2_Backend.Controllers
             await _context.SaveChangesAsync();
             return item;
         }
+        [HttpDelete("remove")]
+        public async Task<IActionResult> RemoveIngredient([FromBody] MenuItemProductDTO dto)
+        {
+            var entity = await _context.MenuItemProducts
+                .FirstOrDefaultAsync(x => x.MenuItemID == dto.MenuItemID && x.ProductsID == dto.ProductsID);
+
+            if (entity == null)
+                return NotFound("Ingredient not found for this menu item.");
+
+            _context.MenuItemProducts.Remove(entity);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }
