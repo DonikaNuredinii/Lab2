@@ -42,10 +42,11 @@ const AuthForm = () => {
           password: form.password,
         });
         localStorage.setItem('token', response.data.token);
-         alert('✅ Login successful!');
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+        alert('✅ Login successful!');
         setMessageType('success');
         navigate('/online-menu');
-        
+
       } else {
         await axios.post(`${API_BASE}/api/User/signup`, form);
         alert('✅ Signup successful. Please log in.');

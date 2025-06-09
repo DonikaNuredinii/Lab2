@@ -2499,6 +2499,22 @@
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.UserController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/User/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenRequest",
+        "Type": "TokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.UserController",
     "Method": "SignUp",
     "RelativePath": "api/User/signup",
     "HttpMethod": "POST",

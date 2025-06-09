@@ -17,6 +17,9 @@ namespace Lab2_Backend.Model
     public string Password { get; set; }
     public DateTime CreationDate { get; set; }
 
+    public string? RefreshToken { get; set; }
+    public DateTime? RefreshTokenExpiryTime { get; set; }
+
     [JsonIgnore]
     [ForeignKey("Role")]
     public int? RoleID { get; set; }

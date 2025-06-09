@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lab2_Backend.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 
 
@@ -124,42 +125,37 @@ namespace Lab2_Backend.Controllers
             try
             {
                 Console.WriteLine("Login attempt: " + loginDto.Email);
-
+        
                 var user = await _context.Users.Include(u => u.Role)
                                                .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-
+        
                 if (user == null)
                 {
                     Console.WriteLine("User not found.");
                     return Unauthorized("Invalid credentials.");
                 }
-
-                Console.WriteLine("User found: " + user.Email);
-
+        
                 if (!PasswordHelper.VerifyPassword(loginDto.Password, user.Password))
                 {
                     Console.WriteLine("Password mismatch.");
                     return Unauthorized("Invalid credentials.");
                 }
-
-                Console.WriteLine("Password verified.");
-
-                string token;
-                try
-                {
-                    token = TokenHelper.GenerateToken(user, _config);
-                }
-                catch (Exception tokenEx)
-                {
-                    Console.WriteLine("Token generation failed: " + tokenEx.Message);
-                    return StatusCode(500, $"Token generation failed: {tokenEx.Message}");
-                }
-
-                Console.WriteLine("Token generated successfully.");
-
+        
+                // ✅ Generate tokens
+                string token = TokenHelper.GenerateToken(user, _config);
+                string refreshToken = TokenHelper.GenerateRefreshToken();
+        
+                // ✅ Save refresh token to DB
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+                await _context.SaveChangesAsync();
+        
+                Console.WriteLine("Tokens generated and saved successfully.");
+        
                 return Ok(new
                 {
                     Token = token,
+                    RefreshToken = refreshToken,
                     User = new
                     {
                         user.UserID,
@@ -173,10 +169,11 @@ namespace Lab2_Backend.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Login error in UserController: " + ex.ToString());
+                Console.WriteLine("Login error: " + ex);
                 return StatusCode(500, $"Login failed: {ex.Message}");
             }
         }
+
 
 
 
@@ -345,6 +342,36 @@ namespace Lab2_Backend.Controllers
         }
         
 
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDto tokenRequest)
+        {
+            if (tokenRequest == null || string.IsNullOrEmpty(tokenRequest.AccessToken) || string.IsNullOrEmpty(tokenRequest.RefreshToken))
+                return BadRequest("Invalid client request");
+
+            var principal = TokenHelper.GetPrincipalFromExpiredToken(tokenRequest.AccessToken, _config);
+            if (principal == null)
+                return BadRequest("Invalid access token or refresh token");
+
+            var email = principal.FindFirst(ClaimTypes.Email)?.Value;
+            var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null || user.RefreshToken != tokenRequest.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+                return Unauthorized("Invalid refresh token");
+
+            var newAccessToken = TokenHelper.GenerateToken(user, _config);
+            var newRefreshToken = TokenHelper.GenerateRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                Token = newAccessToken,
+                RefreshToken = newRefreshToken
+            });
+        }
 
         
 
