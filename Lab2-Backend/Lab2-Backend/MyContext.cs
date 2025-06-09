@@ -31,6 +31,8 @@ namespace Lab2_Backend
         public DbSet<RestaurantSubcategory> RestaurantSubcategories { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
 
 
 
@@ -159,6 +161,19 @@ namespace Lab2_Backend
                 .WithMany(s => s.RestaurantSubcategories)
                 .HasForeignKey(rs => rs.SubcategoryId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Review)
+                .WithMany()
+                .HasForeignKey(c => c.ReviewID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.MenuItem)
+                .WithMany()
+                .HasForeignKey(c => c.MenuItemID)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
         }
 

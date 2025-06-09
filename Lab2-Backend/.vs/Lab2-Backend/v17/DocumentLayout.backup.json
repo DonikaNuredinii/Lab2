@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250609193747_AddReviewsTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250609193747_AddReviewsTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250609195816_AddCommentsTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Lab2-Backend\\Migrations\\20250609195816_AddCommentsTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\dn\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\dn\\desktop\\lab2\\lab2-backend\\lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\mycontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\dn\\desktop\\lab2\\lab2-backend\\lab2-backend\\dto\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\dto\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\dn\\desktop\\lab2\\lab2-backend\\lab2-backend\\model\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\model\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\dn\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250609193747_addreviewstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\migrations\\20250609193747_addreviewstable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\dn\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -336,6 +352,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "20250609195816_AddCommentsTable.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250609195816_AddCommentsTable.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250609195816_AddCommentsTable.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250609195816_AddCommentsTable.cs",
+              "RelativeToolTip": "Lab2-Backend\\Migrations\\20250609195816_AddCommentsTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T19:58:16.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommentsController.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CommentsController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CommentsController.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CommentsController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\CommentsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T19:57:30.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CommentDTO.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\CommentDTO.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\CommentDTO.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\CommentDTO.cs",
+              "RelativeToolTip": "Lab2-Backend\\DTO\\CommentDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T19:55:43.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Comment.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Comment.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Comment.cs",
+              "RelativeToolTip": "Lab2-Backend\\Model\\Comment.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAqwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T19:55:26.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "20250609193747_AddReviewsTable.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250609193747_AddReviewsTable.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250609193747_AddReviewsTable.cs",
@@ -348,20 +416,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ReviewsController.cs",
-              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ReviewsController.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ReviewsController.cs",
-              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ReviewsController.cs",
-              "RelativeToolTip": "Lab2-Backend\\Controllers\\ReviewsController.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAkwG4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T19:25:26.244Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "ReviewDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\ReviewDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\ReviewDTO.cs",
@@ -369,12 +424,11 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\ReviewDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T19:19:36.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T19:19:36.659Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Review.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Review.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Review.cs",
@@ -382,44 +436,17 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Review.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAkwBgAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T19:18:21.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T19:18:21.38Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProductNotesController.cs",
-              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductNotesController.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ProductNotesController.cs",
-              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductNotesController.cs",
-              "RelativeToolTip": "Lab2-Backend\\Controllers\\ProductNotesController.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAcwF0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:42:59.953Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MenuItemsController.cs",
-              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
-              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
-              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
-              "RelativeToolTip": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAiwHoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:39:15.764Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MyContext.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\MyContext.cs",
               "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\MyContext.cs",
               "RelativeToolTip": "Lab2-Backend\\MyContext.cs",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAqwKUAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAswCAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-05T14:21:09.8Z",
               "EditorCaption": ""
@@ -427,6 +454,42 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "ReviewsController.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ReviewsController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ReviewsController.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ReviewsController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\ReviewsController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAkwG4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T19:25:26.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ProductNotesController.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductNotesController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ProductNotesController.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductNotesController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\ProductNotesController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAcwF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:42:59.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MenuItemsController.cs",
+              "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "ToolTip": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "RelativeToolTip": "Lab2-Backend\\Controllers\\MenuItemsController.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAiwHoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:39:15.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "MenuItemProductsController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MenuItemProductsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MenuItemProductsController.cs",
@@ -434,12 +497,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\MenuItemProductsController.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAA2wGMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:43:22.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:43:22.409Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "MongoDBSettings.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Configurations\\MongoDBSettings.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Configurations\\MongoDBSettings.cs",
@@ -447,12 +509,11 @@
               "RelativeToolTip": "Lab2-Backend\\Configurations\\MongoDBSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:21:36.343Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:21:36.343Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ProductsController.cs",
@@ -460,12 +521,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\ProductsController.cs",
               "ViewState": "AgIAAGcAAAAAAAAAAAAUwIwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:41:58.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:41:58.273Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "RestaurantController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\RestaurantController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\RestaurantController.cs",
@@ -473,12 +533,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\RestaurantController.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAkwDQAAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T18:32:17.11Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T18:32:17.11Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\UserController.cs",
@@ -486,12 +545,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\UserController.cs",
               "ViewState": "AgIAADgBAAAAAAAAAAAiwF8BAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:53:52.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:53:52.957Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\LoginDto.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\LoginDto.cs",
@@ -499,12 +557,11 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\LoginDto.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAqwAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:55.427Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:55.427Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "UserCreateDto.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\UserCreateDto.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\UserCreateDto.cs",
@@ -512,12 +569,11 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\UserCreateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:47.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:47.404Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\UserDto.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\UserDto.cs",
@@ -525,12 +581,11 @@
               "RelativeToolTip": "Lab2-Backend\\DTO\\UserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:45:42.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:45:42.775Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "OrderItem.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\OrderItem.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\OrderItem.cs",
@@ -538,12 +593,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\OrderItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T19:07:32.06Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T19:07:32.06Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "MenuItemProducts.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\MenuItemProducts.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\MenuItemProducts.cs",
@@ -551,12 +605,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\MenuItemProducts.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:17:07.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T09:17:07.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "MenuItems.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\MenuItems.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\MenuItems.cs",
@@ -564,12 +617,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\MenuItems.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:10:34.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T10:10:34.311Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "Role.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Role.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Role.cs",
@@ -577,12 +629,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\Role.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:49:02.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T18:49:02.273Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\User.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\User.cs",
@@ -590,12 +641,11 @@
               "RelativeToolTip": "Lab2-Backend\\Model\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T15:54:40.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T15:54:40.088Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "StaffController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\StaffController.cs",
@@ -603,12 +653,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\StaffController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T19:06:29.525Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T19:06:29.525Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "RoleController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\RoleController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\RoleController.cs",
@@ -616,12 +665,11 @@
               "RelativeToolTip": "Lab2-Backend\\Controllers\\RoleController.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAgwGcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T23:46:25.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T23:46:25.429Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "ProductNotes.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\ProductNotes.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\ProductNotes.cs",
@@ -633,7 +681,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "RestaurantSubcategory.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\RestaurantSubcategory.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\RestaurantSubcategory.cs",
@@ -645,7 +693,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "Products.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Products.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Products.cs",
@@ -657,7 +705,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "MenuItemWithProductsDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\MenuItemWithProductsDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\MenuItemWithProductsDTO.cs",
@@ -669,7 +717,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "RestaurantHours.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\RestaurantHours.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\RestaurantHours.cs",
@@ -681,7 +729,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "MenuItemProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\MenuItemProductDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\MenuItemProductDTO.cs",
@@ -693,7 +741,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "ProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\ProductDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\ProductDTO.cs",
@@ -705,7 +753,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Program.cs",
@@ -717,7 +765,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.json",
               "RelativeDocumentMoniker": "Lab2-Backend\\appsettings.json",
@@ -729,7 +777,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 35,
               "Title": "20250607223428_Token.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250607223428_Token.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250607223428_Token.cs",
@@ -741,7 +789,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 36,
               "Title": "20250417205654_TableCreate.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250417205654_TableCreate.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250417205654_TableCreate.cs",
@@ -753,7 +801,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 37,
               "Title": "ProductNoteDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\ProductNoteDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\ProductNoteDTO.cs",
@@ -765,7 +813,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 38,
               "Title": "20250605142600_foreignkeyproducts.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605142600_foreignkeyproducts.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605142600_foreignkeyproducts.cs",
@@ -776,7 +824,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 40,
               "Title": "20250605142329_foreignkeyproducts.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605142329_foreignkeyproducts.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605142329_foreignkeyproducts.cs",
@@ -787,7 +835,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 39,
               "Title": "20250605142449_foreignkeyproducts.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605142449_foreignkeyproducts.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605142449_foreignkeyproducts.cs",
@@ -798,7 +846,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 41,
               "Title": "MyContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\MyContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\MyContextModelSnapshot.cs",
@@ -810,7 +858,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 42,
               "Title": "20250605140920_foreignkeyproducts.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605140920_foreignkeyproducts.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605140920_foreignkeyproducts.cs",
@@ -821,7 +869,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 44,
               "Title": "20250605140334_foreignkeyproducts.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605140334_foreignkeyproducts.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605140334_foreignkeyproducts.cs",
@@ -832,7 +880,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 45,
               "Title": "20250605135917_foreignkeyproducts.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605135917_foreignkeyproducts.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605135917_foreignkeyproducts.cs",
@@ -843,7 +891,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 46,
               "Title": "RestaurantsController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\RestaurantsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\RestaurantsController.cs",
@@ -855,7 +903,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 79,
               "Title": "20250605134748_products.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605134748_products.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250605134748_products.cs",
@@ -867,7 +915,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 43,
               "Title": "Restaurant.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Restaurant.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Restaurant.cs",
@@ -879,7 +927,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 47,
               "Title": "20250605085127_AddStaffAdminSchema.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605085127_AddStaffAdminSchema.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250605085127_AddStaffAdminSchema.cs",
@@ -890,7 +938,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 51,
               "Title": "Table.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Table.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Table.cs",
@@ -902,7 +950,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 49,
               "Title": "RestaurantWithHoursDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\RestaurantWithHoursDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\RestaurantWithHoursDTO.cs",
@@ -914,7 +962,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 50,
               "Title": "20250604214806_restauranth.cs",
               "DocumentMoniker": "C:\\Users\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250604214806_restauranth.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\hp\\OneDrive\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250604214806_restauranth.cs",
@@ -925,7 +973,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 48,
               "Title": "20250605084811_AddStaffAdminSchema.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250605084811_AddStaffAdminSchema.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250605084811_AddStaffAdminSchema.cs",
@@ -936,7 +984,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 52,
               "Title": "PasswordHelper.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Helpers\\PasswordHelper.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Helpers\\PasswordHelper.cs",
@@ -948,7 +996,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 54,
               "Title": "StaffScheduleDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\StaffScheduleDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\StaffScheduleDTO.cs",
@@ -960,7 +1008,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 53,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CategoryController.cs",
@@ -972,7 +1020,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 55,
               "Title": "Lab2-Backend.http",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.http",
               "RelativeDocumentMoniker": "Lab2-Backend\\Lab2-Backend.http",
@@ -984,7 +1032,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 56,
               "Title": "Lab2-Backend.csproj",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Lab2-Backend.csproj",
               "RelativeDocumentMoniker": "Lab2-Backend\\Lab2-Backend.csproj",
@@ -996,7 +1044,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 57,
               "Title": "AuditLog.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\AuditLog.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\AuditLog.cs",
@@ -1008,7 +1056,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 60,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Lab2-Backend\\Properties\\launchSettings.json",
@@ -1020,7 +1068,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 66,
               "Title": "20250426220422_Role4.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250426220422_Role4.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250426220422_Role4.cs",
@@ -1032,7 +1080,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 59,
               "Title": "CustomerController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CustomerController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CustomerController.cs",
@@ -1044,7 +1092,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 58,
               "Title": "CustomerAddressController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CustomerAddressController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CustomerAddressController.cs",
@@ -1056,7 +1104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 64,
               "Title": "20250512210727_AddWaiterUserAndTipToOrders.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250512210727_AddWaiterUserAndTipToOrders.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250512210727_AddWaiterUserAndTipToOrders.cs",
@@ -1068,7 +1116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 63,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Category.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Category.cs",
@@ -1080,7 +1128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 61,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Lab2-Backend\\appsettings.Development.json",
@@ -1092,7 +1140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 62,
               "Title": "Subcategory.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\Subcategory.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\Subcategory.cs",
@@ -1104,7 +1152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 65,
               "Title": "20250427093249_ProductsAndRelatedTables.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427093249_ProductsAndRelatedTables.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250427093249_ProductsAndRelatedTables.cs",
@@ -1116,7 +1164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 67,
               "Title": "20250422230300_FixedRoles.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422230300_FixedRoles.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250422230300_FixedRoles.cs",
@@ -1128,7 +1176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 68,
               "Title": "20250422225605_Roles.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250422225605_Roles.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250422225605_Roles.cs",
@@ -1140,7 +1188,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 69,
               "Title": "20250426221241_roleID.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250426221241_roleID.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250426221241_roleID.cs",
@@ -1152,7 +1200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 70,
               "Title": "MongoTestController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\MongoTestController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\MongoTestController.cs",
@@ -1164,7 +1212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 71,
               "Title": "20250502080324_RestaurantHours.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250502080324_RestaurantHours.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250502080324_RestaurantHours.cs",
@@ -1176,7 +1224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 73,
               "Title": "20250430080633_StaffFinalFix.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250430080633_StaffFinalFix.cs",
@@ -1188,7 +1236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 72,
               "Title": "20250430230515_CustomerAddress.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250430230515_CustomerAddress.cs",
@@ -1200,7 +1248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 74,
               "Title": "20250430075439_StaffFixed.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250430075439_StaffFixed.cs",
@@ -1212,7 +1260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 75,
               "Title": "20250427103522_ProductFix.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Migrations\\20250427103522_ProductFix.cs",
@@ -1224,7 +1272,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 77,
               "Title": "OrderItemsRemovedProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\OrderItemsRemovedProductDTO.cs",
@@ -1236,7 +1284,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 76,
               "Title": "OrderItemsRemovedProductsController.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\OrderItemsRemovedProductsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\OrderItemsRemovedProductsController.cs",
@@ -1248,7 +1296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 78,
               "Title": "OrderItems_RemovedProducts.cs",
               "DocumentMoniker": "C:\\Users\\DN\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Model\\OrderItems_RemovedProducts.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Model\\OrderItems_RemovedProducts.cs",
