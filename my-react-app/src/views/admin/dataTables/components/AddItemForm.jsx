@@ -10,6 +10,7 @@ import {
   Checkbox,
   Stack,
 } from "@chakra-ui/react";
+import ReactSelect from "react-select";
 
 const AddItemForm = ({
   onAddItem,
@@ -32,13 +33,16 @@ const AddItemForm = ({
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [filteredSubcategories, setFilteredSubcategories] = useState([]);
+  const [availableProducts, setAvailableProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [productError, setProductError] = useState("");
 
   useEffect(() => {
     const fetchDropdownData = async () => {
       try {
         const [categoriesRes, subcategoriesRes] = await Promise.all([
-       fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
-        fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`)
+          fetch(`${import.meta.env.VITE_API_BASE}/api/Category`),
+          fetch(`${import.meta.env.VITE_API_BASE}/api/Subcategory`),
         ]);
 
         if (!categoriesRes.ok || !subcategoriesRes.ok) {
@@ -138,6 +142,21 @@ const AddItemForm = ({
       }
     }
   }, [formData.categoryId, subcategories]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE}/api/Products`
+        );
+        const data = await res.json();
+        setAvailableProducts(data);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -149,11 +168,18 @@ const AddItemForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (selectedProducts.length === 0) {
+      setProductError("Please select at least one ingredient.");
+      return;
+    } else {
+      setProductError("");
+    }
     const dataToSubmit = {
       ...formData,
       price: parseFloat(formData.price) || 0,
       categoryId: parseInt(formData.categoryId) || null,
       subCategoryId: parseInt(formData.subCategoryId) || null,
+      productIds: selectedProducts,
     };
     onAddItem(dataToSubmit);
   };
@@ -202,6 +228,28 @@ const AddItemForm = ({
             value={formData.image}
             onChange={handleChange}
           />
+        </FormControl>
+        <FormControl id="ingredients" isInvalid={!!productError} isRequired>
+          <FormLabel>Select Ingredients</FormLabel>
+          <ReactSelect
+            isMulti
+            options={availableProducts.map((p) => ({
+              value: p.productsID,
+              label: p.emri,
+            }))}
+            value={availableProducts
+              .filter((p) => selectedProducts.includes(p.productsID))
+              .map((p) => ({ value: p.productsID, label: p.emri }))}
+            onChange={(selectedOptions) =>
+              setSelectedProducts(selectedOptions.map((opt) => opt.value))
+            }
+            placeholder="Choose ingredients..."
+          />
+          {productError && (
+            <Box color="red.500" fontSize="sm" mt={1}>
+              {productError}
+            </Box>
+          )}
         </FormControl>
 
         <FormControl

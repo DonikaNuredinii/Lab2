@@ -479,8 +479,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "menuItem",
-        "Type": "Lab2_Backend.Model.MenuItems",
+        "Name": "dto",
+        "Type": "Lab2_Backend.DTO.MenuItemWithProductsDTO",
         "IsRequired": true
       }
     ],
@@ -536,8 +536,8 @@
         "IsRequired": true
       },
       {
-        "Name": "updatedItem",
-        "Type": "Lab2_Backend.Model.MenuItems",
+        "Name": "dto",
+        "Type": "Lab2_Backend.DTO.MenuItemWithProductsDTO",
         "IsRequired": true
       }
     ],
@@ -553,6 +553,43 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.MessagesController",
+    "Method": "PostMessage",
+    "RelativePath": "api/Messages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "message",
+        "Type": "Lab2_Backend.Model.ChatMessage",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.MessagesController",
+    "Method": "GetMessages",
+    "RelativePath": "api/Messages/{user1Id}/{user2Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user1Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "user2Id",
         "Type": "System.Int32",
         "IsRequired": true
       }

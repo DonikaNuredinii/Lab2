@@ -4,6 +4,7 @@ using Lab2_Backend.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lab2_Backend.DTO;
 
 namespace Lab2_Backend.Controllers
 {
@@ -34,35 +35,76 @@ namespace Lab2_Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<MenuItems>> Create(MenuItems menuItem)
+        public async Task<ActionResult<MenuItems>> Create(MenuItemWithProductsDTO dto)
         {
-            _context.MenuItems.Add(menuItem);
+            var newItem = new MenuItems
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Price = dto.Price,
+                Image = dto.Image,
+                SubCategoryId = dto.SubCategoryId,
+                IsActive = dto.IsActive,
+                RestaurantId = dto.RestaurantId,
+                UpdatedAt = dto.UpdatedAt
+            };
+
+            _context.MenuItems.Add(newItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = menuItem.Id }, menuItem);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, MenuItems updatedItem)
-        {
-            if (id != updatedItem.Id)
-                return BadRequest();
-
-            _context.Entry(updatedItem).State = EntityState.Modified;
-
-            try
+            if (dto.ProductIds != null && dto.ProductIds.Any())
             {
+                foreach (var productId in dto.ProductIds)
+                {
+                    _context.MenuItemProducts.Add(new MenuItemProducts
+                    {
+                        MenuItemID = newItem.Id,
+                        ProductsID = productId,
+                        IsRequired = true
+                    });
+                }
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+
+            return CreatedAtAction(nameof(GetById), new { id = newItem.Id }, newItem);
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] MenuItemWithProductsDTO dto)
+        {
+            var existingItem = await _context.MenuItems.FindAsync(id);
+            if (existingItem == null)
+                return NotFound(new { message = "Menu item not found." });
+
+            existingItem.Name = dto.Name;
+            existingItem.Description = dto.Description;
+            existingItem.Price = dto.Price;
+            existingItem.Image = dto.Image;
+            existingItem.SubCategoryId = dto.SubCategoryId;
+            existingItem.IsActive = dto.IsActive;
+            existingItem.RestaurantId = dto.RestaurantId;
+            existingItem.UpdatedAt = dto.UpdatedAt;
+
+            var existingLinks = _context.MenuItemProducts.Where(m => m.MenuItemID == id);
+            _context.MenuItemProducts.RemoveRange(existingLinks);
+
+            if (dto.ProductIds != null && dto.ProductIds.Any())
             {
-                if (!_context.MenuItems.Any(m => m.Id == id))
-                    return NotFound();
-                else
-                    throw;
+                foreach (var productId in dto.ProductIds.Distinct())
+                {
+                    _context.MenuItemProducts.Add(new MenuItemProducts
+                    {
+                        MenuItemID = id,
+                        ProductsID = productId,
+                        IsRequired = true
+                    });
+                }
             }
 
-            return NoContent();
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Menu item updated successfully." });
         }
 
         [HttpDelete("{id}")]
