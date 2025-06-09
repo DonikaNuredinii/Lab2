@@ -125,33 +125,32 @@ namespace Lab2_Backend.Controllers
             try
             {
                 Console.WriteLine("Login attempt: " + loginDto.Email);
-        
+
                 var user = await _context.Users.Include(u => u.Role)
                                                .FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-        
+
                 if (user == null)
                 {
                     Console.WriteLine("User not found.");
                     return Unauthorized("Invalid credentials.");
                 }
-        
+
                 if (!PasswordHelper.VerifyPassword(loginDto.Password, user.Password))
                 {
                     Console.WriteLine("Password mismatch.");
                     return Unauthorized("Invalid credentials.");
                 }
-        
-                // ✅ Generate tokens
+
+                
                 string token = TokenHelper.GenerateToken(user, _config);
                 string refreshToken = TokenHelper.GenerateRefreshToken();
         
-                // ✅ Save refresh token to DB
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
                 await _context.SaveChangesAsync();
-        
+
                 Console.WriteLine("Tokens generated and saved successfully.");
-        
+
                 return Ok(new
                 {
                     Token = token,
@@ -340,6 +339,33 @@ namespace Lab2_Backend.Controllers
         
             return Ok(userDto);
         }
+
+
+        [Authorize]
+        [HttpPut("me")]
+        public async Task<IActionResult> UpdateCurrentUser(UserUpdateDto updateDto)
+        {
+            var userIdStr = User.FindFirst("id")?.Value;
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId))
+                return Unauthorized();
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            user.FirstName = updateDto.FirstName;
+            user.LastName = updateDto.LastName;
+            user.PhoneNumber = updateDto.PhoneNumber;
+        
+            if (!string.IsNullOrWhiteSpace(updateDto.Password))
+            {
+                user.Password = PasswordHelper.HashPassword(updateDto.Password);
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         
 
         [HttpPost("refresh")]

@@ -2499,6 +2499,22 @@
   },
   {
     "ContainingType": "Lab2_Backend.Controllers.UserController",
+    "Method": "UpdateCurrentUser",
+    "RelativePath": "api/User/me",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateDto",
+        "Type": "UserUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.UserController",
     "Method": "RefreshToken",
     "RelativePath": "api/User/refresh",
     "HttpMethod": "POST",

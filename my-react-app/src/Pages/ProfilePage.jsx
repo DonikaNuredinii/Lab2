@@ -39,16 +39,36 @@ const ProfilePage = () => {
     };
 
     const handleLogout = async () => {
-      try {
-        await axiosInstance.post('/api/User/logout'); 
-      } catch (err) {
-        console.warn('Logout failed:', err);
-      }
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken');
-      navigate('/auth');
+        try {
+          await axiosInstance.post('/api/User/logout'); 
+        } catch (err) {
+          console.warn('Logout failed:', err);
+        }
+      
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        navigate('/login');
     };
+
+    const handleSave = async () => {
+        const updatePayload = {
+          firstName: form.firstName,
+          lastName: form.lastName,
+          phoneNumber: form.phoneNumber,
+          password: form.password?.trim() || undefined,
+        };
+    
+        try {
+          await axiosInstance.put('/api/User/me', updatePayload);
+          alert('Profile updated successfully!');
+        } catch (err) {
+         console.error('Update failed:', err.response?.data || err.message);
+        
+          alert('Failed to update profile.');
+        }
+    };
+
+
 
 
     if (!user) return <div>Loading...</div>;
@@ -84,7 +104,13 @@ const ProfilePage = () => {
             <div className="form-row">
               <label>
                 Email
-                <input name="email" value={form.email} onChange={handleChange} />
+                <input
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    readOnly
+                />
+
               </label>
               <label>
                 Phone
@@ -94,13 +120,20 @@ const ProfilePage = () => {
             <div className="form-row">
               <label>
                 Password
-                <input type="password" name="password" placeholder="********" />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="********"
+                    value={form.password || ''}
+                    onChange={handleChange}
+                />
+
               </label>
 
             </div>
 
             <div className="action-links">
-              <button type="button" onClick={() => alert('✅ Profile saved (mock only)')} className="save-btn">
+              <button type="button" onClick={handleSave} className="save-btn">
                 Save Changes
               </button>
             </div>
