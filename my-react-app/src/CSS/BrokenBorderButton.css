@@ -1,0 +1,66 @@
+.broken-border-button {
+  position: relative;
+  display: inline-block;
+  padding: 16px 40px;
+  font-family: "Georgia", serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  background-color: #f8f5f0 !important;
+  border: none;
+  cursor: pointer;
+}
+.broken-border-button.b {
+  background-color: #fff !important;
+}
+
+.broken-border-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background:
+    /* Top border with right-shifted large gap */ linear-gradient(
+        to right,
+        #333 0%,
+        #333 60%,
+        transparent 60%,
+        transparent 90%,
+        #333 90%,
+        #333 100%
+      )
+      top / 100% 1px no-repeat,
+    /* Bottom full */ linear-gradient(to right, #333 0%, #333 100%) bottom /
+      100% 1px no-repeat,
+    /* Left and Right borders */ linear-gradient(to bottom, #333 0%, #333 100%)
+      left / 1px 100% no-repeat,
+    linear-gradient(to bottom, #333 0%, #333 100%) right / 1px 100% no-repeat;
+  background-repeat: no-repeat;
+  transition: background 0.3s ease;
+}
+
+.broken-border-button:hover::before {
+  background:
+    /* Top full on hover */ linear-gradient(
+        to right,
+        #333 0%,
+        #333 100%
+      )
+      top / 100% 1px no-repeat,
+    /* Bottom border with right-shifted large gap */
+      linear-gradient(
+        to right,
+        #333 0%,
+        #333 60%,
+        transparent 60%,
+        transparent 90%,
+        #333 90%,
+        #333 100%
+      )
+      bottom / 100% 1px no-repeat,
+    linear-gradient(to bottom, #333 0%, #333 100%) left / 1px 100% no-repeat,
+    linear-gradient(to bottom, #333 0%, #333 100%) right / 1px 100% no-repeat;
+  background-repeat: no-repeat;
+}
