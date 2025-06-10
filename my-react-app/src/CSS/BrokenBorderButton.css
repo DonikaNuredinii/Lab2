@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 .broken-border-button.b {
-  background-color: #fff !important;
+  background-color: #faf9f6 !important;
 }
 
 .broken-border-button::before {

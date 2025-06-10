@@ -14,11 +14,9 @@ import {
   Avatar,
   HStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import * as signalR from "@microsoft/signalr";
+import { useEffect, useRef, useState } from "react";
 
 const ChatModal = ({ isOpen, onClose, restaurant }) => {
-  const [connection, setConnection] = useState(null);
   const [messages, setMessages] = useState([
     {
       senderId: "bot",
@@ -27,59 +25,71 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
     },
   ]);
   const [message, setMessage] = useState("");
+  const socketRef = useRef(null);
   const toast = useToast();
 
   const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const newConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${import.meta.env.VITE_API_BASE}/chatHub`, {
-        accessTokenFactory: () => localStorage.getItem("token"),
-      })
-      .withAutomaticReconnect()
-      .build();
+    if (!isOpen) return;
 
-    setConnection(newConnection);
-  }, []);
+    const wsUrl = `${
+      import.meta.env.VITE_WS_BASE
+    }/ws?token=${token}&userId=${userId}`;
+    socketRef.current = new WebSocket(wsUrl);
 
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then(() => {
-          console.log("Connected to SignalR");
+    socketRef.current.onopen = () => {
+      console.log("WebSocket connected");
+    };
 
-          connection.on("ReceiveMessage", (senderId, content) => {
-            setMessages((prev) => [...prev, { senderId, content }]);
-          });
-        })
-        .catch((err) => console.error("Connection failed: ", err));
-    }
-  }, [connection]);
+    socketRef.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setMessages((prev) => [...prev, data]);
+    };
 
-  const handleSend = async () => {
-    if (!message.trim()) return;
-
-    const receiverId = restaurant?.userID;
-
-    try {
-      await connection.invoke("SendMessage", receiverId, message);
-      setMessages((prev) => [...prev, { senderId: userId, content: message }]);
-      setMessage("");
-    } catch (err) {
-      console.error("Send error:", err);
+    socketRef.current.onerror = (err) => {
+      console.error("WebSocket error", err);
       toast({
-        title: "Error",
-        description: "Message could not be sent.",
+        title: "Connection Error",
+        description: "Unable to connect to chat server.",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
-    }
+    };
+
+    socketRef.current.onclose = () => {
+      console.log("WebSocket disconnected");
+    };
+
+    return () => {
+      socketRef.current?.close();
+    };
+  }, [isOpen]);
+
+  const handleSend = () => {
+    if (!message.trim() || socketRef.current.readyState !== WebSocket.OPEN)
+      return;
+
+    const newMsg = {
+      senderId: userId,
+      receiverId: restaurant?.userID,
+      content: message,
+    };
+
+    socketRef.current.send(JSON.stringify(newMsg));
+    setMessages((prev) => [...prev, newMsg]);
+    setMessage("");
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="sm" motionPreset="slideInBottom">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="sm"
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay />
       <ModalContent
         bg="white"
@@ -90,7 +100,13 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
         boxShadow="xl"
         overflow="hidden"
       >
-        <ModalHeader bg="#5A7870" color="white" fontWeight="bold" fontSize="md" py={3}>
+        <ModalHeader
+          bg="#5A7870"
+          color="white"
+          fontWeight="bold"
+          fontSize="md"
+          py={3}
+        >
           Chat with {restaurant?.emri || "Support"}
           <Text fontSize="xs" fontWeight="normal">
             Usually replies in a few minutes
@@ -102,7 +118,7 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
             {messages.map((msg, index) => (
               <HStack
                 key={index}
-                alignSelf={msg.senderId == userId ? "flex-end" : "flex-start"}
+                alignSelf={msg.senderId === userId ? "flex-end" : "flex-start"}
                 spacing={2}
               >
                 {msg.senderId !== userId && msg.senderId !== "bot" && (
@@ -112,7 +128,7 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
                   <Avatar size="sm" name="Support Bot" bg="green.400" />
                 )}
                 <Box
-                  bg={msg.senderId == userId ? "teal.100" : "gray.200"}
+                  bg={msg.senderId === userId ? "teal.100" : "gray.200"}
                   borderRadius="lg"
                   p={2}
                   maxW="240px"
@@ -131,9 +147,16 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
             bg="white"
             borderColor="gray.300"
           />
-       <Button mt={2} onClick={handleSend} w="full"bg="#5A7870"color="white"_hover={{ bg: "#4f6d64" }}>
-          Send
-       </Button>
+          <Button
+            mt={2}
+            onClick={handleSend}
+            w="full"
+            bg="#5A7870"
+            color="white"
+            _hover={{ bg: "#4f6d64" }}
+          >
+            Send
+          </Button>
         </ModalBody>
       </ModalContent>
     </Modal>

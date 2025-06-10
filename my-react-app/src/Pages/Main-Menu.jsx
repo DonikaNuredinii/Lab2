@@ -259,8 +259,8 @@ const MainMenu = () => {
         <Box
           width={{ base: "100%", md: "360px" }}
           minW={{ base: "100%", md: "360px" }}
-          bg="#fff"
-          borderLeft="1px solid #e2e8f0"
+          bg="#FAF9F6"
+          borderLeft="1px solid #F0EAD6"
           boxShadow="xl"
           height="100vh"
           display="flex"
@@ -268,7 +268,7 @@ const MainMenu = () => {
           zIndex="10"
         >
           {/* Header */}
-          <Box p={4} borderBottom="1px solid #e2e8f0" bg="white">
+          <Box p={4} borderBottom="1px solid #ddd" mt={6} mb={2} bg="#FAF9F6">
             <Text fontSize="xl" fontWeight="bold">
               Your Orders
             </Text>
@@ -277,8 +277,7 @@ const MainMenu = () => {
             </Text>
           </Box>
 
-          {/* Entire scrollable content (items + total + button) */}
-          <Box flex="1" overflowY="auto" px={4} py={2}>
+          <Box flex="1" overflowY="auto" px={4} py={2} mt={4}>
             {/* Table headers */}
             <HStack
               justify="space-between"
@@ -367,7 +366,6 @@ const MainMenu = () => {
               mb={4}
               mt={10}
               color="gray.900"
-              bg="#fff"
             >
               Place Order
             </Button>
