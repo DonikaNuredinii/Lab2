@@ -77,7 +77,7 @@
 }
 
 .intro-image-container {
-  width: 40%;
+  width: 80%;
 }
 
 .intro-image-container img {
@@ -127,6 +127,9 @@
   overflow: hidden;
   min-height: 350px;
   justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .restaurant-card:hover {

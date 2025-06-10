@@ -12,16 +12,15 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Lab2_Backend.Helpers;
 using Lab2_Backend.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using Lab2_Backend.Middleware;
 using System.Security.Claims;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Load configuration
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-// DB connection
+// SQL DB connection
 var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 var connectionString = isWindows
     ? builder.Configuration.GetConnectionString("TrustedConnection")
@@ -29,21 +28,20 @@ var connectionString = isWindows
 
 builder.Services.AddDbContext<MyContext>(options =>
     options.UseSqlServer(connectionString));
-
-builder.Services.AddScoped<AuditLogService>();               // SQL version
-
-
+builder.Services.AddScoped<AuditLogService>();
 
 // MongoDB
-builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
+builder.Services.Configure<MongoDBSettings>(
+    builder.Configuration.GetSection("MongoDBSettings"));
+
+builder.Services.AddSingleton<IMongoClient>(sp =>
+{
+    var mongoSettings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
+    return new MongoClient(mongoSettings.ConnectionString);
+});
+
 builder.Services.AddScoped<MongoAuditLogService>();
 builder.Services.AddScoped<ChatService>();
-builder.Services.AddSignalR();
-
-
-
-
-
 
 // CORS
 builder.Services.AddCors(options =>
@@ -56,7 +54,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// JWT configuration
+// JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var jwtKey = jwtSettings["SecretKey"];
 
@@ -90,13 +88,38 @@ else
     Console.WriteLine("JWT SecretKey is missing. Skipping JWT configuration.");
 }
 
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Build app
 var app = builder.Build();
+
+app.UseMiddleware<WebSocketMiddleware>();
+app.UseWebSockets();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/ws" && context.WebSockets.IsWebSocketRequest)
+    {
+        var user = context.User;
+        var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier);
+
+        if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+        {
+            context.Response.StatusCode = 401;
+            return;
+        }
+
+        var chatService = context.RequestServices.GetRequiredService<ChatService>();
+        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+        await WebSocketHandler.Handle(webSocket, userId, chatService);
+    }
+    else
+    {
+        await next();
+    }
+});
 
 if (app.Environment.IsDevelopment())
 {
@@ -109,5 +132,11 @@ app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.MapHub<ChatHub>("/chatHub");
+using (var scope = app.Services.CreateScope())
+{
+    var chatService = scope.ServiceProvider.GetRequiredService<ChatService>();
+    WebSocketHandler.Configure(chatService);
+}
+
+
 app.Run();

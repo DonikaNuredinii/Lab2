@@ -27,26 +27,45 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
   const [message, setMessage] = useState("");
   const socketRef = useRef(null);
   const toast = useToast();
+  const messagesEndRef = useRef(null); // Ref for scrolling to bottom
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
 
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("userId")); // Check login status on mount
+  }, []);
+
+  useEffect(() => {
     if (!isOpen) return;
+
+    console.log("Restaurant prop:", restaurant);
+
+    // Ensure token, userId, and restaurant userID are valid
+    if (!token || !userId || !restaurant?.userID) {
+      const errorMessage =
+        !token || !userId
+          ? "Missing authentication information."
+          : "Restaurant information is incomplete.";
+
+      toast({
+        title: "Error",
+        description: errorMessage,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
 
     const wsUrl = `${
       import.meta.env.VITE_WS_BASE
     }/ws?token=${token}&userId=${userId}`;
+
+    console.log("WebSocket URL:", wsUrl);
+
     socketRef.current = new WebSocket(wsUrl);
-
-    socketRef.current.onopen = () => {
-      console.log("WebSocket connected");
-    };
-
-    socketRef.current.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setMessages((prev) => [...prev, data]);
-    };
 
     socketRef.current.onerror = (err) => {
       console.error("WebSocket error", err);
@@ -66,22 +85,69 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
     return () => {
       socketRef.current?.close();
     };
-  }, [isOpen]);
+  }, [isOpen, token, userId, restaurant?.userID]);
+
+  // Function to scroll to the bottom of the chat
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Effect to scroll to the bottom whenever messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSend = () => {
     if (!message.trim() || socketRef.current.readyState !== WebSocket.OPEN)
       return;
 
+    const receiverId = parseInt(restaurant?.userID);
+
+    if (Number.isNaN(receiverId)) {
+      toast({
+        title: "Invalid Restaurant ID",
+        description: "The restaurant ID is not valid.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     const newMsg = {
-      senderId: userId,
-      receiverId: restaurant?.userID,
+      receiverId: receiverId,
       content: message,
     };
 
-    socketRef.current.send(JSON.stringify(newMsg));
-    setMessages((prev) => [...prev, newMsg]);
-    setMessage("");
+    try {
+      socketRef.current.send(JSON.stringify(newMsg));
+      setMessages((prev) => [...prev, { ...newMsg, senderId: userId }]);
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Send Error",
+        description: "Failed to send message.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
+
+  // Conditionally render the modal based on login status
+  if (!isLoggedIn) {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Please Log In</ModalHeader>
+          <ModalBody>You need to log in to use the chat feature.</ModalBody>
+          <ModalCloseButton />
+        </ModalContent>
+      </Modal>
+    );
+  }
 
   return (
     <Modal
@@ -137,6 +203,7 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
                 </Box>
               </HStack>
             ))}
+            <div ref={messagesEndRef} /> {/* Scroll to bottom */}
           </VStack>
 
           <Input
