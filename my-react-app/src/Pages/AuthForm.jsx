@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 
-const AuthForm = () => {
+const AuthForm = ({ setIsAuthenticated }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState({
     firstName: "",
@@ -29,38 +29,52 @@ const AuthForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
-    setMessageType("");
+  e.preventDefault();
+  setMessage("");
+  setMessageType("");
 
-    try {
-      if (isLogin) {
-        const response = await axios.post(`${API_BASE}/api/User/login`, {
-          email: form.email,
-          password: form.password,
-        });
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        localStorage.setItem("userId", String(response.data.userId));
+  try {
+    if (isLogin) {
+      const response = await axios.post(`${API_BASE}/api/User/login`, {
+        email: form.email,
+        password: form.password,
+      });
 
-        alert("✅ Login successful!");
-        setMessageType("success");
-        navigate("/online-menu");
+      const { token, refreshToken, userId, user } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("userId", String(userId));
+      localStorage.setItem("role", user.role);
+
+      setIsAuthenticated(true);
+
+      alert("✅ Login successful!");
+      setMessageType("success");
+
+      if (user.role === "Superadmin") {
+        navigate("/superadmin");
       } else {
-        await axios.post(`${API_BASE}/api/User/signup`, form);
-        alert("✅ Signup successful. Please log in.");
-        setMessageType("success");
-        setIsLogin(true);
+        navigate("/admin");
       }
-    } catch (error) {
-      const errMsg =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : "Something went wrong.";
-      setMessage(` ${errMsg}`);
-      setMessageType("error");
+
+    } else {
+      // SIGNUP logic here
+      await axios.post(`${API_BASE}/api/User/signup`, form);
+      alert("✅ Signup successful. Please log in.");
+      setMessageType("success");
+      setIsLogin(true); // switch to login form after signup
     }
-  };
+  } catch (error) {
+    const errMsg =
+      typeof error.response?.data === "string"
+        ? error.response.data
+        : "Something went wrong.";
+    setMessage(` ${errMsg}`);
+    setMessageType("error");
+  }
+};
+
 
   return (
     <div className="auth-wrapper">

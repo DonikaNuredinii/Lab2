@@ -1,19 +1,25 @@
+// utils/authService.js
 import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
 
 export const refreshAccessToken = async () => {
-  const token = localStorage.getItem('token');
   const refreshToken = localStorage.getItem('refreshToken');
+  const accessToken = localStorage.getItem('token');
 
-  if (!token || !refreshToken) throw new Error('Missing tokens');
+  if (!refreshToken || !accessToken) {
+    throw new Error("No refresh token or access token");
+  }
 
-  const res = await axios.post(`${API_BASE}/api/User/refresh`, {
-    accessToken: token,
-    refreshToken: refreshToken,
+  const response = await axios.post(`${API_BASE}/api/User/refresh`, {
+    accessToken,
+    refreshToken,
   });
 
-  localStorage.setItem('token', res.data.token);
-  localStorage.setItem('refreshToken', res.data.refreshToken);
-  return res.data.token;
+  const { token, refreshToken: newRefreshToken } = response.data;
+
+  localStorage.setItem('token', token);
+  localStorage.setItem('refreshToken', newRefreshToken);
+
+  return token; // return for retry
 };

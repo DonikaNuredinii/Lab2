@@ -152,19 +152,20 @@ namespace Lab2_Backend.Controllers
                 Console.WriteLine("Tokens generated and saved successfully.");
 
                 return Ok(new
-                {
-                    Token = token,
-                    RefreshToken = refreshToken,
-                    User = new
-                    {
-                        user.UserID,
-                        user.FirstName,
-                        user.LastName,
-                        user.Email,
-                        Role = user.Role?.RoleName ?? "Unknown",
-                        Type = user.GetType().Name
-                    }
-                });
+{
+    token,
+    refreshToken,
+    userId = user.UserID, // ✅ Add this top-level userId
+    user = new
+    {
+        user.FirstName,
+        user.LastName,
+        user.Email,
+        role = user.Role?.RoleName ?? "Unknown",
+        type = user.GetType().Name
+    }
+});
+
             }
             catch (Exception ex)
             {

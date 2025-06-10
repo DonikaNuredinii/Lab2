@@ -15,7 +15,7 @@ const ProfilePage = () => {
       const fetchProfile = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
-          navigate('/auth');
+          navigate('/login');
           return;
         }
 
@@ -27,7 +27,7 @@ const ProfilePage = () => {
           setForm(res.data);
         } catch (err) {
           console.error(err);
-          navigate('/auth');
+          navigate('/login');
         }
       };
 
@@ -47,6 +47,7 @@ const ProfilePage = () => {
       
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
+        localStorage.removeItem('userId');
         navigate('/login');
     };
 
