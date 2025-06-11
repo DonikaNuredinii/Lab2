@@ -13,6 +13,8 @@ import {
   Divider,
   HStack,
 } from "@chakra-ui/react";
+import NoteModal from "./NoteModal";
+import { MdNoteAdd } from "react-icons/md";
 
 const OnlineMenu = () => {
   const { id } = useParams();
@@ -24,6 +26,9 @@ const OnlineMenu = () => {
   const [error, setError] = useState(null);
   const [shuffledImageIndices, setShuffledImageIndices] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedItemProducts, setSelectedItemProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
 
   // Cart State
   const [cartItems, setCartItems] = useState([]);
@@ -73,10 +78,45 @@ const OnlineMenu = () => {
         "Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati."
       );
       setCartItems([]);
-      navigate("/checkout");
     } catch (err) {
       console.error(err);
       alert("Failed to place order");
+    }
+  };
+  const handleOpenNoteModal = async (item) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE}/api/MenuItemProducts/menuitem/${
+          item.id
+        }`
+      );
+      if (!res.ok) throw new Error("Failed to fetch ingredients");
+
+      const data = await res.json();
+
+      if (data.length === 0) {
+        alert("This dish has no removable ingredients configured.");
+        return;
+      }
+
+      const detailedProducts = await Promise.all(
+        data.map(async (prod) => {
+          const res = await fetch(
+            `${import.meta.env.VITE_API_BASE}/api/Products/${prod.productsID}`
+          );
+          const prodData = await res.json();
+          return prodData.emri;
+        })
+      );
+
+      const uniqueNames = [...new Set(detailedProducts)];
+      setSelectedItemProducts(uniqueNames);
+      setSelectedProducts(uniqueNames);
+      setSelectedMenuItemId(item.id);
+      onOpen();
+    } catch (err) {
+      console.error("Error loading ingredients:", err);
+      alert("Failed to load product ingredients.");
     }
   };
 
@@ -261,8 +301,19 @@ const OnlineMenu = () => {
                             />
                           )}
                         </div>
+
                         <div className="menu-item-text-content">
-                          <div className="menu-item-name">{item.name}</div>
+                          <div className="menu-item-name-with-icon">
+                            <span className="menu-item-name">{item.name}</span>
+                            <IconButton
+                              icon={<MdNoteAdd size={18} />}
+                              size="sm"
+                              aria-label="Add Note"
+                              className="note-icon-button"
+                              onClick={() => handleOpenNoteModal(item)}
+                            />
+                          </div>
+
                           <div className="menu-item-description">
                             {item.description}
                           </div>
@@ -283,6 +334,14 @@ const OnlineMenu = () => {
               </div>
             ))}
           </Box>
+          <NoteModal
+            isOpen={isOpen}
+            onClose={onClose}
+            products={selectedItemProducts}
+            selected={selectedProducts}
+            setSelected={setSelectedProducts}
+            menuItemId={selectedMenuItemId}
+          />
 
           {/* SIDEBAR */}
           {cartItems.length > 0 && (

@@ -75,7 +75,7 @@ const NoteModal = ({
           fontSize="xl"
           textAlign="center"
           fontWeight="bold"
-          color="#333"
+          color="#32524D"
         >
           Customize Your Dish
         </ModalHeader>
@@ -95,13 +95,23 @@ const NoteModal = ({
                 borderRadius="lg"
                 p={2}
                 bg="#fff"
-                _hover={{ bg: "#f4f4f4" }}
+                _hover={{ bg: "#e9f1ef" }}
                 transition="0.2s"
               >
                 <Checkbox
                   isChecked={selected.includes(product)}
                   onChange={() => toggleCheck(product)}
-                  colorScheme="orange"
+                  colorScheme="green"
+                  iconColor="#32524D"
+                  sx={{
+                    control: {
+                      borderColor: "#32524D",
+                      _checked: {
+                        bg: "#32524D",
+                        borderColor: "#32524D",
+                      },
+                    },
+                  }}
                 >
                   {product}
                 </Checkbox>
@@ -111,7 +121,9 @@ const NoteModal = ({
 
           <Flex justifyContent="center">
             <Button
-              colorScheme="orange"
+              bg="#32524D"
+              color="white"
+              _hover={{ bg: "#28453f" }}
               variant="solid"
               borderRadius="full"
               px={6}
