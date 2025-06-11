@@ -71,6 +71,7 @@ const MainMenu = () => {
         "Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati."
       );
       setCartItems([]);
+      navigate("/checkout");
     } catch (err) {
       console.error(err);
       alert("Failed to place order");
