@@ -138,5 +138,4 @@ using (var scope = app.Services.CreateScope())
     WebSocketHandler.Configure(chatService);
 }
 
-
 app.Run();

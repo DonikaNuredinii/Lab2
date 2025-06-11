@@ -8,7 +8,7 @@ namespace Lab2_Backend.DTOs
     public class StaffScheduleDTO
     {
         public int StaffID { get; set; }
-        public int? TableID { get; set; }
+        public List<int> TableIDs { get; set; }
 
         public string DayOfWeek { get; set; }
 

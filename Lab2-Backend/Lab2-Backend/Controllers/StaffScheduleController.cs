@@ -18,15 +18,32 @@ namespace Lab2_Backend.Controllers
 
         // GET: api/StaffSchedule
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StaffSchedule>>> GetSchedules()
+        public async Task<ActionResult<IEnumerable<StaffScheduleResponseDTO>>> GetSchedules()
         {
-          return await _context.StaffSchedules
-            .Include(s => s.StaffUser)
-            .Include(s => s.Table)
-            .Include(s => s.AssignedByUser)
-            .ToListAsync();
-
+            return await _context.StaffSchedules
+                .Include(s => s.StaffUser)
+                .Include(s => s.StaffScheduleTables)
+                    .ThenInclude(sst => sst.Table)
+                .Include(s => s.AssignedByUser)
+                .Select(s => new StaffScheduleResponseDTO
+                {
+                    ScheduleID = s.ScheduleID,
+                    StaffID = s.StaffID,
+                    DayOfWeek = s.DayOfWeek,
+                    StartTime = s.StartTime.ToString(@"hh\:mm"),
+                    EndTime = s.EndTime.ToString(@"hh\:mm"),
+                    AssignedBy = s.AssignedBy,
+                    StaffFirstName = s.StaffUser.FirstName,
+                    StaffLastName = s.StaffUser.LastName,
+                    AssignedByFirstName = s.AssignedByUser != null ? s.AssignedByUser.FirstName : null,
+                    Tables = s.StaffScheduleTables.Select(t => new TableDTO
+                    {
+                        TableID = t.TableID,
+                    }).ToList()
+                })
+                .ToListAsync();
         }
+
 
         // GET: api/StaffSchedule/5
         [HttpGet("{id}")]
@@ -66,17 +83,21 @@ public async Task<ActionResult<StaffSchedule>> CreateSchedule(StaffScheduleDTO d
         }
     }
 
-    var schedule = new StaffSchedule
-    {
-        StaffID = dto.StaffID,
-        TableID = dto.TableID,
-        DayOfWeek = dto.DayOfWeek,
-        StartTime = startTime,
-        EndTime = endTime,
-        AssignedBy = dto.AssignedBy
-    };
+            var schedule = new StaffSchedule
+            {
+                StaffID = dto.StaffID,
+                DayOfWeek = dto.DayOfWeek,
+                StartTime = startTime,
+                EndTime = endTime,
+                AssignedBy = dto.AssignedBy,
+                StaffScheduleTables = dto.TableIDs?.Select(tid => new StaffScheduleTable
+                {
+                    TableID = tid
+                }).ToList()
+            };
 
-    _context.StaffSchedules.Add(schedule);
+
+            _context.StaffSchedules.Add(schedule);
     await _context.SaveChangesAsync();
 
     return CreatedAtAction(nameof(GetSchedule), new { id = schedule.ScheduleID }, schedule);
@@ -92,11 +113,18 @@ public async Task<ActionResult<StaffSchedule>> CreateSchedule(StaffScheduleDTO d
                 return NotFound();
 
             schedule.StaffID = dto.StaffID;
-            schedule.TableID = dto.TableID;
             schedule.DayOfWeek = dto.DayOfWeek;
             schedule.StartTime = dto.StartTime;
             schedule.EndTime = dto.EndTime;
             schedule.AssignedBy = dto.AssignedBy;
+
+            _context.StaffScheduleTables.RemoveRange(schedule.StaffScheduleTables);
+            schedule.StaffScheduleTables = dto.TableIDs?.Select(tid => new StaffScheduleTable
+            {
+                StaffScheduleID = schedule.ScheduleID,
+                TableID = tid
+            }).ToList();
+
 
             await _context.SaveChangesAsync();
             return NoContent();

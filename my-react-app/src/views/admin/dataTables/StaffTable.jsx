@@ -113,7 +113,8 @@ const StaffManagement = () => {
   };
 
   const handleDeleteStaff = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this staff member?")) return;
+    if (!window.confirm("Are you sure you want to delete this staff member?"))
+      return;
     try {
       await fetch(`${API_BASE}/api/User/${id}`, { method: "DELETE" });
       toast({
@@ -149,18 +150,58 @@ const StaffManagement = () => {
       <Box px="25px" mb="24px" maxW="1300px" mx="auto">
         <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
           <Flex px="25px" mt="6" justifyContent="flex-end">
-            <Button colorScheme="brand" size="md" borderRadius="0" onClick={onOpen}>
+            <Button
+              colorScheme="brand"
+              size="md"
+              borderRadius="0"
+              onClick={onOpen}
+            >
               Add Staff
             </Button>
           </Flex>
           <Table variant="simple" color="gray.500" mb="24px">
             <Thead>
               <Tr h="60px">
-                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">NAME</Th>
-                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">EMAIL</Th>
-                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">PHONE</Th>
-                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">ROLE</Th>
-                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">ACTIONS</Th>
+                <Th
+                  textAlign="center"
+                  fontSize="12px"
+                  fontWeight="600"
+                  color="gray.400"
+                >
+                  NAME
+                </Th>
+                <Th
+                  textAlign="center"
+                  fontSize="12px"
+                  fontWeight="600"
+                  color="gray.400"
+                >
+                  EMAIL
+                </Th>
+                <Th
+                  textAlign="center"
+                  fontSize="12px"
+                  fontWeight="600"
+                  color="gray.400"
+                >
+                  PHONE
+                </Th>
+                <Th
+                  textAlign="center"
+                  fontSize="12px"
+                  fontWeight="600"
+                  color="gray.400"
+                >
+                  ROLE
+                </Th>
+                <Th
+                  textAlign="center"
+                  fontSize="12px"
+                  fontWeight="600"
+                  color="gray.400"
+                >
+                  ACTIONS
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -169,9 +210,15 @@ const StaffManagement = () => {
                   <Td textAlign="center" fontWeight="700" color={textColor}>
                     {user.firstName} {user.lastName}
                   </Td>
-                  <Td textAlign="center" fontWeight="400" color={textColor}>{user.email}</Td>
-                  <Td textAlign="center" fontWeight="700" color={textColor}>{user.phoneNumber}</Td>
-                  <Td textAlign="center" fontWeight="500" color={textColor}>{user.roleName}</Td>
+                  <Td textAlign="center" fontWeight="400" color={textColor}>
+                    {user.email}
+                  </Td>
+                  <Td textAlign="center" fontWeight="700" color={textColor}>
+                    {user.phoneNumber}
+                  </Td>
+                  <Td textAlign="center" fontWeight="500" color={textColor}>
+                    {user.roleName}
+                  </Td>
                   <Td textAlign="center">
                     <IconButton
                       aria-label="Edit staff"
@@ -212,36 +259,79 @@ const StaffManagement = () => {
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{formData.userID ? "Edit Staff" : "Add New Staff"}</ModalHeader>
+          <ModalHeader>
+            {formData.userID ? "Edit Staff" : "Add New Staff"}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={4} align="stretch" pb={6}>
               <FormControl isRequired>
                 <FormLabel>First Name</FormLabel>
-                <Input value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
+                <Input
+                  value={formData.firstName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Last Name</FormLabel>
-                <Input value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
+                <Input
+                  value={formData.lastName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Email</FormLabel>
-                <Input value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                <Input
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Phone Number</FormLabel>
-                <Input value={formData.phoneNumber} onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} />
+                <Input
+                  value={formData.phoneNumber}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phoneNumber: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+                <Input
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Role</FormLabel>
-                <Select placeholder="Select role" value={formData.roleID} onChange={(e) => setFormData({ ...formData, roleID: parseInt(e.target.value) })}>
-                  {roles.map((role) => (
-                    <option key={role.roleID} value={role.roleID}>{role.roleName}</option>
-                  ))}
+                <Select
+                  placeholder="Select role"
+                  value={formData.roleID}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      roleID: parseInt(e.target.value),
+                    })
+                  }
+                >
+                  {roles
+                    .filter((role) =>
+                      ["Waiter", "Cook", "User"].includes(role.roleName)
+                    )
+                    .map((role) => (
+                      <option key={role.roleID} value={role.roleID}>
+                        {role.roleName}
+                      </option>
+                    ))}
                 </Select>
               </FormControl>
               <Flex justifyContent="flex-end" pt={4}>

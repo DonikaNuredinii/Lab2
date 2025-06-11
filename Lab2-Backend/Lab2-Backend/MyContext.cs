@@ -32,6 +32,7 @@ namespace Lab2_Backend
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<StaffScheduleTable> StaffScheduleTables { get; set; }
 
 
 
@@ -191,6 +192,19 @@ namespace Lab2_Backend
                 .Property(p => p.Amount)
                 .HasColumnType("decimal(18,2)");
 
+
+            modelBuilder.Entity<StaffScheduleTable>()
+                .HasKey(sst => new { sst.StaffScheduleID, sst.TableID });
+
+            modelBuilder.Entity<StaffScheduleTable>()
+                .HasOne(sst => sst.StaffSchedule)
+                .WithMany(ss => ss.StaffScheduleTables)
+                .HasForeignKey(sst => sst.StaffScheduleID);
+
+            modelBuilder.Entity<StaffScheduleTable>()
+                .HasOne(sst => sst.Table)
+                .WithMany(t => t.StaffScheduleTables)
+                .HasForeignKey(sst => sst.TableID);
         }
 
 

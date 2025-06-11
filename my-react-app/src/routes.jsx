@@ -19,7 +19,6 @@ import {
 
 // Admin Imports
 import MainDashboard from "../src/views/admin/default";
-import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
@@ -109,7 +108,7 @@ const routes = [
   {
     name: "Staff Schedule",
     layout: "/admin",
-    path: "/staff-schedule",
+    path: "/schedule",
     icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
     component: <StaffSchedule />,
   },
@@ -128,21 +127,6 @@ const routes = [
     component: <AuditLogsTable />,
   },
 
-  {
-    name: "NFT Marketplace",
-    layout: "/admin",
-    path: "/nft-marketplace",
-    icon: (
-      <Icon
-        as={MdOutlineShoppingCart}
-        width="20px"
-        height="20px"
-        color="inherit"
-      />
-    ),
-    component: <NFTMarketplace />,
-    secondary: true,
-  },
   {
     name: "Data Tables",
     layout: "/admin",

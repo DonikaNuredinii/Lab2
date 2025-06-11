@@ -20,16 +20,13 @@ const RestaurantStatus = () => {
   return (
     <div
       style={{
-        backgroundColor: isOpen ? "#D4EDDA" : "#F8D7DA",
-        color: isOpen ? "#155724" : "#721C24",
-        border: `1px solid ${isOpen ? "#C3E6CB" : "#F5C6CB"}`,
+        color: isOpen ? "#AAFF00" : "#FF0000",
         padding: "10px 20px",
-        borderRadius: "12px",
         display: "inline-block",
         fontWeight: "bold",
       }}
     >
-      {isOpen ? "🟢 Restaurant is OPEN" : "🔴 Restaurant is CLOSED"}
+      {isOpen ? " OPEN" : "CLOSED"}
     </div>
   );
 };

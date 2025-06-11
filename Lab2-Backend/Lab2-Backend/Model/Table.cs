@@ -16,5 +16,8 @@ namespace Lab2_Backend.Model
         [JsonIgnore]
         [ValidateNever]
         public Restaurant Restaurant { get; set; }
+        [JsonIgnore]
+        [ValidateNever]
+        public virtual ICollection<StaffScheduleTable> StaffScheduleTables { get; set; }
     }
 }
