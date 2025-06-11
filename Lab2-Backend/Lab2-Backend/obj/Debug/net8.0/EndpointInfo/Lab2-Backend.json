@@ -3081,7 +3081,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Review"
+                    "$ref": "#/components/schemas/ReviewDTO"
                   }
                 }
               },
@@ -3089,7 +3089,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Review"
+                    "$ref": "#/components/schemas/ReviewDTO"
                   }
                 }
               },
@@ -3097,7 +3097,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Review"
+                    "$ref": "#/components/schemas/ReviewDTO"
                   }
                 }
               }
@@ -3491,7 +3491,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StaffSchedule"
+                    "$ref": "#/components/schemas/StaffScheduleResponseDTO"
                   }
                 }
               },
@@ -3499,7 +3499,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StaffSchedule"
+                    "$ref": "#/components/schemas/StaffScheduleResponseDTO"
                   }
                 }
               },
@@ -3507,7 +3507,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/StaffSchedule"
+                    "$ref": "#/components/schemas/StaffScheduleResponseDTO"
                   }
                 }
               }
@@ -4584,6 +4584,10 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5360,6 +5364,10 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5445,11 +5453,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "tableID": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "dayOfWeek": {
             "minLength": 1,
             "type": "string"
@@ -5467,11 +5470,15 @@
             "format": "int32",
             "nullable": true
           },
+          "staffScheduleTables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StaffScheduleTable"
+            },
+            "nullable": true
+          },
           "staffUser": {
             "$ref": "#/components/schemas/User"
-          },
-          "table": {
-            "$ref": "#/components/schemas/Table"
           },
           "assignedByUser": {
             "$ref": "#/components/schemas/User"
@@ -5486,9 +5493,12 @@
             "type": "integer",
             "format": "int32"
           },
-          "tableID": {
-            "type": "integer",
-            "format": "int32",
+          "tableIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           },
           "dayOfWeek": {
@@ -5507,6 +5517,76 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaffScheduleResponseDTO": {
+        "type": "object",
+        "properties": {
+          "scheduleID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "staffID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "assignedBy": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "staffFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "staffLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "assignedByFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TableDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StaffScheduleTable": {
+        "type": "object",
+        "properties": {
+          "staffScheduleID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "staffSchedule": {
+            "$ref": "#/components/schemas/StaffSchedule"
+          },
+          "tableID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "table": {
+            "$ref": "#/components/schemas/Table"
           }
         },
         "additionalProperties": false
@@ -5543,6 +5623,16 @@
           "qrCode": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TableDTO": {
+        "type": "object",
+        "properties": {
+          "tableID": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

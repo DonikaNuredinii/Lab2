@@ -8,5 +8,6 @@
         public int? MenuItemID { get; set; }
         public int UserID { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string? UserName { get; set; }
     }
 }

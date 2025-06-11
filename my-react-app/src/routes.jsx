@@ -30,6 +30,7 @@ import StaffSchedule from "views/admin/dataTables/StaffSchedule";
 import ProductsTable from "../src/views/admin/dataTables/ProductsTable";
 import AuditLogsTable from "views/admin/dataTables/AuditLogsTable";
 
+
 // Superadmin Imports
 import SuperAdminDashboard from "../src/views/superadmin/default";
 import RestaurantsTable from "../src/views/superadmin/dataTables/RestaurantsTable";
@@ -39,6 +40,7 @@ import TablesTable from "../src/views/superadmin/dataTables/TablesTable";
 import SignInCentered from "views/auth/signIn";
 import OnlineMenu from "./Pages/OnlineMenu";
 import ProfilePage from "./Pages/ProfilePage";
+import DishDetails from "./Pages/DishDetails";
 
 const routes = [
   {
@@ -160,6 +162,13 @@ const routes = [
     layout: "/",
     path: "/online-menu",
     component: <OnlineMenu />,
+    hidden: true,
+  },
+  {
+  name: "Dish Review",
+    layout: "/",
+    path: "/dish/:menuItemId",
+    component: <DishDetails />,
     hidden: true,
   },
 

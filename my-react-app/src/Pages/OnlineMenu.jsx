@@ -291,14 +291,23 @@ const OnlineMenu = () => {
                       <div className="menu-item-card" key={item.id}>
                         <div className="menu-item-image-container">
                           {item.image && (
-                            <img
-                              src={
-                                item.image.startsWith("/")
-                                  ? item.image
-                                  : "/" + item.image
-                              }
-                              alt={item.name}
-                            />
+                            <div
+                              className="image-hover-wrapper"
+                              onClick={() => navigate(`/dish/${item.id}`)}
+                            >
+                              <img
+                                src={
+                                  item.image.startsWith("/")
+                                    ? item.image
+                                    : "/" + item.image
+                                }
+                                alt={item.name}
+                                className="menu-hover-image"
+                              />
+                              <div className="hover-caption">
+                                Rate this dish
+                              </div>
+                            </div>
                           )}
                         </div>
 

@@ -12,6 +12,7 @@ import MainMenu from "./Pages/Main-Menu";
 import OnlineMenu from "./Pages/OnlineMenu";
 import ProfilePage from "./Pages/ProfilePage";
 import CheckOutPage from "./Pages/CheckoutPage";
+import DishDetails from "./Pages/DishDetails";
 
 export default function Main() {
   const location = useLocation();
@@ -73,6 +74,7 @@ export default function Main() {
         />
         <Route path="/" element={<MenuCover />} />
         <Route path="/main-menu" element={<MainMenu />} />
+         <Route path="/dish/:menuItemId" element={<DishDetails />} />
         <Route
           path="/online-menu/:id?"
           element={isAuthenticated ? <OnlineMenu /> : <Navigate to="/login" />}

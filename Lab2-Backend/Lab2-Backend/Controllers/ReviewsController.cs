@@ -16,7 +16,6 @@ namespace Lab2_Backend.Controllers
             _context = context;
         }
 
-        // GET: api/Reviews
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
         {
@@ -26,7 +25,6 @@ namespace Lab2_Backend.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Reviews/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> GetReview(int id)
         {
@@ -41,22 +39,37 @@ namespace Lab2_Backend.Controllers
             return review;
         }
 
-        // GET: api/Reviews/menuitem/5
         [HttpGet("menuitem/{menuItemId}")]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviewsForMenuItem(int menuItemId)
+        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviewsForMenuItem(int menuItemId)
         {
             var reviews = await _context.Reviews
                 .Where(r => r.MenuItemID == menuItemId)
                 .Include(r => r.User)
                 .ToListAsync();
 
-            return Ok(reviews);
+            var dtoList = reviews.Select(r => new ReviewDTO
+            {
+                ReviewID = r.ReviewID,
+                MenuItemID = r.MenuItemID,
+                UserID = r.UserID,
+                Rating = r.Rating,
+                Comment = r.Comment,
+                CreatedAt = r.CreatedAt,
+                UserName = r.User != null ? $"{r.User.FirstName} {r.User.LastName}" : "Unknown"
+            });
+
+            return Ok(dtoList);
         }
 
-        // POST: api/Reviews
         [HttpPost]
         public async Task<ActionResult<Review>> PostReview(ReviewDTO dto)
         {
+            var exists = await _context.Reviews
+                .AnyAsync(r => r.UserID == dto.UserID && r.MenuItemID == dto.MenuItemID);
+
+            if (exists)
+                return Conflict("User has already reviewed this menu item.");
+
             var review = new Review
             {
                 MenuItemID = dto.MenuItemID,
@@ -72,7 +85,6 @@ namespace Lab2_Backend.Controllers
             return CreatedAtAction(nameof(GetReview), new { id = review.ReviewID }, review);
         }
 
-        // PUT: api/Reviews/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReview(int id, ReviewDTO dto)
         {
@@ -87,13 +99,11 @@ namespace Lab2_Backend.Controllers
             review.Comment = dto.Comment;
             review.MenuItemID = dto.MenuItemID;
             review.UserID = dto.UserID;
-            // CreatedAt nuk ndryshohet në update
 
             await _context.SaveChangesAsync();
             return NoContent();
         }
 
-        // DELETE: api/Reviews/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReview(int id)
         {

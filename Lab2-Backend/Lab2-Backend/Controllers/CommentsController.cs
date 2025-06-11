@@ -19,7 +19,10 @@ namespace Lab2_Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CommentDTO>>> GetAllComments()
         {
-            var comments = await _context.Comments.ToListAsync();
+            var comments = await _context.Comments
+                .Include(c => c.User)
+                .ToListAsync();
+
             var dto = comments.Select(c => new CommentDTO
             {
                 CommentID = c.CommentID,
@@ -27,7 +30,8 @@ namespace Lab2_Backend.Controllers
                 ReviewID = c.ReviewID,
                 MenuItemID = c.MenuItemID,
                 UserID = c.UserID,
-                CreatedAt = c.CreatedAt
+                CreatedAt = c.CreatedAt,
+                UserName = c.User != null ? $"{c.User.FirstName} {c.User.LastName}" : "Unknown"
             });
 
             return Ok(dto);
@@ -36,7 +40,10 @@ namespace Lab2_Backend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CommentDTO>> GetComment(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
+            var comment = await _context.Comments
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(c => c.CommentID == id);
+
             if (comment == null) return NotFound();
 
             return new CommentDTO
@@ -46,7 +53,8 @@ namespace Lab2_Backend.Controllers
                 ReviewID = comment.ReviewID,
                 MenuItemID = comment.MenuItemID,
                 UserID = comment.UserID,
-                CreatedAt = comment.CreatedAt
+                CreatedAt = comment.CreatedAt,
+                UserName = comment.User != null ? $"{comment.User.FirstName} {comment.User.LastName}" : "Unknown"
             };
         }
 
