@@ -29,8 +29,6 @@ import ManageIngredientsModal from "./components/ManageIngredientsModal";
 import { MdEdit, MdDelete, MdNoteAdd } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 
-const columnHelper = createColumnHelper();
-
 const MenuItemsFullView = () => {
   const [structuredData, setStructuredData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,6 +39,8 @@ const MenuItemsFullView = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const location = useLocation();
   const isSuperAdmin = location.pathname.includes("/superadmin");
+  const columnHelper = createColumnHelper();
+  const restaurantId = Number(localStorage.getItem("restaurantId"));
 
   const {
     isOpen: isEditOpen,
@@ -75,11 +75,10 @@ const MenuItemsFullView = () => {
       ]);
       const filteredItems = isSuperAdmin
         ? items
-        : items.filter((item) => item.restaurantId === 2);
-
+        : items.filter((item) => item.restaurantId === restaurantId);
       const filteredCategories = isSuperAdmin
         ? categories
-        : categories.filter((c) => c.restaurantID === 2);
+        : categories.filter((c) => c.restaurantID === restaurantId);
 
       const structured = filteredCategories
         .map((category) => {
@@ -540,7 +539,10 @@ const MenuItemsFullView = () => {
           <ModalHeader>Add New Menu Item</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AddItemForm onAddItem={handleAddItem} restaurantId={2} />
+            <AddItemForm
+              onAddItem={handleAddItem}
+              restaurantId={restaurantId}
+            />
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -560,7 +562,7 @@ const MenuItemsFullView = () => {
             {selectedItem && (
               <AddItemForm
                 onAddItem={handleEditItem}
-                restaurantId={2}
+                restaurantId={restaurantId}
                 initialData={selectedItem}
                 isEdit={true}
               />

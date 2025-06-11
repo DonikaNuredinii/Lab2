@@ -182,7 +182,9 @@ namespace Lab2_Backend.Controllers
                         user.LastName,
                         user.Email,
                         role = user.Role?.RoleName ?? "Unknown",
-                        type = user.GetType().Name
+                        type = user.GetType().Name,
+                        restaurantId = user is Staff staffUser ? staffUser.RestaurantID : null
+
                     }
                 });
 

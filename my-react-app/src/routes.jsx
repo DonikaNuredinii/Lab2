@@ -9,10 +9,12 @@ import {
   MdOutlineShoppingCart,
   MdRestaurantMenu,
   MdPeople,
+  MdDinnerDining,
   MdShoppingCart,
   MdSchedule,
   MdAccessTime,
   MdInventory,
+  MdTableRestaurant,
 } from "react-icons/md";
 // import { MdShoppingCart } from "react-icons/md";
 // import { MdPeople } from "react-icons/md";
@@ -62,7 +64,7 @@ const routes = [
     layout: "/superadmin",
     path: "/restaurants",
     icon: (
-      <Icon as={MdRestaurantMenu} width="20px" height="20px" color="inherit" />
+      <Icon as={MdDinnerDining} width="20px" height="20px" color="inherit" />
     ),
     component: <RestaurantsTable />,
   },
@@ -71,7 +73,7 @@ const routes = [
     layout: "/superadmin",
     path: "/tables",
     icon: (
-      <Icon as={MdRestaurantMenu} width="20px" height="20px" color="inherit" />
+      <Icon as={MdTableRestaurant} width="20px" height="20px" color="inherit" />
     ),
     component: <TablesTable />,
   },
@@ -152,13 +154,13 @@ const routes = [
     component: <ReviewsTable />,
   },
 
-  {
-    name: "Data Tables",
-    layout: "/admin",
-    icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
-    path: "/data-tables",
-    component: <DataTables />,
-  },
+  // {
+  //   name: "Data Tables",
+  //   layout: "/admin",
+  //   icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
+  //   path: "/data-tables",
+  //   component: <DataTables />,
+  // },
   {
     name: "Profile",
     layout: "/admin",

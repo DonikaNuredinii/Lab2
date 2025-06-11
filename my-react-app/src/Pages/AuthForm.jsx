@@ -110,16 +110,19 @@ const AuthForm = ({ setIsAuthenticated }) => {
         localStorage.setItem("token", token);
         localStorage.setItem("userId", String(userId));
         localStorage.setItem("role", user.role);
-
+        if (user.restaurantId) {
+          localStorage.setItem("restaurantId", String(user.restaurantId));
+        }
+        console.log("restaurantId", String(user.restaurantId));
         setIsAuthenticated(true);
 
         alert("✅ Login successful!");
         setMessageType("success");
 
-        if (user.role === "Superadmin") {
-          navigate("/superadmin");
+        if (user.role === "SuperAdmin") {
+          navigate("/superadmin/default");
         } else if (user.role === "Admin") {
-          navigate("/admin");
+          navigate("/admin/default");
         } else if (user.role === "user" || user.role === "User") {
           navigate("/online-menu");
         } else {

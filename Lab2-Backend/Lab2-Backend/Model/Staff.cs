@@ -14,9 +14,6 @@ namespace Lab2_Backend.Model
         [JsonIgnore]
         public virtual Restaurant? Restaurant { get; set; }
 
-        [JsonIgnore]
-        [ForeignKey("Role")]
-        public virtual Role? Role { get; set; }
 
     }
 }

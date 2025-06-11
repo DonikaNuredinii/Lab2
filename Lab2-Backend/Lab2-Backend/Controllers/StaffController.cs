@@ -1,6 +1,11 @@
+﻿using Lab2_Backend.DTO;
+using Lab2_Backend.Helpers;
 using Lab2_Backend.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Lab2_Backend.Controllers
 {
@@ -8,103 +13,123 @@ namespace Lab2_Backend.Controllers
     [ApiController]
     public class StaffController : ControllerBase
     {
-        private readonly  MyContext _context;
+        private readonly MyContext _context;
 
-        public StaffController( MyContext context)
+        public StaffController(MyContext context)
         {
             _context = context;
         }
 
-        // GET
+        // GET: api/Staff
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Staff>>> GetStaff()
+        public async Task<ActionResult<IEnumerable<StaffDto>>> GetStaff()
         {
-            return await _context.Staff.Include(s => s.Restaurant).ToListAsync();
+            var staffList = await _context.Staff
+                .Include(s => s.Role)
+                .Select(s => new StaffDto
+                {
+                    UserID = s.UserID,
+                    FirstName = s.FirstName,
+                    LastName = s.LastName,
+                    Email = s.Email,
+                    PhoneNumber = s.PhoneNumber,
+                    CreationDate = s.CreationDate,
+                    RoleID = s.RoleID,
+                    RestaurantID = s.RestaurantID ?? 0,
+                    Password = s.Password,
+                })
+                .ToListAsync();
+
+            return Ok(staffList);
         }
 
-        // GET with ID
+        // GET: api/Staff/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Staff>> GetStaff(int id)
+        public async Task<ActionResult<StaffDto>> GetStaff(int id)
         {
-            var staff = await _context.Staff.Include(s => s.Restaurant).FirstOrDefaultAsync(s => s.UserID == id);
+            var staff = await _context.Staff
+                .Include(s => s.Role)
+                .FirstOrDefaultAsync(s => s.UserID == id);
 
             if (staff == null)
-            {
                 return NotFound();
-            }
 
-            return staff;
+            return new StaffDto
+            {
+                UserID = staff.UserID,
+                FirstName = staff.FirstName,
+                LastName = staff.LastName,
+                Email = staff.Email,
+                PhoneNumber = staff.PhoneNumber,
+                CreationDate = staff.CreationDate,
+                RoleID = staff.RoleID,
+                RestaurantID = staff.RestaurantID ?? 0,
+                Password = staff.Password,
+            };
         }
 
-        // PUT
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutStaff(int id, Staff staff)
+        [HttpPost]
+        public async Task<ActionResult<StaffDto>> PostStaff(StaffDto dto)
         {
-            if (id != staff.UserID)
-            {
-                return BadRequest();
-            }
+            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleID == dto.RoleID);
+            if (role == null)
+                return BadRequest("Invalid role ID.");
 
-            _context.Entry(staff).State = EntityState.Modified;
-
-            try
+            var staff = new Staff
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StaffExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+                CreationDate = DateTime.UtcNow,
+                RestaurantID = dto.RestaurantID,
+                RoleID = role.RoleID,
+                Password = PasswordHelper.HashPassword(dto.Password) // ✅ HASH PASSWORD HERE
+            };
 
+            _context.Staff.Add(staff);
+            await _context.SaveChangesAsync();
+
+            dto.UserID = staff.UserID;
+            dto.CreationDate = staff.CreationDate;
+
+            return CreatedAtAction(nameof(GetStaff), new { id = staff.UserID }, dto);
+        }
+
+
+        // PUT: api/Staff/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutStaff(int id, StaffDto dto)
+        {
+            if (id != dto.UserID)
+                return BadRequest("ID mismatch.");
+
+            var existing = await _context.Staff.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            existing.FirstName = dto.FirstName;
+            existing.LastName = dto.LastName;
+            existing.Email = dto.Email;
+            existing.PhoneNumber = dto.PhoneNumber;
+            existing.RestaurantID = dto.RestaurantID;
+           existing.Password = dto.Password;
+
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
-        // POST
-        [HttpPost]
-        public async Task<ActionResult<Staff>> PostStaff(Staff staff)
-        {
-            var role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "Staff");
-                if (role == null)
-                {
-                    return BadRequest("Staff role not found.");
-                }
-                
-                staff.RoleID = role.RoleID;
-                staff.CreationDate = DateTime.UtcNow;
-                
-                _context.Staff.Add(staff);
-                await _context.SaveChangesAsync();
-
-
-            return CreatedAtAction("GetStaff", new { id = staff.UserID }, staff);
-        }
-
-        // DELETE
+        // DELETE: api/Staff/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStaff(int id)
         {
             var staff = await _context.Staff.FindAsync(id);
             if (staff == null)
-            {
                 return NotFound();
-            }
 
             _context.Staff.Remove(staff);
             await _context.SaveChangesAsync();
-
             return NoContent();
-        }
-
-        private bool StaffExists(int id)
-        {
-            return _context.Staff.Any(e => e.UserID == id);
         }
     }
 }

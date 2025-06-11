@@ -90,11 +90,11 @@ export default function Main() {
         <Route
           path="/login"
           element={
-            isAuthenticated ? (
-              userRole === "Superadmin" ? (
-                <Navigate to="/superadmin/dashboard" />
+            authChecked && isAuthenticated ? (
+              userRole === "SuperAdmin" ? (
+                <Navigate to="/superadmin" />
               ) : userRole === "Admin" ? (
-                <Navigate to="/admin/dashboard" />
+                <Navigate to="/admin" />
               ) : (
                 <Navigate to="/online-menu" />
               )
@@ -146,7 +146,7 @@ export default function Main() {
           path="admin/*"
           element={
             isAuthenticated &&
-            (userRole === "Admin" || userRole === "Superadmin") ? (
+            (userRole === "Admin" || userRole === "SuperAdmin") ? (
               <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
             ) : (
               <Navigate to="/login" />
@@ -157,7 +157,7 @@ export default function Main() {
         <Route
           path="superadmin/*"
           element={
-            isAuthenticated && userRole === "Superadmin" ? (
+            isAuthenticated && userRole === "SuperAdmin" ? (
               <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
             ) : (
               <Navigate to="/login" />

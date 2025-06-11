@@ -68,68 +68,82 @@ const CheckoutPage = () => {
           borderRadius="xl"
           textAlign="center"
         >
-          <Heading size="lg" mb={4}>Checkout</Heading>
+          <Heading size="lg" mb={4}>
+            Checkout
+          </Heading>
           <Text fontSize="md" mb={6}>
-            Thank you for your order! Please choose a payment method to continue.
+            Thank you for your order! Please choose a payment method to
+            continue.
           </Text>
 
           <VStack spacing={4}>
-            <Button width="100%" colorScheme="blue" onClick={() => handlePaymentChoice("Cash")}>
+            <Button
+              width="100%"
+              colorScheme="blue"
+              onClick={() => handlePaymentChoice("Cash")}
+            >
               Pay with Cash
             </Button>
-           <Button
-  width="100%"
-  colorScheme="green"
-  onClick={async () => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Payments/create-checkout-session`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-         credentials: "include",
-        body: JSON.stringify({
-          cartItems,
-        }),
-      });
+            <Button
+              width="100%"
+              colorScheme="green"
+              onClick={async () => {
+                try {
+                  const res = await fetch(
+                    `${
+                      import.meta.env.VITE_API_BASE
+                    }/api/Payments/create-checkout-session`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      credentials: "include",
+                      body: JSON.stringify({
+                        cartItems,
+                      }),
+                    }
+                  );
 
-      const data = await res.json();
+                  const data = await res.json();
 
-const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-if (!stripe) {
-  throw new Error("Stripe failed to load.");
-}
+                  const stripe = await loadStripe(
+                    import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+                  );
+                  if (!stripe) {
+                    throw new Error("Stripe failed to load.");
+                  }
 
-      stripe.redirectToCheckout({ sessionId: data.id });
-    } catch (error) {
-      console.error("Stripe Checkout error:", error);
-      toast({
-        title: "Failed to start payment session.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    }
-  }}
->
-  Pay with Card (Stripe)
-</Button>
-<Button
-  width="100%"
-  colorScheme="teal"
-  onClick={() => {
-    navigate("/payment", {
-      state: {
-        totalAmount,
-        orderId,
-        cartItems,
-        paymentMethod: "Online",
-      },
-    });
-  }}
->
-  Pay Online
-</Button>
+                  stripe.redirectToCheckout({ sessionId: data.id });
+                } catch (error) {
+                  console.error("Stripe Checkout error:", error);
+                  toast({
+                    title: "Failed to start payment session.",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                  });
+                }
+              }}
+            >
+              Pay with Card (Stripe)
+            </Button>
+            <Button
+              width="100%"
+              colorScheme="teal"
+              onClick={() => {
+                navigate("/payment", {
+                  state: {
+                    totalAmount,
+                    orderId,
+                    cartItems,
+                    paymentMethod: "Online",
+                  },
+                });
+              }}
+            >
+              Pay Online
+            </Button>
           </VStack>
         </Box>
       </Box>
@@ -148,20 +162,32 @@ if (!stripe) {
       </Modal>
 
       {/* Invoice Modal */}
-      <Modal isOpen={showInvoiceModal} onClose={() => setShowInvoiceModal(false)} size="lg">
+      <Modal
+        isOpen={showInvoiceModal}
+        onClose={() => setShowInvoiceModal(false)}
+        size="lg"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Invoice</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack align="start" spacing={3}>
-              <Text><strong>Order ID:</strong> {orderId}</Text>
-              <Text><strong>Total:</strong> €{totalAmount.toFixed(2)}</Text>
+              <Text>
+                <strong>Order ID:</strong> {orderId}
+              </Text>
+              <Text>
+                <strong>Total:</strong> €{totalAmount.toFixed(2)}
+              </Text>
               <Divider />
-              <Text fontWeight="bold" mt={2}>Items:</Text>
+              <Text fontWeight="bold" mt={2}>
+                Items:
+              </Text>
               {cartItems.map((item, index) => (
                 <Box key={index} w="100%">
-                  <Text>- {item.name} x {item.quantity}</Text>
+                  <Text>
+                    - {item.name} x {item.quantity}
+                  </Text>
                 </Box>
               ))}
             </VStack>
