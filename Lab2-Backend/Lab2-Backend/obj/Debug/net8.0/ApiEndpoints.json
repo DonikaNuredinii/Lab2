@@ -1024,7 +1024,7 @@
     "Parameters": [
       {
         "Name": "paymentDto",
-        "Type": "Lab2_Backend.DTO.PaymentCreateDto",
+        "Type": "PaymentCreateDto",
         "IsRequired": true
       }
     ],

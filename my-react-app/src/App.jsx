@@ -20,50 +20,75 @@ export default function Main() {
   const location = useLocation();
   const [currentTheme, setCurrentTheme] = useState(initialTheme);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authChecked, setAuthChecked] = useState(false); // ✅ added
+  const [authChecked, setAuthChecked] = useState(false); 
+  const [userRole, setUserRole] = useState("");
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const valid = token && token.split(".").length === 3;
-    setIsAuthenticated(!!valid);
-    setAuthChecked(true); // ✅ indicate that auth check is done
-    console.log("Auth check completed:", valid);
-  }, [location.pathname]);
 
-  if (!authChecked) return <div>Loading...</div>; // ✅ delay route rendering
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  const valid = token && token.split(".").length === 3;
+  setIsAuthenticated(!!valid);
+  setUserRole(role); // new
+  setAuthChecked(true);
+  console.log("Auth check completed:", valid);
+}, [location.pathname]);
+
+
+  if (!authChecked) return <div>Loading...</div>;
 
   return (
     <ChakraProvider theme={currentTheme}>
       <Routes>
         <Route
           path="/login"
-          element={<AuthForm setIsAuthenticated={setIsAuthenticated} />}
+          element={
+            isAuthenticated ? (
+              userRole === "Superadmin" ? (
+                <Navigate to="/superadmin" replace />
+              ) : userRole === "Admin" ? (
+                <Navigate to="/admin" replace />
+              ) : (
+                <Navigate to="/online-menu" replace />
+              )
+            ) : (
+              <AuthForm setIsAuthenticated={setIsAuthenticated} />
+            )
+          }
         />
+
+
         <Route path="auth/*" element={<AuthLayout />} />
         <Route
           path="/profile"
           element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
         />
         <Route
-          path="admin/*"
-          element={
-            isAuthenticated ? (
-              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          path="superadmin/*"
-          element={
-            isAuthenticated ? (
-              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+  path="admin/*"
+  element={
+    isAuthenticated && (userRole === "Admin" || userRole === "Superadmin") ? (
+      <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+    ) : isAuthenticated ? (
+      <Navigate to="/online-menu" />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
+
+<Route
+  path="superadmin/*"
+  element={
+    isAuthenticated && userRole === "Superadmin" ? (
+      <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+    ) : isAuthenticated ? (
+      <Navigate to="/online-menu" />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
+
         <Route
           path="rtl/*"
           element={
