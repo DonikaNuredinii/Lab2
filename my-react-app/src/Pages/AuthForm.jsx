@@ -13,6 +13,7 @@ const AuthForm = ({ setIsAuthenticated }) => {
     email: "",
     phoneNumber: "",
     password: "",
+    confirmPassword: "", 
   });
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -28,14 +29,66 @@ const AuthForm = ({ setIsAuthenticated }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+  const { email, password, firstName, lastName, phoneNumber } = form;
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const allowedDomains = ["gmail.com", "outlook.com", "hotmail.com"];
+  const domain = email.split("@")[1]?.toLowerCase();
+
+  if (!emailRegex.test(email)) {
+    setMessage("Invalid email format.");
+    setMessageType("error");
+    return false;
+  }
+
+  if (!allowedDomains.includes(domain)) {
+    setMessage("Email must be from gmail.com, outlook.com, or hotmail.com.");
+    setMessageType("error");
+    return false;
+  }
+
+
+  if (!/^[A-Z]/.test(password)) {
+    setMessage(" Password must start with an uppercase letter.");
+    setMessageType("error");
+    return false;
+  }
+
+ 
+  if (!isLogin) {
+    if (!firstName || !lastName || !phoneNumber) {
+      setMessage("❌ All fields are required for signup.");
+      setMessageType("error");
+      return false;
+    }
+
+    if (password !== form.confirmPassword) {
+      setMessage("❌ Passwords do not match.");
+      setMessageType("error");
+      return false;
+    }
+
+
+
+  }
+
+  return true;
+};
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setMessageType("");
 
+    if (!validateForm()) return;
+
+
     try {
       if (isLogin) {
-        // FIX: ruaj rezultatin në një variabël
+        
         if (!form.email || !form.password) {
           alert("Please enter email and password");
           return;
@@ -143,9 +196,19 @@ const AuthForm = ({ setIsAuthenticated }) => {
             onChange={handleChange}
             required
           />
+        
+          {!isLogin && (
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              onChange={handleChange}
+              required
+            />
+          )}
 
           <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-
+        
           <p className="toggle-text">
             {isLogin ? "Don't have an account?" : "Already have an account?"}
             <button type="button" onClick={toggleForm}>
@@ -153,6 +216,7 @@ const AuthForm = ({ setIsAuthenticated }) => {
             </button>
           </p>
         </form>
+
       </div>
     </div>
   );

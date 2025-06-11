@@ -51,19 +51,26 @@ const StaffManagement = () => {
     fetchRoles();
   }, []);
 
-  const fetchStaff = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/User`);
-      const data = await res.json();
-      setStaff(data);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to load staff.",
-        status: "error",
-      });
-    }
-  };
+const fetchStaff = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/api/User`);
+    const data = await res.json();
+
+    // Filter users with roles "Cook" or "Waiter"
+    const staffOnly = data.filter(user =>
+      ["Cook", "Waiter"].includes(user.roleName)
+    );
+
+    setStaff(staffOnly);
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "Failed to load staff.",
+      status: "error",
+    });
+  }
+};
+
 
   const fetchRoles = async () => {
     try {

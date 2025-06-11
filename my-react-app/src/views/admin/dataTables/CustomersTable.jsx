@@ -1,478 +1,298 @@
 import React, { useEffect, useState } from "react";
 import {
   Box,
-  Flex,
+  Button,
   Table,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
-  useColorModeValue,
-  Button,
+  Flex,
+  useToast,
+  IconButton,
+  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
-  useToast,
-  IconButton,
   VStack,
+  useColorModeValue,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Text,
 } from "@chakra-ui/react";
-import { createColumnHelper } from "@tanstack/react-table";
-import Card from "components/card/Card";
-import { MdEdit, MdDelete, MdLocationOn } from "react-icons/md";
-import CustomerForm from "./components/CustomerForm";
+import { MdDelete, MdEdit } from "react-icons/md";
 
-const columnHelper = createColumnHelper();
+const API_BASE = import.meta.env.VITE_API_BASE;
 
-const CustomersTable = () => {
+const CustomerManagement = () => {
   const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const [selectedCustomerAddress, setSelectedCustomerAddress] = useState(null);
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isEditOpen,
-    onOpen: onEditOpen,
-    onClose: onEditClose,
-  } = useDisclosure();
-  const {
-    isOpen: isAddressOpen,
-    onOpen: onAddressOpen,
-    onClose: onAddressClose,
-  } = useDisclosure();
-  const toast = useToast();
+  const [roles, setRoles] = useState([]);
+  const [formData, setFormData] = useState({
+    userID: null,
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    roleID: "",
+  });
 
-  const fetchCustomers = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Customer`);
-      if (!response.ok) {
-        throw new Error("Error fetching customer data.");
-      }
-      const data = await response.json();
-      setCustomers(data);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to load customer data.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const textColor = useColorModeValue("secondaryGray.900", "white");
 
   useEffect(() => {
     fetchCustomers();
+    fetchRoles();
   }, []);
 
-  const columns = [
-    columnHelper.accessor("id", {
-      id: "id",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          ID
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="700"
-          textAlign="center"
-        >
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("firstName", {
-      id: "firstName",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          NAME
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="700"
-          textAlign="center"
-        >
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("lastName", {
-      id: "lastName",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          SURNAME
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="700"
-          textAlign="center"
-        >
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("email", {
-      id: "email",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          EMAIL
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="400"
-          textAlign="center"
-        >
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("phoneNumber", {
-      id: "phoneNumber",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          PHONE
-        </Text>
-      ),
-      cell: (info) => (
-        <Text
-          color={textColor}
-          fontSize="sm"
-          fontWeight="700"
-          textAlign="center"
-        >
-          {info.getValue()}
-        </Text>
-      ),
-    }),
-    columnHelper.accessor("actions", {
-      id: "actions",
-      header: () => (
-        <Text
-          fontSize="12px"
-          fontWeight="600"
-          color="gray.400"
-          textAlign="center"
-        >
-          ACTIONS
-        </Text>
-      ),
-      cell: (info) => (
-        <Flex justifyContent="center">
-          <IconButton
-            aria-label="Edit customer"
-            icon={<MdEdit />}
-            size="sm"
-            variant="ghost"
-            colorScheme="gray"
-            onClick={() => {
-              setSelectedCustomer(info.row.original);
-              onEditOpen();
-            }}
-            mr={2}
-          />
-          <IconButton
-            aria-label="View address"
-            icon={<MdLocationOn />}
-            size="sm"
-            variant="ghost"
-            colorScheme="gray"
-            onClick={async () => {
-              try {
-                const customerId = info.row.original.userID; // Assuming userID is the correct property for the user ID
-               const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/CustomerAddress/byuser/${customerId}`);
-
-                if (!response.ok) {
-                  throw new Error("Failed to fetch customer address");
-                }
-                const addressData = await response.json();
-                setSelectedCustomerAddress(addressData);
-                onAddressOpen();
-              } catch (error) {
-                console.error("Error fetching customer address:", error);
-                setSelectedCustomerAddress(null);
-                onAddressOpen();
-              }
-            }}
-            mr={2}
-          />
-          <IconButton
-            aria-label="Delete customer"
-            icon={<MdDelete />}
-            size="sm"
-            variant="ghost"
-            colorScheme="red"
-            onClick={() => handleDeleteCustomer(info.row.original.userID)}
-          />
-        </Flex>
-      ),
-    }),
-  ];
-
-  const handleDeleteCustomer = async (customerId) => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this customer? This action cannot be undone."
-      )
-    ) {
-      return;
-    }
-
+  const fetchCustomers = async () => {
     try {
-      const response = await fetch(
-       `${import.meta.env.VITE_API_BASE}/api/User/${customerId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        throw new Error(
-          errorData?.message || `Failed to delete customer: ${response.status}`
-        );
-      }
-
-      await fetchCustomers();
-      toast({
-        title: "Customer deleted successfully",
-        description: "The customer has been permanently removed.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "top-right",
-      });
+      const res = await fetch(`${API_BASE}/api/User`);
+      const data = await res.json();
+      const userOnly = data.filter((user) => user.roleName === "User");
+      setCustomers(userOnly);
     } catch (error) {
-      console.error("Error deleting customer:", error);
-
-      // Attempt to read and log the response body for more details
-      if (error.response) {
-        error.response
-          .text()
-          .then((text) => {
-            console.error("Backend Error Details:", text);
-          })
-          .catch((e) =>
-            console.error("Failed to read error response body:", e)
-          );
-      }
-
       toast({
-        title: "Deletion failed",
-        description:
-          error.message ||
-          "There was an error deleting the customer. Please try again.",
+        title: "Error",
+        description: "Failed to load customers.",
         status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top-right",
       });
     }
   };
 
-  const handleAddCustomer = async (newCustomerData) => {
+  const fetchRoles = async () => {
     try {
-    const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Customer`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCustomerData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to add customer: ${response.status}`);
+      const res = await fetch(`${API_BASE}/api/Role/roles`);
+      const data = await res.json();
+      const userRole = data.find((role) => role.roleName === "User");
+      if (userRole) {
+        setRoles([userRole]);
       }
-
-      await fetchCustomers();
-      onClose();
-      toast({
-        title: "Customer added.",
-        description: "The new customer has been added.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
     } catch (error) {
-      console.error("Error adding customer:", error);
       toast({
-        title: "Adding customer failed.",
-        description: `There was an error adding the customer: ${error.message}`,
+        title: "Error",
+        description: "Failed to load roles.",
         status: "error",
-        duration: 5000,
-        isClosable: true,
       });
     }
   };
 
-  const handleEditCustomer = async (updatedCustomerData) => {
-    setCustomers(
-      customers.map((cust) =>
-        cust.userID === updatedCustomerData.userID ? updatedCustomerData : cust
-      )
-    );
-    onEditClose();
-
-    toast({
-      title: "Customer updated successfully",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
+  const resetForm = () => {
+    setFormData({
+      userID: null,
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      roleID: roles[0]?.roleID || "",
     });
   };
 
-  if (loading) return <div>Loading customer data...</div>;
-  if (error) return <div>{error}</div>;
-  if (!customers.length) return <div>No customers found.</div>;
+  const handleAddCustomer = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/User`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to add customer");
+
+      toast({
+        title: "Success",
+        description: "Customer added.",
+        status: "success",
+      });
+
+      fetchCustomers();
+      onClose();
+      resetForm();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+      });
+    }
+  };
+
+  const handleDeleteCustomer = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this customer?")) return;
+    try {
+      await fetch(`${API_BASE}/api/User/${id}`, { method: "DELETE" });
+      toast({
+        title: "Deleted",
+        description: "Customer has been removed.",
+        status: "info",
+      });
+      fetchCustomers();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete customer.",
+        status: "error",
+      });
+    }
+  };
 
   return (
     <>
       <Box h="250px" />
-      <Card flexDirection="column" w="100%" px="0px" overflowX="auto">
-        <Flex px="25px" mb="8px" justifyContent="flex-end" align="center">
-          <Button
-            colorScheme="brand"
-            size="md"
-            borderRadius="0"
-            onClick={onOpen}
-          >
-            Add Customer
-          </Button>
-        </Flex>
-
-        <Box px="25px" mb="24px">
+      <Box px="25px" mb="24px" maxW="1300px" mx="auto">
+        <Box overflowX="auto" borderRadius="2xl" boxShadow="base" bg="white">
+          <Flex px="25px" mt="6" justifyContent="flex-end">
+            <Button colorScheme="brand" size="md" borderRadius="0" onClick={() => {
+              resetForm();
+              onOpen();
+            }}>
+              Add Customer
+            </Button>
+          </Flex>
           <Table variant="simple" color="gray.500" mb="24px">
             <Thead>
               <Tr h="60px">
-                {columns.map((column) => (
-                  <Th
-                    key={column.id}
-                    borderColor={borderColor}
-                    textAlign="center"
-                  >
-                    {column.header()}
-                  </Th>
-                ))}
+                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">
+                  NAME
+                </Th>
+                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">
+                  EMAIL
+                </Th>
+                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">
+                  PHONE
+                </Th>
+                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">
+                  ROLE
+                </Th>
+                <Th textAlign="center" fontSize="12px" fontWeight="600" color="gray.400">
+                  ACTIONS
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {customers.map((customer) => (
-                <Tr key={customer.userID} h="100px">
-                  {columns.map((column) => (
-                    <Td
-                      key={column.id}
-                      fontSize="14px"
-                      borderColor="transparent"
-                      py="10px"
-                      textAlign="center"
-                    >
-                      {column.cell({
-                        getValue: () => customer[column.id],
-                        row: { original: customer },
-                      })}
-                    </Td>
-                  ))}
+              {customers.map((user) => (
+                <Tr key={user.userID} h="100px">
+                  <Td textAlign="center" fontWeight="700" color={textColor}>
+                    {user.firstName} {user.lastName}
+                  </Td>
+                  <Td textAlign="center" fontWeight="400" color={textColor}>
+                    {user.email}
+                  </Td>
+                  <Td textAlign="center" fontWeight="700" color={textColor}>
+                    {user.phoneNumber}
+                  </Td>
+                  <Td textAlign="center" fontWeight="500" color={textColor}>
+                    {user.roleName}
+                  </Td>
+                  <Td textAlign="center">
+                    {/* Could add Edit here if needed */}
+                    <IconButton
+                      aria-label="Delete customer"
+                      icon={<MdDelete />}
+                      size="sm"
+                      variant="ghost"
+                      colorScheme="red"
+                      onClick={() => handleDeleteCustomer(user.userID)}
+                    />
+                  </Td>
                 </Tr>
               ))}
             </Tbody>
           </Table>
         </Box>
+      </Box>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Add New Customer</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <CustomerForm onAddCustomer={handleAddCustomer} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-
-        <Modal isOpen={isEditOpen} onClose={onEditClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Edit Customer</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {selectedCustomer && (
-                <CustomerForm
-                  initialData={selectedCustomer}
-                  isEdit={true}
-                  onAddCustomer={handleEditCustomer}
+      {/* Modal for Add Customer */}
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add New Customer</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack spacing={4} align="stretch" pb={6}>
+              <FormControl isRequired>
+                <FormLabel>First Name</FormLabel>
+                <Input
+                  value={formData.firstName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
                 />
-              )}
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-
-        <Modal isOpen={isAddressOpen} onClose={onAddressClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Customer Address</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {selectedCustomerAddress ? (
-                <VStack align="stretch" spacing={2}>
-                  <Text>
-                    Address Line: {selectedCustomerAddress.addressLine}
-                  </Text>
-                  <Text>City: {selectedCustomerAddress.city}</Text>
-                  <Text>Postal Code: {selectedCustomerAddress.postalCode}</Text>
-                </VStack>
-              ) : (
-                <Text>No address data available.</Text>
-              )}
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Card>
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Last Name</FormLabel>
+                <Input
+                  value={formData.lastName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Phone Number</FormLabel>
+                <Input
+                  value={formData.phoneNumber}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phoneNumber: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Role</FormLabel>
+                <Select
+                  placeholder="Select role"
+                  value={formData.roleID}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      roleID: parseInt(e.target.value),
+                    })
+                  }
+                >
+                  {roles.map((role) => (
+                    <option key={role.roleID} value={role.roleID}>
+                      {role.roleName}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+              <Flex justifyContent="flex-end" pt={4}>
+                <Button colorScheme="teal" onClick={handleAddCustomer}>
+                  Save Customer
+                </Button>
+              </Flex>
+            </VStack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
 
-export default CustomersTable;
+export default CustomerManagement;

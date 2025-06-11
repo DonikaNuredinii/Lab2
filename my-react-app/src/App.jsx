@@ -131,6 +131,16 @@ export default function Main() {
           element={isAuthenticated ? <PaymentPage /> : <Navigate to="/login" />}
         />
 
+        <Route
+          path="/admin/profile"
+          element={<Navigate to="/profile" replace />}
+        />
+        <Route
+          path="/superadmin/profile"
+          element={<Navigate to="/profile" replace />}
+        />
+
+
         {/* Admin Dashboards */}
         <Route
           path="admin/*"
