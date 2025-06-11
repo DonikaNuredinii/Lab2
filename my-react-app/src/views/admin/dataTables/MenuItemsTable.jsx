@@ -27,6 +27,7 @@ import Menu from "components/menu/MainMenu";
 import AddItemForm from "./components/AddItemForm";
 import ManageIngredientsModal from "./components/ManageIngredientsModal";
 import { MdEdit, MdDelete, MdNoteAdd } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 const columnHelper = createColumnHelper();
 
@@ -38,6 +39,9 @@ const MenuItemsFullView = () => {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const location = useLocation();
+  const isSuperAdmin = location.pathname.includes("/superadmin");
+
   const {
     isOpen: isEditOpen,
     onOpen: onEditOpen,
@@ -69,9 +73,13 @@ const MenuItemsFullView = () => {
         categoriesRes.json(),
         subcategoriesRes.json(),
       ]);
+      const filteredItems = isSuperAdmin
+        ? items
+        : items.filter((item) => item.restaurantId === 2);
 
-      const filteredItems = items.filter((item) => item.restaurantId === 2);
-      const filteredCategories = categories.filter((c) => c.restaurantID === 2);
+      const filteredCategories = isSuperAdmin
+        ? categories
+        : categories.filter((c) => c.restaurantID === 2);
 
       const structured = filteredCategories
         .map((category) => {

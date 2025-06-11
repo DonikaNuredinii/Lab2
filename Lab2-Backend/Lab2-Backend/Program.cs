@@ -48,7 +48,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5174") // SAKTË këtu sipas portit të frontend-it tuaj
+        policy.WithOrigins("http://localhost:5174", "http://localhost:5173") // SAKTË këtu sipas portit të frontend-it tuaj
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials(); // për cookies/token
@@ -60,36 +60,41 @@ builder.Services.AddCors(options =>
 // JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var jwtKey = jwtSettings["SecretKey"];
+var key = Encoding.UTF8.GetBytes(jwtKey); // Move outside so it's accessible below
 
-if (!string.IsNullOrEmpty(jwtKey))
-{
-    var key = Encoding.UTF8.GetBytes(jwtKey);
-
-    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtSettings["Issuer"],
-                ValidAudience = jwtSettings["Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(key)
-            };
-        });
-
-    builder.Services.AddAuthorization(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        options.AddPolicy("AdminPolicy", policy =>
-            policy.RequireClaim("RolesID", "1"));
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Cookies["jwt"];
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    context.Token = accessToken;
+                }
+                return Task.CompletedTask;
+            }
+        };
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(key)
+        };
     });
-}
-else
+
+builder.Services.AddAuthorization(options =>
 {
-    Console.WriteLine("JWT SecretKey is missing. Skipping JWT configuration.");
-}
+    options.AddPolicy("AdminPolicy", policy =>
+        policy.RequireClaim("RolesID", "1"));
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

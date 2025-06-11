@@ -29,59 +29,66 @@ const AuthForm = ({ setIsAuthenticated }) => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setMessage("");
-  setMessageType("");
+    e.preventDefault();
+    setMessage("");
+    setMessageType("");
 
-  try {
-    if (isLogin) {
-      // FIX: ruaj rezultatin në një variabël
-const response = await axios.post(`${API_BASE}/api/User/login`, {
-  email: form.email,
-  password: form.password,
-}, {
-  withCredentials: true
-});
+    try {
+      if (isLogin) {
+        // FIX: ruaj rezultatin në një variabël
+        if (!form.email || !form.password) {
+          alert("Please enter email and password");
+          return;
+        }
 
-const { token, userId, user } = response.data;
+        const response = await axios.post(
+          `${API_BASE}/api/User/login`,
+          {
+            email: form.email,
+            password: form.password,
+          },
+          {
+            withCredentials: true,
+          }
+        );
 
-localStorage.setItem("token", token);
-localStorage.setItem("userId", String(userId));
-localStorage.setItem("role", user.role);
+        const { token, userId, user } = response.data;
 
-      setIsAuthenticated(true);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", String(userId));
+        localStorage.setItem("role", user.role);
 
-      alert("✅ Login successful!");
-      setMessageType("success");
+        setIsAuthenticated(true);
 
-     if (user.role === "Superadmin") {
-       navigate("/superadmin");
-     } else if (user.role === "Admin") {
-       navigate("/admin");
-    } else if (user.role === "user" || user.role === "User") {
-        navigate("/online-menu");
-    } else {
-        console.warn("Unknown role. Redirecting to fallback route.");
-     navigate("/");
+        alert("✅ Login successful!");
+        setMessageType("success");
+
+        if (user.role === "Superadmin") {
+          navigate("/superadmin");
+        } else if (user.role === "Admin") {
+          navigate("/admin");
+        } else if (user.role === "user" || user.role === "User") {
+          navigate("/online-menu");
+        } else {
+          console.warn("Unknown role. Redirecting to fallback route.");
+          navigate("/");
+        }
+      } else {
+        // SIGNUP logic here
+        await axios.post(`${API_BASE}/api/User/signup`, form);
+        alert("✅ Signup successful. Please log in.");
+        setMessageType("success");
+        setIsLogin(true); // switch to login form after signup
       }
-
-    } else {
-      // SIGNUP logic here
-      await axios.post(`${API_BASE}/api/User/signup`, form);
-      alert("✅ Signup successful. Please log in.");
-      setMessageType("success");
-      setIsLogin(true); // switch to login form after signup
+    } catch (error) {
+      const errMsg =
+        typeof error.response?.data === "string"
+          ? error.response.data
+          : "Something went wrong.";
+      setMessage(` ${errMsg}`);
+      setMessageType("error");
     }
-  } catch (error) {
-    const errMsg =
-      typeof error.response?.data === "string"
-        ? error.response.data
-        : "Something went wrong.";
-    setMessage(` ${errMsg}`);
-    setMessageType("error");
-  }
-};
-
+  };
 
   return (
     <div className="auth-wrapper">

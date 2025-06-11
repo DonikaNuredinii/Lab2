@@ -162,13 +162,14 @@ namespace Lab2_Backend.Controllers
 
 
                 Console.WriteLine("Tokens generated and saved successfully.");
-                Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+                Response.Cookies.Append("jwt", token, new CookieOptions
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.None, // ← important for cross-origin
-                    Expires = DateTime.UtcNow.AddDays(7)
+                    SameSite = SameSiteMode.None,
+                    Expires = DateTime.UtcNow.AddHours(1)
                 });
+
 
 
                 return Ok(new
@@ -422,8 +423,8 @@ namespace Lab2_Backend.Controllers
             await _context.SaveChangesAsync();
 
             // Overwrite the old cookie with a new refresh token
-        Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
-        {
+            Response.Cookies.Append("refreshToken", newRefreshToken, new CookieOptions {
+
             HttpOnly = true,
             Secure = true,
             SameSite = SameSiteMode.None, // ← important for cross-origin

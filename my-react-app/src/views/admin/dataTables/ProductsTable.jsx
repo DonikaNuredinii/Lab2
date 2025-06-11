@@ -14,6 +14,13 @@ import {
   useToast,
   IconButton,
   Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Card from "components/card/Card";
@@ -31,6 +38,8 @@ const ProductsTable = () => {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   const toast = useToast();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   const fetchProducts = async () => {
     try {
@@ -53,6 +62,50 @@ const ProductsTable = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const handleEditProduct = (product) => {
+    setEditingProduct(product);
+    setIsEditing(true);
+  };
+  const handleSaveProduct = async () => {
+    try {
+      const updatedProduct = {
+        ...editingProduct,
+        price: parseFloat(editingProduct.price) || 0,
+        stockQuantity: parseInt(editingProduct.stockQuantity) || 0,
+      };
+
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_BASE}/api/Products/${
+          editingProduct.productsID
+        }`,
+        updatedProduct
+      );
+
+      if (response.status === 200) {
+        toast({
+          title: "Product updated",
+          description: "The product has been updated successfully.",
+          status: "success",
+          duration: 4000,
+          isClosable: true,
+          position: "top-right",
+        });
+        setIsEditing(false); // ✅ closes the modal
+        fetchProducts(); // ✅ refresh list
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+      toast({
+        title: "Update failed",
+        description: "There was an error updating the product.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
 
   const handleImportExcel = async (e) => {
     const file = e.target.files[0];
@@ -306,73 +359,160 @@ const ProductsTable = () => {
 
   if (loading) return <div>Loading products...</div>;
   if (error) return <div>{error}</div>;
-
   return (
-    <Card flexDirection="column" w="100%" px="0px" mt="65px" overflowX="auto">
-      <Flex px="25px" mb="8px" justifyContent="space-between" align="center">
-        <Flex gap={4}>
-          <ProductImportTemplate />
-          <Input
-            type="file"
-            accept=".xlsx,.xls"
-            onChange={handleImportExcel}
-            display="none"
-            id="file-upload"
-          />
-          <Button
-            as="label"
-            htmlFor="file-upload"
-            leftIcon={<MdFileUpload />}
-            colorScheme="blue"
-            size="md"
-            borderRadius="0"
-          >
-            Import Excel
-          </Button>
-          <Button
-            leftIcon={<MdFileDownload />}
-            colorScheme="green"
-            size="md"
-            borderRadius="0"
-            onClick={handleExportExcel}
-          >
-            Export Excel
-          </Button>
+    <>
+      <Card flexDirection="column" w="100%" px="0px" mt="65px" overflowX="auto">
+        <Flex px="25px" mb="8px" justifyContent="space-between" align="center">
+          <Flex gap={4}>
+            <ProductImportTemplate />
+            <Input
+              type="file"
+              accept=".xlsx,.xls"
+              onChange={handleImportExcel}
+              display="none"
+              id="file-upload"
+            />
+            <Button
+              as="label"
+              htmlFor="file-upload"
+              leftIcon={<MdFileUpload />}
+              colorScheme="blue"
+              size="md"
+              borderRadius="0"
+            >
+              Import Excel
+            </Button>
+            <Button
+              leftIcon={<MdFileDownload />}
+              colorScheme="green"
+              size="md"
+              borderRadius="0"
+              onClick={handleExportExcel}
+            >
+              Export Excel
+            </Button>
+          </Flex>
         </Flex>
-      </Flex>
 
-      <Table variant="simple" color="gray.500" mb="24px">
-        <Thead>
-          <Tr h="60px">
-            {columns.map((column) => (
-              <Th key={column.id} borderColor={borderColor} textAlign="center">
-                {column.header()}
-              </Th>
-            ))}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {products.map((product) => (
-            <Tr key={product.productsID} h="60px">
+        <Table variant="simple" color="gray.500" mb="24px">
+          <Thead>
+            <Tr h="60px">
               {columns.map((column) => (
-                <Td
+                <Th
                   key={column.id}
-                  fontSize="14px"
-                  borderColor="transparent"
-                  py="10px"
+                  borderColor={borderColor}
                   textAlign="center"
                 >
-                  {column.cell({
-                    getValue: () => product[column.id],
-                    row: { original: product },
-                  })}
-                </Td>
+                  {column.header()}
+                </Th>
               ))}
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </Card>
+          </Thead>
+          <Tbody>
+            {products.map((product) => (
+              <Tr key={product.productsID} h="60px">
+                {columns.map((column) => (
+                  <Td
+                    key={column.id}
+                    fontSize="14px"
+                    borderColor="transparent"
+                    py="10px"
+                    textAlign="center"
+                  >
+                    {column.cell({
+                      getValue: () => product[column.id],
+                      row: { original: product },
+                    })}
+                  </Td>
+                ))}
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </Card>
+
+      {/* EDIT PRODUCT MODAL */}
+      <Modal isOpen={isEditing} onClose={() => setIsEditing(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Product</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {editingProduct && (
+              <Box as="form" p={2}>
+                <Flex direction="column" gap={4}>
+                  <Input
+                    placeholder="Name"
+                    value={editingProduct.emri}
+                    onChange={(e) =>
+                      setEditingProduct({
+                        ...editingProduct,
+                        emri: e.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Description"
+                    value={editingProduct.description}
+                    onChange={(e) =>
+                      setEditingProduct({
+                        ...editingProduct,
+                        description: e.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Price"
+                    type="number"
+                    value={editingProduct.price}
+                    onChange={(e) =>
+                      setEditingProduct({
+                        ...editingProduct,
+                        price: e.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Unit"
+                    value={editingProduct.unit}
+                    onChange={(e) =>
+                      setEditingProduct({
+                        ...editingProduct,
+                        unit: e.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Stock Quantity"
+                    type="number"
+                    value={editingProduct.stockQuantity}
+                    onChange={(e) =>
+                      setEditingProduct({
+                        ...editingProduct,
+                        stockQuantity: e.target.value,
+                      })
+                    }
+                  />
+                </Flex>
+              </Box>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={handleSaveProduct}
+              isDisabled={!editingProduct?.emri || editingProduct.price === ""}
+            >
+              Save
+            </Button>
+            <Button variant="ghost" onClick={() => setIsEditing(false)}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

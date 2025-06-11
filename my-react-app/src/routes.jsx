@@ -30,7 +30,6 @@ import StaffSchedule from "views/admin/dataTables/StaffSchedule";
 import ProductsTable from "../src/views/admin/dataTables/ProductsTable";
 import AuditLogsTable from "views/admin/dataTables/AuditLogsTable";
 
-
 // Superadmin Imports
 import SuperAdminDashboard from "../src/views/superadmin/default";
 import RestaurantsTable from "../src/views/superadmin/dataTables/RestaurantsTable";
@@ -85,6 +84,15 @@ const routes = [
     component: <MenuItemsTable />,
   },
   {
+    name: "Menu Items",
+    layout: "/superadmin",
+    path: "/menu-items",
+    icon: (
+      <Icon as={MdRestaurantMenu} width="20px" height="20px" color="inherit" />
+    ),
+    component: <MenuItemsTable />,
+  },
+  {
     name: "Customers",
     layout: "/admin",
     path: "/customers",
@@ -117,6 +125,13 @@ const routes = [
   {
     name: "Products",
     layout: "/admin",
+    path: "/products",
+    icon: <Icon as={MdInventory} width="20px" height="20px" color="inherit" />,
+    component: <ProductsTable />,
+  },
+  {
+    name: "Products",
+    layout: "/superadmin",
     path: "/products",
     icon: <Icon as={MdInventory} width="20px" height="20px" color="inherit" />,
     component: <ProductsTable />,
@@ -165,20 +180,20 @@ const routes = [
     hidden: true,
   },
   {
-  name: "Dish Review",
+    name: "Dish Review",
     layout: "/",
     path: "/dish/:menuItemId",
     component: <DishDetails />,
     hidden: true,
   },
 
-  {
-    name: "Profile",
-    layout: "/admin",
-    path: "/profile",
-    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-    component: <ProfilePage />, // swapped out
-  },
+  // {
+  //   name: "Profile",
+  //   layout: "/admin",
+  //   path: "/profile",
+  //   icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+  //   component: <ProfilePage />,
+  // },
 ];
 
 export default routes;
