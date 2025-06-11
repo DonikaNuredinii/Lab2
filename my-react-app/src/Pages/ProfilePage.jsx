@@ -3,6 +3,7 @@ import axios from "axios";
 import "../CSS/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
+import { FaArrowLeft } from "react-icons/fa";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 
@@ -72,6 +73,13 @@ const ProfilePage = () => {
   return (
     <div className="settings-layout">
       <aside className="settings-sidebar">
+          <button
+    onClick={() => navigate("/online-menu")}
+    className="back-button"
+  >
+    <FaArrowLeft />
+
+  </button>
         <div className="profile-avatar">
           {/* <img src="https://via.placeholder.com/100" alt="Avatar" /> */}
           <h3>
@@ -80,7 +88,7 @@ const ProfilePage = () => {
         </div>
         <ul className="sidebar-nav">
           <li className="active">Account</li>
-          <li>Order History</li>
+          {/* <li>Order History</li> */}
           <li>Notifications</li>
         </ul>
         <button onClick={handleLogout} className="logout-link">
