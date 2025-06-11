@@ -21,7 +21,9 @@ const OrdersTable = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE}/api/Orders`
+      );
       if (!response.ok) throw new Error("Failed to fetch orders.");
       const data = await response.json();
       setOrders(data);
@@ -41,13 +43,16 @@ const OrdersTable = () => {
 
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders/${orderId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ordersID: orderId, status: newStatus }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE}/api/Orders/${orderId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ordersID: orderId, status: newStatus }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to update order.");
 
@@ -111,8 +116,10 @@ const OrdersTable = () => {
                       px={4}
                       _hover={{ bg: "#EADFB4" }}
                       onClick={() => {
-                        const updated = orders.map(o =>
-                          o.ordersID === order.ordersID ? { ...o, status: "Preparing" } : o
+                        const updated = orders.map((o) =>
+                          o.ordersID === order.ordersID
+                            ? { ...o, status: "Preparing" }
+                            : o
                         );
                         setOrders(updated);
                         alert("This order is now being prepared.");
@@ -129,8 +136,10 @@ const OrdersTable = () => {
                       px={4}
                       _hover={{ bg: "#B6F2CF" }}
                       onClick={() => {
-                        const updated = orders.map(o =>
-                          o.ordersID === order.ordersID ? { ...o, status: "Completed" } : o
+                        const updated = orders.map((o) =>
+                          o.ordersID === order.ordersID
+                            ? { ...o, status: "Completed" }
+                            : o
                         );
                         setOrders(updated);
                         alert("This order has been completed.");
@@ -147,8 +156,10 @@ const OrdersTable = () => {
                       px={4}
                       _hover={{ bg: "#FECDCA" }}
                       onClick={() => {
-                        const updated = orders.map(o =>
-                          o.ordersID === order.ordersID ? { ...o, status: "Cancelled" } : o
+                        const updated = orders.map((o) =>
+                          o.ordersID === order.ordersID
+                            ? { ...o, status: "Cancelled" }
+                            : o
                         );
                         setOrders(updated);
                         alert("This order has been cancelled.");

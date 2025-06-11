@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import NoteModal from "./NoteModal";
 import { MdNoteAdd } from "react-icons/md";
+import PaymentSidebar from "../PaymentSidebar";
 
 const OnlineMenu = () => {
   const { id } = useParams();
@@ -29,8 +30,19 @@ const OnlineMenu = () => {
   const [selectedItemProducts, setSelectedItemProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
 
-  // Cart State
+  const {
+    isOpen: isPaymentOpen,
+    onOpen: onPaymentOpen,
+    onClose: onPaymentClose,
+  } = useDisclosure(); // ✅ added
+  const [orderId, setOrderId] = useState(null); // ✅ added
+
+  const closePaymentSidebar = () => {
+    onPaymentClose();
+  };
+
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
@@ -73,16 +85,15 @@ const OnlineMenu = () => {
 
       if (!res.ok) throw new Error("Failed to place order");
 
-      await res.json();
-      alert(
-        "Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati."
-      );
-      setCartItems([]);
+      const data = await res.json(); // ✅ changed
+      setOrderId(data.id); // ✅ added
+      onPaymentOpen(); // ✅ open sidebar instead of alert
     } catch (err) {
       console.error(err);
       alert("Failed to place order");
     }
   };
+
   const handleOpenNoteModal = async (item) => {
     try {
       const res = await fetch(
@@ -290,18 +301,26 @@ const OnlineMenu = () => {
                     sub.items.map((item) => (
                       <div className="menu-item-card" key={item.id}>
                         <div className="menu-item-image-container">
-  {item.image && (
-    <div className="image-hover-wrapper" onClick={() => navigate(`/dish/${item.id}`)}>
-      <img
-        src={item.image.startsWith("/") ? item.image : "/" + item.image}
-        alt={item.name}
-        className="menu-hover-image"
-      />
-      <div className="hover-caption">Rate this dish</div>
-    </div>
-  )}
-</div>
-
+                          {item.image && (
+                            <div
+                              className="image-hover-wrapper"
+                              onClick={() => navigate(`/dish/${item.id}`)}
+                            >
+                              <img
+                                src={
+                                  item.image.startsWith("/")
+                                    ? item.image
+                                    : "/" + item.image
+                                }
+                                alt={item.name}
+                                className="menu-hover-image"
+                              />
+                              <div className="hover-caption">
+                                Rate this dish
+                              </div>
+                            </div>
+                          )}
+                        </div>
 
                         <div className="menu-item-text-content">
                           <div className="menu-item-name-with-icon">
@@ -344,7 +363,6 @@ const OnlineMenu = () => {
             menuItemId={selectedMenuItemId}
           />
 
-          {/* SIDEBAR */}
           {cartItems.length > 0 && (
             <Box
               width={{ base: "100%", md: "360px" }}
@@ -483,6 +501,16 @@ const OnlineMenu = () => {
           />
         </>
       )}
+
+      <PaymentSidebar
+        isOpen={isPaymentOpen}
+        onClose={onPaymentClose}
+        totalAmount={total}
+        orderId={orderId}
+        cartItems={cartItems}
+        method={paymentMethod}
+        setMethod={setPaymentMethod}
+      />
     </div>
   );
 };
