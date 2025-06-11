@@ -1,5 +1,19 @@
-import React from "react";
-import { Box, Button, Text, VStack, Heading, useToast } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Text,
+  VStack,
+  Heading,
+  useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  Divider,
+} from "@chakra-ui/react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const CheckoutPage = () => {
@@ -11,17 +25,17 @@ const CheckoutPage = () => {
   const orderId = location.state?.orderId || null;
   const cartItems = location.state?.cartItems || [];
 
+  const [showWaiterModal, setShowWaiterModal] = useState(false);
+  const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+
   const handlePaymentChoice = (method) => {
     if (method === "Cash") {
-      alert(`Your total is $${totalAmount.toFixed(2)}. You will pay after you receive your food.`);
-      toast({
-        title: "Please pay after you receive your food.",
-        status: "info",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-      navigate("/"); // Redirect after alert
+      setShowWaiterModal(true);
+
+      setTimeout(() => {
+        setShowWaiterModal(false);
+        setShowInvoiceModal(true);
+      }, 3000);
     } else {
       navigate("/payment", {
         state: {
@@ -35,39 +49,86 @@ const CheckoutPage = () => {
   };
 
   return (
-    <Box
-      minHeight="100vh"
-      bg="gray.50"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      px={4}
-    >
+    <>
       <Box
-        maxW="md"
-        w="full"
-        p={8}
-        bg="white"
-        boxShadow="lg"
-        borderRadius="xl"
-        textAlign="center"
+        minHeight="100vh"
+        bg="gray.50"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        px={4}
       >
-        <Heading size="lg" mb={4}>Checkout</Heading>
-        <Text fontSize="md" mb={6}>Thank you for your order! Please choose a payment method to continue.</Text>
+        <Box
+          maxW="md"
+          w="full"
+          p={8}
+          bg="white"
+          boxShadow="lg"
+          borderRadius="xl"
+          textAlign="center"
+        >
+          <Heading size="lg" mb={4}>Checkout</Heading>
+          <Text fontSize="md" mb={6}>
+            Thank you for your order! Please choose a payment method to continue.
+          </Text>
 
-        <VStack spacing={4}>
-          <Button width="100%" colorScheme="blue" onClick={() => handlePaymentChoice("Cash")}>
-            Pay with Cash
-          </Button>
-          <Button width="100%" colorScheme="green" onClick={() => handlePaymentChoice("Card")}>
-            Pay with Card
-          </Button>
-          <Button width="100%" colorScheme="purple" onClick={() => handlePaymentChoice("Online")}>
-            Pay Online
-          </Button>
-        </VStack>
+          <VStack spacing={4}>
+            <Button width="100%" colorScheme="blue" onClick={() => handlePaymentChoice("Cash")}>
+              Pay with Cash
+            </Button>
+            <Button width="100%" colorScheme="green" onClick={() => handlePaymentChoice("Card")}>
+              Pay with Card
+            </Button>
+            <Button width="100%" colorScheme="purple" onClick={() => handlePaymentChoice("Online")}>
+              Pay Online
+            </Button>
+          </VStack>
+        </Box>
       </Box>
-    </Box>
+
+      {/* Waiter Modal */}
+      <Modal isOpen={showWaiterModal} onClose={() => {}}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody p={6} textAlign="center">
+            <Text fontSize="xl" fontWeight="bold">
+              Waiter will be with you shortly!
+            </Text>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      {/* Invoice Modal */}
+      <Modal isOpen={showInvoiceModal} onClose={() => setShowInvoiceModal(false)} size="lg">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Invoice</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack align="start" spacing={3}>
+              <Text><strong>Order ID:</strong> {orderId}</Text>
+              <Text><strong>Total:</strong> €{totalAmount.toFixed(2)}</Text>
+              <Divider />
+              <Text fontWeight="bold" mt={2}>Items:</Text>
+              {cartItems.map((item, index) => (
+                <Box key={index} w="100%">
+                  <Text>- {item.name} x {item.quantity}</Text>
+                </Box>
+              ))}
+            </VStack>
+            <Button
+              mt={6}
+              width="100%"
+              colorScheme="blue"
+              onClick={() => setShowInvoiceModal(false)}
+            >
+              Close
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 
