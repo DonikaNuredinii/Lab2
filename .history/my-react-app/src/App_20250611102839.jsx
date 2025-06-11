@@ -89,10 +89,22 @@ export default function Main() {
   return (
     <ChakraProvider theme={currentTheme}>
       <Routes>
-      <Route
-      path="/login"
-      element={<AuthForm setIsAuthenticated={setIsAuthenticated} />}
-       />
+  <Route
+  path="/login"
+  element={
+    isAuthenticated
+      ? (() => {
+          const role = localStorage.getItem("role");
+          if (role === "Superadmin") {
+            return <Navigate to="/superadmin/default" />;
+          } else {
+            return <Navigate to="/admin/default" />;
+          }
+        })()
+      : <AuthForm setIsAuthenticated={setIsAuthenticated} />
+  }
+/>
+
         <Route path="auth/*" element={<AuthLayout />} />
 
         <Route

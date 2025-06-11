@@ -91,8 +91,8 @@ export default function Main() {
       <Routes>
       <Route
       path="/login"
-      element={<AuthForm setIsAuthenticated={setIsAuthenticated} />}
-       />
+  element={<AuthForm setIsAuthenticated={setIsAuthenticated} />}
+/>
         <Route path="auth/*" element={<AuthLayout />} />
 
         <Route

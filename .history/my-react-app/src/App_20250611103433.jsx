@@ -90,9 +90,9 @@ export default function Main() {
     <ChakraProvider theme={currentTheme}>
       <Routes>
       <Route
-      path="/login"
-      element={<AuthForm setIsAuthenticated={setIsAuthenticated} />}
-       />
+  path="/login"
+  element={<AuthForm setIsAuthenticated={setIsAuthenticated} />}
+/>
         <Route path="auth/*" element={<AuthLayout />} />
 
         <Route

@@ -56,12 +56,12 @@ const AuthForm = ({ setIsAuthenticated }) => {
        navigate("/superadmin");
      } else if (user.role === "Admin") {
        navigate("/admin");
-    } else if (user.role === "user" || user.role === "User") {
-        navigate("/online-menu");
-    } else {
-        console.warn("Unknown role. Redirecting to fallback route.");
-     navigate("/");
-      }
+} else if (user.role === "user" || user.role === "User") {
+  navigate("/online-menu");
+} else {
+  console.warn("Unknown role. Redirecting to fallback route.");
+  navigate("/");
+}
 
     } else {
       // SIGNUP logic here

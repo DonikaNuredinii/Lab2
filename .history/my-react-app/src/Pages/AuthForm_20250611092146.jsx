@@ -52,15 +52,10 @@ const AuthForm = ({ setIsAuthenticated }) => {
       alert("✅ Login successful!");
       setMessageType("success");
 
-     if (user.role === "Superadmin") {
-       navigate("/superadmin");
-     } else if (user.role === "Admin") {
-       navigate("/admin");
-    } else if (user.role === "user" || user.role === "User") {
-        navigate("/online-menu");
-    } else {
-        console.warn("Unknown role. Redirecting to fallback route.");
-     navigate("/");
+      if (user.role === "Superadmin") {
+        navigate("/superadmin");
+      } else {
+        navigate("/admin");
       }
 
     } else {
