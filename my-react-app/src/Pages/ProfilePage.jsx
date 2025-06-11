@@ -78,7 +78,7 @@ const ProfilePage = () => {
       <div className="settings-layout">
         <aside className="settings-sidebar">
           <div className="profile-avatar">
-            <img src="https://via.placeholder.com/100" alt="Avatar" />
+            {/* <img src="https://via.placeholder.com/100" alt="Avatar" /> */}
             <h3>{user.firstName} {user.lastName}</h3>
           </div>
           <ul className="sidebar-nav">

@@ -27,21 +27,26 @@ export default function Main() {
 useEffect(() => {
   const checkAuth = async () => {
     try {
-      const token = localStorage.getItem("token");
-
       const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/User/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include",
       });
 
       if (!res.ok) throw new Error("Not authenticated");
 
       const user = await res.json();
-      console.log("USER FROM /me:", user);
-
       setIsAuthenticated(true);
-      setUserRole(user.roleName || user.role || "User");
+
+      // Kontroll i sigurt për rolin
+      let role = user.roleName || "User"; // Lexo direkt nga user.roleName
+      console.log("User object:", user);
+      console.log("Roli final:", role);
+      setUserRole(role);
+
+
+      console.log("User object:", user);
+      console.log("Roli final:", role);
+      setUserRole(role);
+      
     } catch (err) {
       console.error("Auth failed", err);
       setIsAuthenticated(false);
@@ -54,6 +59,36 @@ useEffect(() => {
 }, [location.pathname]);
 
 
+// useEffect(() => {
+//   const checkAuth = async () => {
+//     try {
+//       const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/User/me`, {
+//         credentials: "include",
+//       });
+
+//       if (!res.ok) throw new Error("Not authenticated");
+
+//       const user = await res.json();
+//       let role = user.roleName || "User";
+//       setIsAuthenticated(true);
+//       setUserRole(role);
+//     } catch (err) {
+//       console.warn("Auth failed:", err.message); // më pak alarmant
+//       setIsAuthenticated(false);
+//     } finally {
+//       setAuthChecked(true);
+//     }
+//   };
+
+
+//   if (!["/login", "/register"].includes(location.pathname)) {
+//     checkAuth();
+//   } else {
+//     setAuthChecked(true); // nuk ka nevojë të presim auth
+//   }
+// }, [location.pathname]);
+
+
 
 
 
@@ -62,55 +97,63 @@ useEffect(() => {
   return (
     <ChakraProvider theme={currentTheme}>
       <Routes>
-        <Route
-          path="/login"
-          element={
-            isAuthenticated ? (
-              userRole === "Superadmin" ? (
-                <Navigate to="/superadmin" replace />
-              ) : userRole === "Admin" ? (
-                <Navigate to="/admin" replace />
-              ) : (
-                <Navigate to="/online-menu" replace />
-              )
+        {/* LOGIN ROUTE */}
+      <Route
+        path="/login"
+        element={
+          isAuthenticated ? (
+            userRole === "Superadmin" ? (
+              <Navigate to="/superadmin/dashboard" replace />
+            ) : userRole === "Admin" ? (
+              <Navigate to="/admin/dashboard" replace />
             ) : (
-              <AuthForm setIsAuthenticated={setIsAuthenticated} />
+              <Navigate to="/online-menu" replace />
             )
-          }
-        />
+          ) : (
+            <AuthForm setIsAuthenticated={setIsAuthenticated} />
+          )
+        }
+      />
 
-
+      
+        {/* AUTH LAYOUT */}
         <Route path="auth/*" element={<AuthLayout />} />
+      
+        {/* PROFILE PAGE */}
         <Route
           path="/profile"
           element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
         />
+
+        {/* ADMIN DASHBOARD */}
         <Route
-  path="admin/*"
-  element={
-    isAuthenticated && (userRole === "Admin" || userRole === "Superadmin") ? (
-      <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-    ) : isAuthenticated ? (
-      <Navigate to="/online-menu" />
-    ) : (
-      <Navigate to="/login" />
-    )
-  }
-/>
+          path="admin/*"
+          element={
+            isAuthenticated && (userRole === "Admin" || userRole === "Superadmin") ? (
+              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+            ) : isAuthenticated ? (
+              <Navigate to="/online-menu/2" />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
 
-<Route
-  path="superadmin/*"
-  element={
-    isAuthenticated && userRole === "Superadmin" ? (
-      <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-    ) : isAuthenticated ? (
-      <Navigate to="/online-menu" />
-    ) : (
-      <Navigate to="/login" />
-    )
-  }
-/>
+        
+        <Route
+          path="superadmin/*"
+          element={
+            isAuthenticated && userRole === "Superadmin" ? (
+              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+            ) : isAuthenticated ? (
+              <Navigate to="/online-menu/2" />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
 
+        
         <Route
           path="rtl/*"
           element={
@@ -121,18 +164,28 @@ useEffect(() => {
             )
           }
         />
+
+        
         <Route path="/" element={<MenuCover />} />
         <Route path="/main-menu" element={<MainMenu />} />
-         <Route path="/dish/:menuItemId" element={<DishDetails />} />
-        <Route
-  path="/online-menu/*"
-  element={isAuthenticated ? <OnlineMenu /> : <Navigate to="/login" />}
-/>
+        <Route path="/dish/:menuItemId" element={<DishDetails />} />
+        
+        
+      <Route
+        path="/online-menu"
+        element={isAuthenticated ? <OnlineMenu /> : <Navigate to="/login" />}
+      />
+      {/* <Route
+        path="/online-menu"
+        element={<Navigate to="/online-menu/2" />}
+      /> */}
 
+      
+      
         <Route path="/checkout" element={<CheckOutPage />} />
         <Route path="/payment" element={<PaymentPage />} />
-
       </Routes>
+
     </ChakraProvider>
   );
 }
