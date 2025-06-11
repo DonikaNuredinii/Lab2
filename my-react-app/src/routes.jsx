@@ -29,6 +29,7 @@ import OrdersTable from "../src/views/admin/dataTables/OrdersTable";
 import StaffTable from "views/admin/dataTables/StaffTable";
 import StaffSchedule from "views/admin/dataTables/StaffSchedule";
 import ProductsTable from "../src/views/admin/dataTables/ProductsTable";
+import AuditLogsTable from "views/admin/dataTables/AuditLogsTable";
 
 // Superadmin Imports
 import SuperAdminDashboard from "../src/views/superadmin/default";
@@ -38,7 +39,7 @@ import TablesTable from "../src/views/superadmin/dataTables/TablesTable";
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 import OnlineMenu from "./Pages/OnlineMenu";
-import ProfilePage from './Pages/ProfilePage';
+import ProfilePage from "./Pages/ProfilePage";
 
 const routes = [
   {
@@ -119,6 +120,13 @@ const routes = [
     icon: <Icon as={MdInventory} width="20px" height="20px" color="inherit" />,
     component: <ProductsTable />,
   },
+  {
+    name: "Audit Logs",
+    layout: "/admin",
+    path: "/audit-logs",
+    icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
+    component: <AuditLogsTable />,
+  },
 
   {
     name: "NFT Marketplace",
@@ -170,14 +178,14 @@ const routes = [
     component: <OnlineMenu />,
     hidden: true,
   },
-  {
-  name: "Profile",
-  layout: "/admin",
-  path: "/profile",
-  icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-  component: <ProfilePage />, // swapped out
-},
 
+  {
+    name: "Profile",
+    layout: "/admin",
+    path: "/profile",
+    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+    component: <ProfilePage />, // swapped out
+  },
 ];
 
 export default routes;

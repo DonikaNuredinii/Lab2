@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Lab2_Backend.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Lab2_Backend.MongoService;
+using Lab2_Backend.Migrations;
+
 
 
 
@@ -18,9 +21,9 @@ namespace Lab2_Backend.Controllers
     {
         private readonly MyContext _context;
         private readonly IConfiguration _config;
-        private readonly AuditLogService _auditLogService;
+        private readonly MongoAuditLogService _auditLogService;
 
-        public UserController(MyContext context, IConfiguration config, AuditLogService auditLogService)
+        public UserController(MyContext context, IConfiguration config, MongoAuditLogService auditLogService)
         {
             _context = context;
             _config = config;
@@ -148,23 +151,32 @@ namespace Lab2_Backend.Controllers
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
                 await _context.SaveChangesAsync();
+                await _auditLogService.CreateLoginLogAsync(new AuditLog
+                {
+                    UserId = user.UserID,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    RoleId = user.RoleID,
+                    UserAgent = Request.Headers["User-Agent"].ToString()
+                });
+
 
                 Console.WriteLine("Tokens generated and saved successfully.");
 
                 return Ok(new
-{
-    token,
-    refreshToken,
-    userId = user.UserID, // ✅ Add this top-level userId
-    user = new
-    {
-        user.FirstName,
-        user.LastName,
-        user.Email,
-        role = user.Role?.RoleName ?? "Unknown",
-        type = user.GetType().Name
-    }
-});
+                {
+                    token,
+                    refreshToken,
+                    userId = user.UserID, // ✅ Add this top-level userId
+                    user = new
+                    {
+                        user.FirstName,
+                        user.LastName,
+                        user.Email,
+                        role = user.Role?.RoleName ?? "Unknown",
+                        type = user.GetType().Name
+                    }
+                });
 
             }
             catch (Exception ex)
@@ -216,15 +228,12 @@ namespace Lab2_Backend.Controllers
 
             try
             {
-                await _auditLogService.CreateAsync(new AuditLog
+                if (int.TryParse(userId, out int parsedId))
                 {
-                    Action = "Logout",
-                    UserId = userId,
-                    Timestamp = DateTime.UtcNow,
-                    IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                    UserAgent = Request.Headers["User-Agent"].ToString(),
-                    RequestPath = HttpContext.Request.Path
-                });
+                    await _auditLogService.UpdateLogoutTimestampAsync(parsedId);
+                }
+
+
             }
             catch (Exception ex)
             {

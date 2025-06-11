@@ -28,7 +28,7 @@ var connectionString = isWindows
 
 builder.Services.AddDbContext<MyContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddScoped<AuditLogService>();
+builder.Services.AddScoped<MongoAuditLogService>();
 
 // MongoDB
 builder.Services.Configure<MongoDBSettings>(
