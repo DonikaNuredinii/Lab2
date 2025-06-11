@@ -3,6 +3,7 @@ import "../CSS/OnlineMenu.css";
 import { useParams, useNavigate } from "react-router-dom";
 import ChatModal from "../components/ChatModal";
 import { FaComments } from "react-icons/fa";
+import PaymentSidebar from "../PaymentSidebar";
 import {
   Box,
   Text,
@@ -12,6 +13,7 @@ import {
   VStack,
   Divider,
   HStack,
+  Flex,
 } from "@chakra-ui/react";
 import NoteModal from "./NoteModal";
 import { MdNoteAdd } from "react-icons/md";
@@ -30,9 +32,17 @@ const OnlineMenu = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
 
-  // Cart State
+  const [orderId, setOrderId] = useState(null);
+  const {
+    isOpen: isPaymentOpen,
+    onOpen: onPaymentOpen,
+    onClose: onPaymentClose,
+  } = useDisclosure();
+
+  // Cart state
   const [cartItems, setCartItems] = useState([]);
 
+  // Add item to cart
   const addToCart = (item) => {
     setCartItems((prev) => {
       const exists = prev.find((i) => i.id === item.id);
@@ -45,50 +55,50 @@ const OnlineMenu = () => {
     });
   };
 
+  // Calculate total price
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
 
+  // Submit order and navigate to checkout page
   const handleSubmitOrder = async () => {
-    const orderDto = {
-      restaurantID: parseInt(id),
-      tableID: 1,
-      costumerID: 0,
-      costumerAdressID: 0,
-      orderType: "Dine-in",
-      status: "Pending",
-      totalAmount: total,
-      createdAt: new Date().toISOString(),
-    };
-
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderDto),
-      });
-
-      if (!res.ok) throw new Error("Failed to place order");
-
-      await res.json();
-      alert(
-        "Faleminderit! Porosia juaj po përgatitet dhe së shpejti do të jete gati."
-      );
-      setCartItems([]);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to place order");
-    }
+  const orderDto = {
+    restaurantID: parseInt(id),
+    tableID: 1,
+    costumerID: 0,
+    costumerAdressID: 0,
+    orderType: "Dine-in",
+    status: "Pending",
+    totalAmount: total,
+    createdAt: new Date().toISOString(),
   };
+
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/Orders`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderDto),
+    });
+
+    if (!res.ok) throw new Error("Failed to place order");
+
+    const data = await res.json();
+
+    // Redirect to checkout page me total dhe orderId ne state
+ navigate("/checkout", { state: { total, orderId: data.ordersID || data.orderID, cartItems } });
+  } catch (err) {
+    console.error(err);
+    alert("Failed to place order");
+  }
+};
+
+
+  // Hap modalin e përbërësve (ingredients) të menu item
   const handleOpenNoteModal = async (item) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE}/api/MenuItemProducts/menuitem/${
-          item.id
-        }`
+        `${import.meta.env.VITE_API_BASE}/api/MenuItemProducts/menuitem/${item.id}`
       );
       if (!res.ok) throw new Error("Failed to fetch ingredients");
 
@@ -160,9 +170,7 @@ const OnlineMenu = () => {
 
       try {
         const restaurantRes = await fetch(
-          `${
-            import.meta.env.VITE_API_BASE
-          }/api/Restaurant/${restaurantIdToFetch}`
+          `${import.meta.env.VITE_API_BASE}/api/Restaurant/${restaurantIdToFetch}`
         );
         if (!restaurantRes.ok) throw new Error("Error fetching restaurant.");
 
@@ -226,8 +234,7 @@ const OnlineMenu = () => {
 
   if (!id && loading)
     return <div className="online-menu-page">Loading restaurants...</div>;
-  if (!id && error)
-    return <div className="online-menu-page">Error: {error}</div>;
+  if (!id && error) return <div className="online-menu-page">Error: {error}</div>;
 
   return (
     <div className="online-menu-page">
@@ -352,8 +359,8 @@ const OnlineMenu = () => {
             menuItemId={selectedMenuItemId}
           />
 
-          {/* SIDEBAR */}
-          {cartItems.length > 0 && (
+          {/* Sidebar porosisë */}
+          {cartItems.length > 0 && !isPaymentOpen && (
             <Box
               width={{ base: "100%", md: "360px" }}
               bg="#FAF9F6"
@@ -466,6 +473,20 @@ const OnlineMenu = () => {
                 </Button>
               </Box>
             </Box>
+          )}
+
+          {/* Modal i pagesës */}
+          {isPaymentOpen && (
+          <PaymentSidebar
+  isOpen={isPaymentOpen}
+  onClose={closePaymentSidebar}
+  totalAmount={totalAmount}
+  orderId={orderId}
+  cartItems={cartItems}
+  method={paymentMethod}
+  setMethod={setPaymentMethod}
+/>
+
           )}
         </Box>
       )}
