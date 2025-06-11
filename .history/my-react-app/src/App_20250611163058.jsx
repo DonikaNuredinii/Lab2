@@ -82,8 +82,6 @@ export default function Main() {
           element={isAuthenticated ? <OnlineMenu /> : <Navigate to="/login" />}
         />{" "}
         <Route path="/checkout" element={<CheckOutPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-
       </Routes>
     </ChakraProvider>
   );

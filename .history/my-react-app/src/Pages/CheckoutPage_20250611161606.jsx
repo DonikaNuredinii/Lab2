@@ -21,7 +21,7 @@ const CheckoutPage = () => {
         isClosable: true,
         position: "top",
       });
-      navigate("/"); // Redirect after alert
+      navigate("/"); // Or redirect wherever you want after cash alert
     } else {
       navigate("/payment", {
         state: {
@@ -52,17 +52,33 @@ const CheckoutPage = () => {
         borderRadius="xl"
         textAlign="center"
       >
-        <Heading size="lg" mb={4}>Checkout</Heading>
-        <Text fontSize="md" mb={6}>Thank you for your order! Please choose a payment method to continue.</Text>
+        <Heading size="lg" mb={4}>
+          Checkout
+        </Heading>
+        <Text fontSize="md" mb={6}>
+          Thank you for your order! Please choose a payment method to continue.
+        </Text>
 
         <VStack spacing={4}>
-          <Button width="100%" colorScheme="blue" onClick={() => handlePaymentChoice("Cash")}>
+          <Button
+            width="100%"
+            colorScheme="blue"
+            onClick={() => handlePaymentChoice("Cash")}
+          >
             Pay with Cash
           </Button>
-          <Button width="100%" colorScheme="green" onClick={() => handlePaymentChoice("Card")}>
+          <Button
+            width="100%"
+            colorScheme="green"
+            onClick={() => handlePaymentChoice("Card")}
+          >
             Pay with Card
           </Button>
-          <Button width="100%" colorScheme="purple" onClick={() => handlePaymentChoice("Online")}>
+          <Button
+            width="100%"
+            colorScheme="purple"
+            onClick={() => handlePaymentChoice("Online")}
+          >
             Pay Online
           </Button>
         </VStack>
