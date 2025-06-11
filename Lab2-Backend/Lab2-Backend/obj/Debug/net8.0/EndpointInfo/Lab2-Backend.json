@@ -2885,7 +2885,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Review"
+                    "$ref": "#/components/schemas/ReviewDTO"
                   }
                 }
               },
@@ -2893,7 +2893,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Review"
+                    "$ref": "#/components/schemas/ReviewDTO"
                   }
                 }
               },
@@ -2901,7 +2901,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Review"
+                    "$ref": "#/components/schemas/ReviewDTO"
                   }
                 }
               }
@@ -4476,6 +4476,28 @@
         },
         "additionalProperties": false
       },
+      "CardDataDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "expire": {
+            "type": "string",
+            "nullable": true
+          },
+          "cvv": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Category": {
         "type": "object",
         "properties": {
@@ -4990,6 +5012,37 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalInfo": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardData": {
+            "$ref": "#/components/schemas/CardDataDto"
           }
         },
         "additionalProperties": false
@@ -5366,6 +5419,10 @@
             "format": "date-time"
           },
           "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "menuItemName": {
             "type": "string",
             "nullable": true
           }

@@ -29,6 +29,7 @@ import StaffTable from "views/admin/dataTables/StaffTable";
 import StaffSchedule from "views/admin/dataTables/StaffSchedule";
 import ProductsTable from "../src/views/admin/dataTables/ProductsTable";
 import AuditLogsTable from "views/admin/dataTables/AuditLogsTable";
+import ReviewsTable from "views/admin/dataTables/ReviewsTable";
 
 // Superadmin Imports
 import SuperAdminDashboard from "../src/views/superadmin/default";
@@ -142,6 +143,13 @@ const routes = [
     path: "/audit-logs",
     icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
     component: <AuditLogsTable />,
+  },
+   {
+    name: "Reviews",
+    layout: "/admin",
+    path: "/reviews",
+    icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
+    component: <ReviewsTable />,
   },
 
   {

@@ -15,15 +15,29 @@ namespace Lab2_Backend.Controllers
         {
             _context = context;
         }
-
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviews()
         {
-            return await _context.Reviews
+            var reviews = await _context.Reviews
                 .Include(r => r.User)
                 .Include(r => r.MenuItem)
                 .ToListAsync();
+
+            var dtoList = reviews.Select(r => new ReviewDTO
+            {
+                ReviewID = r.ReviewID,
+                MenuItemID = r.MenuItemID,
+                UserID = r.UserID,
+                Rating = r.Rating,
+                Comment = r.Comment,
+                CreatedAt = r.CreatedAt,
+                UserName = r.User != null ? $"{r.User.FirstName} {r.User.LastName}" : "Unknown",
+                MenuItemName = r.MenuItem != null ? r.MenuItem.Name : "Unknown"
+            });
+
+            return Ok(dtoList);
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> GetReview(int id)

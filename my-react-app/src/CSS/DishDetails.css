@@ -17,7 +17,7 @@ body {
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
   padding: 2rem;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1000px;
   gap: 3rem;
   flex-wrap: wrap;
   transition: all 0.3s ease-in-out;
