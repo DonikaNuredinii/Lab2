@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\controllers\\staffschedulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\controllers\\staffschedulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|solutionrelative:lab2-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7547077B-90DD-4310-9644-349C672BAD60}|Lab2-Backend\\Lab2-Backend.csproj|c:\\users\\techcom\\desktop\\lab2\\lab2-backend\\lab2-backend\\migrations\\20250611093206_fixremovedproductsfk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -385,7 +385,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Bookmark",
@@ -413,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "StaffScheduleResponseDTO.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\StaffScheduleResponseDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\StaffScheduleResponseDTO.cs",
@@ -449,20 +449,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ReviewsController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ReviewsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\ReviewsController.cs",
               "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\ReviewsController.cs",
               "RelativeToolTip": "Lab2-Backend\\Controllers\\ReviewsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-09T19:25:26.244Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CommentsController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\CommentsController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\CommentsController.cs",
@@ -486,7 +486,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "StaffScheduleController.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Controllers\\StaffScheduleController.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Controllers\\StaffScheduleController.cs",
@@ -498,7 +498,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "StaffScheduleDTO.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\DTO\\StaffScheduleDTO.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\DTO\\StaffScheduleDTO.cs",
@@ -546,15 +546,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
               "RelativeDocumentMoniker": "Lab2-Backend\\Program.cs",
               "ToolTip": "C:\\Users\\TECHCOM\\Desktop\\Lab2\\Lab2-Backend\\Lab2-Backend\\Program.cs",
               "RelativeToolTip": "Lab2-Backend\\Program.cs",
-              "ViewState": "AQIAAIAAAAAAAAAAAAAiwIwAAAAKAAAA",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAAAIUAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T21:23:57.019Z"
+              "WhenOpened": "2025-04-29T21:23:57.019Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

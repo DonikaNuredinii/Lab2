@@ -35,17 +35,19 @@ const AuthForm = ({ setIsAuthenticated }) => {
 
   try {
     if (isLogin) {
-      const response = await axios.post(`${API_BASE}/api/User/login`, {
-        email: form.email,
-        password: form.password,
-      });
+      // FIX: ruaj rezultatin në një variabël
+const response = await axios.post(`${API_BASE}/api/User/login`, {
+  email: form.email,
+  password: form.password,
+}, {
+  withCredentials: true
+});
 
-      const { token, refreshToken, userId, user } = response.data;
+const { token, userId, user } = response.data;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("userId", String(userId));
-      localStorage.setItem("role", user.role);
+localStorage.setItem("token", token);
+localStorage.setItem("userId", String(userId));
+localStorage.setItem("role", user.role);
 
       setIsAuthenticated(true);
 

@@ -25,14 +25,36 @@ export default function Main() {
 
 
 useEffect(() => {
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-  const valid = token && token.split(".").length === 3;
-  setIsAuthenticated(!!valid);
-  setUserRole(role); // new
-  setAuthChecked(true);
-  console.log("Auth check completed:", valid);
+  const checkAuth = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`${import.meta.env.VITE_API_BASE}/api/User/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error("Not authenticated");
+
+      const user = await res.json();
+      console.log("USER FROM /me:", user);
+
+      setIsAuthenticated(true);
+      setUserRole(user.roleName || user.role || "User");
+    } catch (err) {
+      console.error("Auth failed", err);
+      setIsAuthenticated(false);
+    } finally {
+      setAuthChecked(true);
+    }
+  };
+
+  checkAuth();
 }, [location.pathname]);
+
+
+
 
 
   if (!authChecked) return <div>Loading...</div>;
@@ -103,9 +125,10 @@ useEffect(() => {
         <Route path="/main-menu" element={<MainMenu />} />
          <Route path="/dish/:menuItemId" element={<DishDetails />} />
         <Route
-          path="/online-menu/:id?"
-          element={isAuthenticated ? <OnlineMenu /> : <Navigate to="/login" />}
-        />{" "}
+  path="/online-menu/*"
+  element={isAuthenticated ? <OnlineMenu /> : <Navigate to="/login" />}
+/>
+
         <Route path="/checkout" element={<CheckOutPage />} />
         <Route path="/payment" element={<PaymentPage />} />
 

@@ -162,21 +162,29 @@ namespace Lab2_Backend.Controllers
 
 
                 Console.WriteLine("Tokens generated and saved successfully.");
+Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+{
+    HttpOnly = true,
+    Secure = true,
+    SameSite = SameSiteMode.None, // ← important for cross-origin
+    Expires = DateTime.UtcNow.AddDays(7)
+});
 
-                return Ok(new
-                {
-                    token,
-                    refreshToken,
-                    userId = user.UserID, // ✅ Add this top-level userId
-                    user = new
-                    {
-                        user.FirstName,
-                        user.LastName,
-                        user.Email,
-                        role = user.Role?.RoleName ?? "Unknown",
-                        type = user.GetType().Name
-                    }
-                });
+
+return Ok(new
+{
+    token,
+    userId = user.UserID,
+    user = new
+    {
+        user.FirstName,
+        user.LastName,
+        user.Email,
+        role = user.Role?.RoleName ?? "Unknown",
+        type = user.GetType().Name
+    }
+});
+
 
             }
             catch (Exception ex)
@@ -220,28 +228,36 @@ namespace Lab2_Backend.Controllers
         }
 
 
-        [Authorize]
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
+[Authorize]
+[HttpPost("logout")]
+public async Task<IActionResult> Logout()
+{
+    var userId = User.FindFirst("id")?.Value ?? "unknown";
+
+    try
+    {
+        if (int.TryParse(userId, out int parsedId))
         {
-            var userId = User.FindFirst("id")?.Value ?? "unknown";
-
-            try
-            {
-                if (int.TryParse(userId, out int parsedId))
-                {
-                    await _auditLogService.UpdateLogoutTimestampAsync(parsedId);
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Audit log during logout failed: " + ex.Message);
-            }
-
-            return Ok(new { message = "Logged out successfully. Please delete the token on client side." });
+            await _auditLogService.UpdateLogoutTimestampAsync(parsedId);
         }
+
+        // ✅ FSHIRJA E COOKIE-S
+        Response.Cookies.Delete("refreshToken", new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
+            Path = "/" // 🔥 kjo është thelbësore – duhet të përputhet me path-in e vendosjes
+        });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Audit log during logout failed: " + ex.Message);
+    }
+
+    return Ok(new { message = "Logged out successfully. Please delete the token on client side." });
+}
+
 
 
         //[HttpPost("migrate-passwords")]
@@ -319,36 +335,34 @@ namespace Lab2_Backend.Controllers
         }
 
 
-        [Authorize]
-        [HttpGet("me")]
-        public async Task<ActionResult<UserDto>> GetCurrentUser()
-        {
-            var userId = User.FindFirst("id")?.Value;
-        
-            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int id))
-                return Unauthorized();
-        
-            var user = await _context.Users
-                                     .Include(u => u.Role)
-                                     .FirstOrDefaultAsync(u => u.UserID == id);
-        
-            if (user == null)
-                return NotFound();
-        
-            var userDto = new UserDto
-            {
-                UserID = user.UserID,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                CreationDate = user.CreationDate,
-                RoleID = user.RoleID,
-                RoleName = user.Role?.RoleName
-            };
-        
-            return Ok(userDto);
-        }
+[HttpGet("me")]
+public async Task<ActionResult<UserDto>> GetCurrentUser()
+{
+    var refreshToken = Request.Cookies["refreshToken"];
+    if (string.IsNullOrEmpty(refreshToken))
+        return Unauthorized("Missing refresh token");
+
+    var user = await _context.Users
+        .Include(u => u.Role)
+        .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken && u.RefreshTokenExpiryTime > DateTime.UtcNow);
+
+    if (user == null)
+        return Unauthorized("Invalid or expired refresh token");
+
+    var userDto = new UserDto
+    {
+        UserID = user.UserID,
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        Email = user.Email,
+        PhoneNumber = user.PhoneNumber,
+        CreationDate = user.CreationDate,
+        RoleID = user.RoleID,
+        RoleName = user.Role?.RoleName
+    };
+
+    return Ok(userDto);
+}
 
 
         [Authorize]
@@ -378,36 +392,48 @@ namespace Lab2_Backend.Controllers
 
         
 
-        [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDto tokenRequest)
-        {
-            if (tokenRequest == null || string.IsNullOrEmpty(tokenRequest.AccessToken) || string.IsNullOrEmpty(tokenRequest.RefreshToken))
-                return BadRequest("Invalid client request");
+[HttpPost("refresh")]
+public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDto tokenRequest)
+{
+    if (tokenRequest == null || string.IsNullOrEmpty(tokenRequest.AccessToken))
+        return BadRequest("Invalid client request");
 
-            var principal = TokenHelper.GetPrincipalFromExpiredToken(tokenRequest.AccessToken, _config);
-            if (principal == null)
-                return BadRequest("Invalid access token or refresh token");
+    var refreshToken = Request.Cookies["refreshToken"];
+    if (string.IsNullOrEmpty(refreshToken))
+        return BadRequest("Refresh token is missing in cookies");
 
-            var email = principal.FindFirst(ClaimTypes.Email)?.Value;
-            var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
+    var principal = TokenHelper.GetPrincipalFromExpiredToken(tokenRequest.AccessToken, _config);
+    if (principal == null)
+        return BadRequest("Invalid access token");
 
-            if (user == null || user.RefreshToken != tokenRequest.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-                return Unauthorized("Invalid refresh token");
+    var email = principal.FindFirst(ClaimTypes.Email)?.Value;
+    var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
 
-            var newAccessToken = TokenHelper.GenerateToken(user, _config);
-            var newRefreshToken = TokenHelper.GenerateRefreshToken();
+    if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+        return Unauthorized("Invalid refresh token");
 
-            user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+    var newAccessToken = TokenHelper.GenerateToken(user, _config);
+    var newRefreshToken = TokenHelper.GenerateRefreshToken();
 
-            await _context.SaveChangesAsync();
+    user.RefreshToken = newRefreshToken;
+    user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+    await _context.SaveChangesAsync();
 
-            return Ok(new
-            {
-                Token = newAccessToken,
-                RefreshToken = newRefreshToken
-            });
-        }
+    // Overwrite the old cookie with a new refresh token
+Response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+{
+    HttpOnly = true,
+    Secure = true,
+    SameSite = SameSiteMode.None, // ← important for cross-origin
+    Expires = DateTime.UtcNow.AddDays(7)
+});
+
+
+    return Ok(new
+    {
+        Token = newAccessToken
+    });
+}
 
         
 
