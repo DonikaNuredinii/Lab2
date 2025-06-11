@@ -72,11 +72,12 @@ namespace Lab2_Backend
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<MenuItemProducts>()
-                .HasOne(mip => mip.Products)
-                .WithMany()
-                .HasForeignKey(mip => mip.ProductsID)
-                .HasPrincipalKey(p => p.ProductsID)
-                .OnDelete(DeleteBehavior.Cascade);
+         .HasOne(mip => mip.Product)
+         .WithMany(p => p.MenuItemProducts)
+         .HasForeignKey(mip => mip.ProductsID)
+         .HasPrincipalKey(p => p.ProductsID)
+         .OnDelete(DeleteBehavior.Cascade);
+
 
             modelBuilder.Entity<OrderItems_RemovedProducts>()
                 .HasOne(oirp => oirp.OrderItems)
@@ -86,11 +87,11 @@ namespace Lab2_Backend
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<OrderItems_RemovedProducts>()
-                .HasOne(oirp => oirp.Products)
-                .WithMany()
-                .HasForeignKey(oirp => oirp.ProductsID)
-                .HasPrincipalKey(p => p.ProductsID)
-                .OnDelete(DeleteBehavior.Cascade);
+              .HasOne(oirp => oirp.Product)
+              .WithMany(p => p.OrderItemsRemovedProducts)
+              .HasForeignKey(oirp => oirp.ProductsID)
+              .HasPrincipalKey(p => p.ProductsID)
+              .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Payments>()
                 .HasOne(p => p.Orders)
@@ -174,6 +175,21 @@ namespace Lab2_Backend
                 .HasForeignKey(c => c.MenuItemID)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Products>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<OrderItems>()
+                .Property(o => o.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Orders>()
+                .Property(o => o.TotalAmount)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Payments>()
+                .Property(p => p.Amount)
+                .HasColumnType("decimal(18,2)");
 
         }
 

@@ -26,7 +26,7 @@ namespace Lab2_Backend.Model
         [ForeignKey(nameof(ProductsID))]
         [JsonIgnore]
         [ValidateNever]
-        public Products Products { get; set; }
+        public Products Product { get; set; }
     }
 }
 

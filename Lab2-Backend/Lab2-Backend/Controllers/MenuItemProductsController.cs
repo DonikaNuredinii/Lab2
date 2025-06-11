@@ -18,13 +18,13 @@ namespace Lab2_Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MenuItemProducts>>> GetMenuItemProducts()
         {
-            return await _context.MenuItemProducts.Include(mip => mip.MenuItems).Include(mip => mip.Products).ToListAsync();
+            return await _context.MenuItemProducts.Include(mip => mip.MenuItems).Include(mip => mip.Product).ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<MenuItemProducts>> GetMenuItemProduct(int id)
         {
-            var item = await _context.MenuItemProducts.Include(mip => mip.MenuItems).Include(mip => mip.Products).FirstOrDefaultAsync(mip => mip.MIProducts == id);
+            var item = await _context.MenuItemProducts.Include(mip => mip.MenuItems).Include(mip => mip.Product).FirstOrDefaultAsync(mip => mip.MIProducts == id);
             if (item == null) return NotFound();
             return item;
         }
