@@ -19,24 +19,16 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 
 const ChatModal = ({ isOpen, onClose, restaurant }) => {
   const [connection, setConnection] = useState(null);
-  const [messages, setMessages] = useState([
-    {
-      senderId: "bot",
-      content:
-        "Hi there! I'm here to help you with any questions about our menu or services. Let me know if you need anything!",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [adminUserId, setAdminUserId] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const messagesEndRef = useRef(null);
   const toast = useToast();
 
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // Fetch admin user ID
   useEffect(() => {
     setIsLoggedIn(!!userId);
 
@@ -63,35 +55,32 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
     if (isOpen) fetchAdminUserId();
   }, [isOpen, restaurant, toast, userId]);
 
-  // Setup SignalR connection
   useEffect(() => {
     if (!isOpen || !token || !userId || !adminUserId) return;
 
     const connectSignalR = async () => {
-      const connection = new HubConnectionBuilder()
+      const conn = new HubConnectionBuilder()
         .withUrl(`${import.meta.env.VITE_WS_BASE}/chatHub`, {
-          accessTokenFactory: () => token, // if using JWT
+          accessTokenFactory: () => token,
         })
-
         .withAutomaticReconnect()
-        .configureLogging(LogLevel.Warning)
+        .configureLogging(LogLevel.Information)
         .build();
 
-      connection.on("ReceiveMessage", (senderId, content) => {
+      conn.on("ReceiveMessage", (senderId, content) => {
+        if (parseInt(senderId) === parseInt(userId)) return; // 👈 Skip self messages
         setMessages((prev) => [...prev, { senderId, content }]);
       });
 
       try {
-        await connection.start();
-        console.log("✅ SignalR connected");
-        setConnection(connection);
-      } catch (error) {
-        console.error("❌ SignalR connection failed", error);
+        await conn.start();
+        setConnection(conn);
+      } catch (err) {
         toast({
           title: "Connection Error",
-          description: "Failed to connect to the chat server.",
+          description: "Failed to connect to chat server.",
           status: "error",
-          duration: 5000,
+          duration: 4000,
           isClosable: true,
         });
       }
@@ -102,7 +91,7 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
     return () => {
       connection?.stop();
     };
-  }, [isOpen, token, userId, adminUserId, toast]);
+  }, [isOpen, token, userId, adminUserId]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -111,15 +100,28 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
   const handleSend = async () => {
     if (!message.trim() || !connection || !adminUserId) return;
 
+    const msgObj = {
+      senderId: parseInt(userId),
+      receiverId: parseInt(adminUserId),
+      content: message,
+    };
+
     try {
       await connection.invoke("SendMessage", adminUserId, message);
-      setMessages((prev) => [...prev, { senderId: userId, content: message }]);
+      await fetch(`${import.meta.env.VITE_API_BASE}/api/Messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(msgObj),
+      });
+      setMessages((prev) => [...prev, msgObj]);
       setMessage("");
     } catch (err) {
-      console.error("Send failed:", err);
       toast({
         title: "Send Error",
-        description: "Could not send your message.",
+        description: "Message could not be sent.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -134,7 +136,7 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
         <ModalContent>
           <ModalHeader>Please Log In</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>You need to log in to use the chat feature.</ModalBody>
+          <ModalBody>You must log in to use the chat feature.</ModalBody>
         </ModalContent>
       </Modal>
     );
@@ -166,28 +168,40 @@ const ChatModal = ({ isOpen, onClose, restaurant }) => {
         <ModalCloseButton color="white" />
         <ModalBody px={4} py={4} bg="gray.50">
           <VStack spacing={3} align="stretch" maxH="300px" overflowY="auto">
-            {messages.map((msg, idx) => (
-              <HStack
-                key={idx}
-                alignSelf={msg.senderId == userId ? "flex-end" : "flex-start"}
-                spacing={2}
-              >
-                {msg.senderId !== userId && msg.senderId !== "bot" && (
-                  <Avatar size="sm" name="Restaurant" />
-                )}
-                {msg.senderId === "bot" && (
-                  <Avatar size="sm" name="Support Bot" bg="green.400" />
-                )}
-                <Box
-                  bg={msg.senderId == userId ? "teal.100" : "gray.200"}
-                  borderRadius="lg"
-                  p={2}
-                  maxW="240px"
+            {messages.map((msg, idx) => {
+              const isMe = parseInt(msg.senderId) === parseInt(userId);
+
+              return (
+                <HStack
+                  key={idx}
+                  alignSelf={isMe ? "flex-end" : "flex-start"}
+                  spacing={2}
                 >
-                  <Text fontSize="sm">{msg.content}</Text>
-                </Box>
-              </HStack>
-            ))}
+                  {!isMe && (
+                    <Avatar
+                      size="sm"
+                      name="Admin"
+                      bg="gray.600"
+                      color="white"
+                    />
+                  )}
+                  <Box
+                    bg={isMe ? "teal.100" : "gray.200"}
+                    borderRadius="lg"
+                    p={2}
+                    maxW="240px"
+                  >
+                    <Text fontSize="xs" fontWeight="bold" mb={1}>
+                      {isMe ? "You" : "Admin"}
+                    </Text>
+                    <Text fontSize="sm">{msg.content}</Text>
+                  </Box>
+                  {isMe && (
+                    <Avatar size="sm" name="You" bg="teal.400" color="white" />
+                  )}
+                </HStack>
+              );
+            })}
             <div ref={messagesEndRef} />
           </VStack>
 

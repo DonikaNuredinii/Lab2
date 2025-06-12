@@ -66,7 +66,8 @@ var tokenValidationParams = new TokenValidationParameters
     ValidateIssuerSigningKey = true,
     ValidIssuer = jwtSettings["Issuer"],
     ValidAudience = jwtSettings["Audience"],
-    IssuerSigningKey = new SymmetricSecurityKey(key)
+    IssuerSigningKey = new SymmetricSecurityKey(key),
+        NameClaimType = "UserID"
 };
 builder.Services.AddSingleton(tokenValidationParams);
 
@@ -107,7 +108,8 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("RolesID", "1"));
 });
 
-builder.Services.AddSignalR(); // ✅ Add SignalR support
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -8,6 +8,7 @@ import {
   MdLock,
   MdOutlineShoppingCart,
   MdRestaurantMenu,
+  MdChat,
   MdPeople,
   MdDinnerDining,
   MdShoppingCart,
@@ -43,6 +44,7 @@ import SignInCentered from "views/auth/signIn";
 import OnlineMenu from "./Pages/OnlineMenu";
 import ProfilePage from "./Pages/ProfilePage";
 import DishDetails from "./Pages/DishDetails";
+import AdminChatTable from "views/admin/dataTables/AdminChatTable";
 
 const routes = [
   {
@@ -152,6 +154,13 @@ const routes = [
     path: "/reviews",
     icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
     component: <ReviewsTable />,
+  },
+  {
+    name: "Chat",
+    layout: "/admin",
+    path: "/chat",
+    icon: <Icon as={MdChat} width="20px" height="20px" color="inherit" />,
+    component: <AdminChatTable />,
   },
 
   {
