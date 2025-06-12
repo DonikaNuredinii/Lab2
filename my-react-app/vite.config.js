@@ -20,4 +20,6 @@ export default defineConfig({
     loader: 'jsx',  // Ensure this is a string and points to JSX files
     include: /src\/.*\.(js|jsx)$/, // Include both .js and .jsx files in the src folder
   },
+
+
 });

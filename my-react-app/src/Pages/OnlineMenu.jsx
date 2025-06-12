@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../CSS/OnlineMenu.css";
 import { useParams, useNavigate } from "react-router-dom";
 import ChatModal from "../components/ChatModal";
+import {  FaUserCircle } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
 import {
   Box,
@@ -522,6 +523,20 @@ const OnlineMenu = () => {
         cartItems={cartItems}
         method={paymentMethod}
         setMethod={setPaymentMethod}
+      />
+        <IconButton
+        icon={<FaUserCircle />}
+        aria-label="Go to Profile"
+        position="fixed"
+        top="25px"
+        right="25px"
+        zIndex={1000}
+        size="lg"
+        borderRadius="full"
+        bg="#32524d"
+        color="white"
+        _hover={{ bg: "#26413d" }}
+        onClick={() => navigate("/profile")}
       />
     </div>
   );
