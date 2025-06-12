@@ -1114,6 +1114,22 @@
     ]
   },
   {
+    "ContainingType": "Lab2_Backend.Controllers.PaymentsController",
+    "Method": "CreateCheckoutSession",
+    "RelativePath": "api/Payments/create-checkout-session",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "StripeCheckoutDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Lab2_Backend.Controllers.ProductNotesController",
     "Method": "GetProductNotes",
     "RelativePath": "api/ProductNotes",
@@ -1916,7 +1932,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Lab2_Backend.Model.Staff, Lab2-Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Lab2_Backend.DTO.StaffDto, Lab2-Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1935,14 +1951,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "staff",
-        "Type": "Lab2_Backend.Model.Staff",
+        "Name": "dto",
+        "Type": "Lab2_Backend.DTO.StaffDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Lab2_Backend.Model.Staff",
+        "Type": "Lab2_Backend.DTO.StaffDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1968,7 +1984,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Lab2_Backend.Model.Staff",
+        "Type": "Lab2_Backend.DTO.StaffDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1992,8 +2008,8 @@
         "IsRequired": true
       },
       {
-        "Name": "staff",
-        "Type": "Lab2_Backend.Model.Staff",
+        "Name": "dto",
+        "Type": "Lab2_Backend.DTO.StaffDto",
         "IsRequired": true
       }
     ],

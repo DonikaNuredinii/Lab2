@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "../CSS/ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { FaArrowLeft } from "react-icons/fa";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -22,11 +19,11 @@ const ProfilePage = () => {
 
       try {
         const res = await axiosInstance.get("/api/User/me");
-
+        console.log("🔍 User fetched:", res.data);
         setUser(res.data);
         setForm(res.data);
       } catch (err) {
-        console.error(err);
+        console.error("Fetch profile error:", err);
         navigate("/login");
       }
     };
@@ -39,16 +36,28 @@ const ProfilePage = () => {
   };
 
   const handleLogout = async () => {
-    try {
-      await axiosInstance.post("/api/User/logout");
-    } catch (err) {
-      console.warn("Logout request failed:", err);
-    } finally {
-      // Always clear client state & redirect
-      localStorage.clear();
-      navigate("/login");
-    }
-  };
+  try {
+    // Call logout endpoint (must clear cookie on server)
+    await axiosInstance.post("/api/User/logout", null, {
+      withCredentials: true,
+    });
+    console.log("🔓 Logout request successful");
+  } catch (err) {
+    console.warn("Logout failed:", err);
+  } finally {
+    // Clear client storage
+    localStorage.clear();
+
+    // Optional: manually expire the cookie (not always reliable)
+    document.cookie =
+      "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    navigate("/login");
+    console.log("👋 Logged out");
+
+  }
+};
+
 
   const handleSave = async () => {
     const updatePayload = {
@@ -63,34 +72,45 @@ const ProfilePage = () => {
       alert("Profile updated successfully!");
     } catch (err) {
       console.error("Update failed:", err.response?.data || err.message);
-
       alert("Failed to update profile.");
     }
   };
 
   if (!user) return <div>Loading...</div>;
 
+  const role = (user?.roleName || "").toLowerCase();
+  console.log("🧠 Normalized role:", role);
+
   return (
     <div className="settings-layout">
       <aside className="settings-sidebar">
-          <button
-    onClick={() => navigate("/online-menu")}
-    className="back-button"
-  >
-    <FaArrowLeft />
+        <button onClick={() => navigate("/online-menu")} className="back-button">
+          <FaArrowLeft />
+        </button>
 
-  </button>
         <div className="profile-avatar">
-          {/* <img src="https://via.placeholder.com/100" alt="Avatar" /> */}
-          <h3>
-            {user.firstName} {user.lastName}
-          </h3>
+          <h3>{user.firstName} {user.lastName}</h3>
         </div>
+
         <ul className="sidebar-nav">
           <li className="active">Account</li>
-          {/* <li>Order History</li> */}
+
+          {(role === "admin" || role === "superadmin") && (
+  <li
+    onClick={() =>
+      role === "superadmin"
+        ? navigate("/superadmin")
+        : navigate("/admin")
+    }
+  >
+    Dashboard
+  </li>
+)}
+
+
           <li>Notifications</li>
         </ul>
+
         <button onClick={handleLogout} className="logout-link">
           Log Out
         </button>
@@ -102,40 +122,25 @@ const ProfilePage = () => {
           <div className="form-row">
             <label>
               First Name
-              <input
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-              />
+              <input name="firstName" value={form.firstName} onChange={handleChange} />
             </label>
             <label>
               Last Name
-              <input
-                name="lastName"
-                value={form.lastName || ""}
-                onChange={handleChange}
-              />
+              <input name="lastName" value={form.lastName || ""} onChange={handleChange} />
             </label>
           </div>
+
           <div className="form-row">
             <label>
               Email
-              <input
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                readOnly
-              />
+              <input name="email" value={form.email} onChange={handleChange} readOnly />
             </label>
             <label>
               Phone
-              <input
-                name="phoneNumber"
-                value={form.phoneNumber}
-                onChange={handleChange}
-              />
+              <input name="phoneNumber" value={form.phoneNumber} onChange={handleChange} />
             </label>
           </div>
+
           <div className="form-row">
             <label>
               Password

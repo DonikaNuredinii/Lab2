@@ -232,34 +232,45 @@ namespace Lab2_Backend.Controllers
 
 
         [Authorize]
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
+[HttpPost("logout")]
+public async Task<IActionResult> Logout()
+{
+    var userId = User.FindFirst("id")?.Value ?? "unknown";
+
+    try
+    {
+        if (int.TryParse(userId, out int parsedId))
         {
-            var userId = User.FindFirst("id")?.Value ?? "unknown";
-
-            try
-            {
-                if (int.TryParse(userId, out int parsedId))
-                {
-                    await _auditLogService.UpdateLogoutTimestampAsync(parsedId);
-                }
-
-                // ✅ FSHIRJA E COOKIE-S
-                Response.Cookies.Delete("refreshToken", new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.None,
-                    Path = "/" // 🔥 kjo është thelbësore – duhet të përputhet me path-in e vendosjes
-                });
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Audit log during logout failed: " + ex.Message);
-            }
-
-            return Ok(new { message = "Logged out successfully. Please delete the token on client side." });
+            await _auditLogService.UpdateLogoutTimestampAsync(parsedId);
         }
+
+        // ✅ Delete the JWT cookie
+        Response.Cookies.Delete("jwt", new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
+            Path = "/" // This MUST match what you used in login
+        });
+
+        // ✅ Also delete the refresh token cookie if present
+        Response.Cookies.Delete("refreshToken", new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
+            Path = "/" // Match login
+        });
+
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Audit log during logout failed: " + ex.Message);
+    }
+
+    return Ok(new { message = "Logged out successfully." });
+}
+
 
 
 

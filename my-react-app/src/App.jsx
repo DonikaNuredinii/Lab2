@@ -23,32 +23,35 @@ export default function Main() {
   const [authChecked, setAuthChecked] = useState(false);
   const [userRole, setUserRole] = useState("");
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setIsAuthenticated(false);
-        setAuthChecked(true);
-        return;
-      }
+useEffect(() => {
+  const checkAuth = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setIsAuthenticated(false);
+      setAuthChecked(true);
+      return;
+    }
 
-      try {
-        const res = await axiosInstance.get("/api/User/me");
-        const user = res.data;
+    try {
+      const res = await axiosInstance.get("/api/User/me");
+      const user = res.data;
 
-        setIsAuthenticated(true);
-        const role = user.roleName || "User";
-        setUserRole(role);
-      } catch (err) {
-        console.error("Auth failed", err);
-        setIsAuthenticated(false);
-      } finally {
-        setAuthChecked(true);
-      }
-    };
+      setIsAuthenticated(true);
+      const role = user.roleName?.toLowerCase() || "user"; // ✅ normalize case
+      setUserRole(role);
 
-    checkAuth();
-  }, [location.pathname]);
+      console.log("✅ Main.jsx authenticated as:", role);
+    } catch (err) {
+      console.error("Auth failed", err);
+      setIsAuthenticated(false);
+    } finally {
+      setAuthChecked(true);
+    }
+  };
+
+  checkAuth();
+}, [location.pathname]);
+
 
   // useEffect(() => {
   //   const checkAuth = async () => {
@@ -88,21 +91,22 @@ export default function Main() {
         <Route path="/main-menu" element={<MainMenu />} />
         <Route path="/dish/:menuItemId" element={<DishDetails />} />
         <Route
-          path="/login"
-          element={
-            authChecked && isAuthenticated ? (
-              userRole === "SuperAdmin" ? (
-                <Navigate to="/superadmin" />
-              ) : userRole === "Admin" ? (
-                <Navigate to="/admin" />
-              ) : (
-                <Navigate to="/online-menu" />
-              )
-            ) : (
-              <AuthForm setIsAuthenticated={setIsAuthenticated} />
-            )
-          }
-        />
+  path="/login"
+  element={
+    authChecked && isAuthenticated ? (
+      userRole === "superadmin" ? (
+        <Navigate to="/superadmin" />
+      ) : userRole === "admin" ? (
+        <Navigate to="/admin" />
+      ) : (
+        <Navigate to="/online-menu" />
+      )
+    ) : (
+      <AuthForm setIsAuthenticated={setIsAuthenticated} />
+    )
+  }
+/>
+
 
         {/* Protected Routes */}
         <Route
@@ -143,27 +147,26 @@ export default function Main() {
 
         {/* Admin Dashboards */}
         <Route
-          path="admin/*"
-          element={
-            isAuthenticated &&
-            (userRole === "Admin" || userRole === "SuperAdmin") ? (
-              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+  path="admin/*"
+  element={
+    isAuthenticated && (userRole === "admin" || userRole === "superadmin") ? (
+      <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
 
-        <Route
-          path="superadmin/*"
-          element={
-            isAuthenticated && userRole === "SuperAdmin" ? (
-              <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+<Route
+  path="superadmin/*"
+  element={
+    isAuthenticated && userRole === "superadmin" ? (
+      <AdminLayout theme={currentTheme} setTheme={setCurrentTheme} />
+    ) : (
+      <Navigate to="/login" />
+    )
+  }
+/>
 
         <Route
           path="rtl/*"
