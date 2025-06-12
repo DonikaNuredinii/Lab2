@@ -726,6 +726,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Lab2_Backend.Controllers.MessagesController",
+    "Method": "GetAdminForRestaurant",
+    "RelativePath": "api/Messages/admin/{restaurantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restaurantId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Lab2_Backend.Controllers.MessagesController",
+    "Method": "GetConversations",
+    "RelativePath": "api/Messages/conversations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Lab2_Backend.Controllers.MongoTestController",
     "Method": "TestConnection",
     "RelativePath": "api/MongoTest/ping",

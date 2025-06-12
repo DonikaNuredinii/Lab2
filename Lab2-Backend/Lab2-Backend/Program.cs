@@ -46,12 +46,17 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("https://localhost:7076", "http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
-    });
-});
+        policy.WithOrigins(
+            "http://localhost:5175",
+            "http://localhost:5173",
+            "https://localhost:7075"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+
+            });
+        });
 
 // ✅ JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");

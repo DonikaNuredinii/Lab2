@@ -1214,6 +1214,41 @@
         }
       }
     },
+    "/api/Messages/admin/{restaurantId}": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "restaurantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Messages/conversations": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Messages/{user1Id}/{user2Id}": {
       "get": {
         "tags": [
@@ -1905,6 +1940,37 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Payments/create-checkout-session": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StripeCheckoutDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StripeCheckoutDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StripeCheckoutDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -3306,7 +3372,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Staff"
+                    "$ref": "#/components/schemas/StaffDto"
                   }
                 }
               },
@@ -3314,7 +3380,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Staff"
+                    "$ref": "#/components/schemas/StaffDto"
                   }
                 }
               },
@@ -3322,7 +3388,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Staff"
+                    "$ref": "#/components/schemas/StaffDto"
                   }
                 }
               }
@@ -3338,17 +3404,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Staff"
+                "$ref": "#/components/schemas/StaffDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Staff"
+                "$ref": "#/components/schemas/StaffDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Staff"
+                "$ref": "#/components/schemas/StaffDto"
               }
             }
           }
@@ -3359,17 +3425,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Staff"
+                  "$ref": "#/components/schemas/StaffDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Staff"
+                  "$ref": "#/components/schemas/StaffDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Staff"
+                  "$ref": "#/components/schemas/StaffDto"
                 }
               }
             }
@@ -3399,17 +3465,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Staff"
+                  "$ref": "#/components/schemas/StaffDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Staff"
+                  "$ref": "#/components/schemas/StaffDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Staff"
+                  "$ref": "#/components/schemas/StaffDto"
                 }
               }
             }
@@ -3435,17 +3501,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Staff"
+                "$ref": "#/components/schemas/StaffDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Staff"
+                "$ref": "#/components/schemas/StaffDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Staff"
+                "$ref": "#/components/schemas/StaffDto"
               }
             }
           }
@@ -4498,6 +4564,24 @@
         },
         "additionalProperties": false
       },
+      "CartItemDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "Category": {
         "type": "object",
         "properties": {
@@ -5029,14 +5113,6 @@
             "type": "string",
             "nullable": true
           },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "zipCode": {
-            "type": "string",
-            "nullable": true
-          },
           "additionalInfo": {
             "type": "string",
             "nullable": true
@@ -5443,7 +5519,7 @@
         },
         "additionalProperties": false
       },
-      "Staff": {
+      "StaffDto": {
         "type": "object",
         "properties": {
           "userID": {
@@ -5466,32 +5542,22 @@
             "type": "string",
             "nullable": true
           },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
           "creationDate": {
             "type": "string",
             "format": "date-time"
           },
-          "refreshToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "refreshTokenExpiryTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "restaurantID": {
+          "roleID": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "lastLogin": {
+          "password": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
+          },
+          "restaurantID": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5644,6 +5710,19 @@
           },
           "table": {
             "$ref": "#/components/schemas/Table"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StripeCheckoutDto": {
+        "type": "object",
+        "properties": {
+          "cartItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItemDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
