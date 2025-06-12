@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../CSS/OnlineMenu.css";
 import { useParams, useNavigate } from "react-router-dom";
 import ChatModal from "../components/ChatModal";
-import { FaComments, FaUserCircle } from "react-icons/fa";
+import { FaComments } from "react-icons/fa";
 import {
   Box,
   Text,
@@ -32,16 +32,29 @@ const OnlineMenu = () => {
   const [selectedMenuItemId, setSelectedMenuItemId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const {
+    isOpen: isNoteModalOpen,
+    onOpen: onNoteModalOpen,
+    onClose: onNoteModalClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isChatModalOpen,
+    onOpen: onChatModalOpen,
+    onClose: onChatModalClose,
+  } = useDisclosure();
+
+  const {
     isOpen: isPaymentOpen,
     onOpen: onPaymentOpen,
     onClose: onPaymentClose,
-  } = useDisclosure();
-  const [orderId, setOrderId] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
+  } = useDisclosure(); // ✅ added
+  const [orderId, setOrderId] = useState(null); // ✅ added
 
   const closePaymentSidebar = () => {
     onPaymentClose();
   };
+
+  const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
     setCartItems((prev) => {
@@ -83,15 +96,9 @@ const OnlineMenu = () => {
 
       if (!res.ok) throw new Error("Failed to place order");
 
-      const orderData = await res.json();
-
-      navigate("/checkout", {
-        state: {
-          total: total,
-          orderId: orderData.ordersID,
-          cartItems: cartItems,
-        },
-      });
+      const data = await res.json(); // ✅ changed
+      setOrderId(data.id); // ✅ added
+      onPaymentOpen(); // ✅ open sidebar instead of alert
     } catch (err) {
       console.error(err);
       alert("Failed to place order");
@@ -101,7 +108,9 @@ const OnlineMenu = () => {
   const handleOpenNoteModal = async (item) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE}/api/MenuItemProducts/menuitem/${item.id}`
+        `${import.meta.env.VITE_API_BASE}/api/MenuItemProducts/menuitem/${
+          item.id
+        }`
       );
       if (!res.ok) throw new Error("Failed to fetch ingredients");
 
@@ -126,7 +135,7 @@ const OnlineMenu = () => {
       setSelectedItemProducts(uniqueNames);
       setSelectedProducts(uniqueNames);
       setSelectedMenuItemId(item.id);
-      onOpen();
+      onNoteModalOpen();
     } catch (err) {
       console.error("Error loading ingredients:", err);
       alert("Failed to load product ingredients.");
@@ -173,7 +182,9 @@ const OnlineMenu = () => {
 
       try {
         const restaurantRes = await fetch(
-          `${import.meta.env.VITE_API_BASE}/api/Restaurant/${restaurantIdToFetch}`
+          `${
+            import.meta.env.VITE_API_BASE
+          }/api/Restaurant/${restaurantIdToFetch}`
         );
         if (!restaurantRes.ok) throw new Error("Error fetching restaurant.");
 
@@ -354,10 +365,9 @@ const OnlineMenu = () => {
               </div>
             ))}
           </Box>
-
           <NoteModal
-            isOpen={isOpen}
-            onClose={onClose}
+            isOpen={isNoteModalOpen}
+            onClose={onNoteModalClose}
             products={selectedItemProducts}
             selected={selectedProducts}
             setSelected={setSelectedProducts}
@@ -493,11 +503,12 @@ const OnlineMenu = () => {
             size="lg"
             colorScheme="teal"
             borderRadius="full"
-            onClick={onOpen}
+            onClick={onChatModalOpen}
           />
+
           <ChatModal
-            isOpen={isOpen}
-            onClose={onClose}
+            isOpen={isChatModalOpen}
+            onClose={onChatModalClose}
             restaurant={selectedRestaurant}
           />
         </>
@@ -511,21 +522,6 @@ const OnlineMenu = () => {
         cartItems={cartItems}
         method={paymentMethod}
         setMethod={setPaymentMethod}
-      />
-
-      <IconButton
-        icon={<FaUserCircle />}
-        aria-label="Go to Profile"
-        position="fixed"
-        top="25px"
-        right="25px"
-        zIndex={1000}
-        size="lg"
-        borderRadius="full"
-        bg="#32524d"
-        color="white"
-        _hover={{ bg: "#26413d" }}
-        onClick={() => navigate("/profile")}
       />
     </div>
   );

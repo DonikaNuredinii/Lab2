@@ -2,27 +2,24 @@
 using Lab2_Backend.Configurations;
 using Lab2_Backend.MongoService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using Stripe;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Lab2_Backend.Helpers;
-using Lab2_Backend.Hubs;
-using Microsoft.AspNetCore.SignalR;
-using Lab2_Backend.Middleware;
 using System.Security.Claims;
-using Stripe;
+using Lab2_Backend.Hubs; // ✅ Import ChatHub
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load configuration
+// ✅ Load config and Stripe
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
-// SQL DB connection
+// ✅ SQL setup
 var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 var connectionString = isWindows
     ? builder.Configuration.GetConnectionString("TrustedConnection")
@@ -30,9 +27,8 @@ var connectionString = isWindows
 
 builder.Services.AddDbContext<MyContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddScoped<MongoAuditLogService>();
 
-// MongoDB
+// ✅ MongoDB
 builder.Services.Configure<MongoDBSettings>(
     builder.Configuration.GetSection("MongoDBSettings"));
 
@@ -45,22 +41,34 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
 builder.Services.AddScoped<MongoAuditLogService>();
 builder.Services.AddScoped<ChatService>();
 
-// CORS
+// ✅ CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5174", "http://localhost:5173")
+        policy.WithOrigins("https://localhost:7076", "http://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
     });
 });
 
-// JWT Authentication
+// ✅ JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var jwtKey = jwtSettings["SecretKey"];
 var key = Encoding.UTF8.GetBytes(jwtKey);
+
+var tokenValidationParams = new TokenValidationParameters
+{
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = jwtSettings["Issuer"],
+    ValidAudience = jwtSettings["Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(key)
+};
+builder.Services.AddSingleton(tokenValidationParams);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -69,25 +77,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnMessageReceived = context =>
             {
-                var accessToken = context.Request.Cookies["jwt"];
-                if (!string.IsNullOrEmpty(accessToken))
+                // ✅ Accept token from SignalR query string too
+                var accessToken = context.Request.Query["access_token"];
+
+                // If request is for SignalR hub
+                var path = context.HttpContext.Request.Path;
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chatHub"))
                 {
                     context.Token = accessToken;
                 }
+                else if (string.IsNullOrEmpty(accessToken))
+                {
+                    // fallback to cookie (if used)
+                    var cookieToken = context.Request.Cookies["jwt"];
+                    if (!string.IsNullOrEmpty(cookieToken))
+                        context.Token = cookieToken;
+                }
+
                 return Task.CompletedTask;
             }
         };
 
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtSettings["Issuer"],
-            ValidAudience = jwtSettings["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(key)
-        };
+        options.TokenValidationParameters = tokenValidationParams;
     });
 
 builder.Services.AddAuthorization(options =>
@@ -96,20 +107,18 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("RolesID", "1"));
 });
 
+builder.Services.AddSignalR(); // ✅ Add SignalR support
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-
-
+// ✅ Middleware Order
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseWebSockets();
-app.UseMiddleware<WebSocketMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -117,12 +126,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// ✅ Routes
 app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
-{
-    var chatService = scope.ServiceProvider.GetRequiredService<ChatService>();
-    WebSocketHandler.Configure(chatService);
-}
+app.MapHub<ChatHub>("/chatHub"); // ✅ Enable SignalR Hub route
 
 app.Run();

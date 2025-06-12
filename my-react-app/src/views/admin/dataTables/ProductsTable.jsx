@@ -28,6 +28,7 @@ import { MdEdit, MdDelete, MdFileUpload, MdFileDownload } from "react-icons/md";
 import * as XLSX from "xlsx";
 import ProductImportTemplate from "./components/ProductImportTemplate";
 import axios from "axios";
+import { useLocation } from "react-router-dom"; // ✅ NEW
 
 const columnHelper = createColumnHelper();
 
@@ -41,6 +42,9 @@ const ProductsTable = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
+  const location = useLocation(); // ✅ NEW
+  const isSuperAdmin = location.pathname.includes("/superadmin"); // ✅ NEW
+
   const fetchProducts = async () => {
     try {
       const response = await fetch(
@@ -50,7 +54,14 @@ const ProductsTable = () => {
         throw new Error("Error fetching products");
       }
       const data = await response.json();
-      setProducts(data);
+
+      if (isSuperAdmin) {
+        setProducts(data); // ✅ show all
+      } else {
+        const restaurantId = Number(localStorage.getItem("restaurantId"));
+        const filtered = data.filter((p) => p.restaurantId === restaurantId);
+        setProducts(filtered); // ✅ filter for admin
+      }
     } catch (err) {
       console.error(err);
       setError("Failed to load products");
@@ -67,6 +78,7 @@ const ProductsTable = () => {
     setEditingProduct(product);
     setIsEditing(true);
   };
+
   const handleSaveProduct = async () => {
     try {
       const updatedProduct = {
@@ -91,8 +103,8 @@ const ProductsTable = () => {
           isClosable: true,
           position: "top-right",
         });
-        setIsEditing(false); // ✅ closes the modal
-        fetchProducts(); // ✅ refresh list
+        setIsEditing(false);
+        fetchProducts();
       }
     } catch (error) {
       console.error("Error updating product:", error);
@@ -121,7 +133,6 @@ const ProductsTable = () => {
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
         for (const row of jsonData) {
-          // Validate Emri and Restaurant Name
           if (!row.Emri || !row["Restaurant Name"]) {
             toast({
               title: "Error",
@@ -131,25 +142,24 @@ const ProductsTable = () => {
               duration: 5000,
               isClosable: true,
             });
-            continue; // Skip to the next row
+            continue;
           }
 
           const restaurantName = row["Restaurant Name"];
           let restaurantId = null;
 
           try {
-            // Fetch RestaurantId from backend by name
             const restaurantResponse = await axios.get(
               `${
                 import.meta.env.VITE_API_BASE
               }/api/Restaurants/byname/${encodeURIComponent(restaurantName)}`
             );
-            restaurantId = restaurantResponse.data; // Assuming the backend returns just the ID
+            restaurantId = restaurantResponse.data;
           } catch (restaurantError) {
             console.error("Error fetching restaurant ID:", restaurantError);
             toast({
               title: "Error",
-              description: `Restaurant \'${restaurantName}\' not found. Skipping product \'${row.Emri}\'.`,
+              description: `Restaurant '${restaurantName}' not found. Skipping product '${row.Emri}'.`,
               status: "error",
               duration: 5000,
               isClosable: true,
@@ -177,12 +187,12 @@ const ProductsTable = () => {
             console.error("Error adding product:", productError);
             toast({
               title: "Error",
-              description: `Failed to add product \'${row.Emri}\'. Error: ${productError.message}`,
+              description: `Failed to add product '${row.Emri}'. Error: ${productError.message}`,
               status: "error",
               duration: 5000,
               isClosable: true,
             });
-            continue; // Skip to the next row on product add error
+            continue;
           }
         }
 
@@ -359,6 +369,7 @@ const ProductsTable = () => {
 
   if (loading) return <div>Loading products...</div>;
   if (error) return <div>{error}</div>;
+
   return (
     <>
       <Card flexDirection="column" w="100%" px="0px" mt="65px" overflowX="auto">

@@ -4,7 +4,6 @@ import { useSwipeable } from "react-swipeable";
 import "../CSS/FoodMenuCover.css";
 import RestaurantStatus from "../components/RestaurantStatus";
 
-
 const MenuCover = () => {
   const navigate = useNavigate();
 
@@ -20,17 +19,17 @@ const MenuCover = () => {
       <span className="corner bottom-right"></span>
       <div className="menu-cover">
         <div className="menu-logo">
-  <h1 className="menu-title">Restaurant Name</h1>
-  
-  {/* Statusi i restorantit */}
-  <RestaurantStatus />
+          <h1 className="menu-title">Bistro Delight</h1>
 
-  <div className="menu-symbols">
-    <span className="symbol">🐟</span>
-    <span className="symbol">🔪</span>
-    <span className="symbol">🐦</span>
-  </div>
-</div>
+          {/* Statusi i restorantit */}
+          <RestaurantStatus />
+
+          <div className="menu-symbols">
+            <span className="symbol">🐟</span>
+            <span className="symbol">🔪</span>
+            <span className="symbol">🐦</span>
+          </div>
+        </div>
       </div>
     </div>
   );

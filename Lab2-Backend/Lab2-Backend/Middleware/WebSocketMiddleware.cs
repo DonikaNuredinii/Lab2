@@ -3,6 +3,9 @@ using System.Net.WebSockets;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Lab2_Backend.MongoService;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Lab2_Backend.Middleware
@@ -22,21 +25,41 @@ namespace Lab2_Backend.Middleware
         {
             if (context.Request.Path == "/ws" && context.WebSockets.IsWebSocketRequest)
             {
-                var user = context.User;
-                var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier);
+                var token = context.Request.Query["token"].ToString();
+                var userIdParam = context.Request.Query["userId"].ToString();
 
-                if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+                if (string.IsNullOrWhiteSpace(token) || !int.TryParse(userIdParam, out int userId))
                 {
                     context.Response.StatusCode = 401;
                     return;
                 }
 
-                var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var validationParams = _serviceProvider.GetRequiredService<TokenValidationParameters>();
 
-                using var scope = _serviceProvider.CreateScope();
-                var chatService = scope.ServiceProvider.GetRequiredService<ChatService>();
+                try
+                {
+                    var principal = tokenHandler.ValidateToken(token, validationParams, out _);
+                    var claimUserId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                await WebSocketHandler.Handle(webSocket, userId, chatService); 
+                    if (claimUserId != userId.ToString())
+                    {
+                        context.Response.StatusCode = 403;
+                        return;
+                    }
+
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+
+                    using var scope = _serviceProvider.CreateScope();
+                    var chatService = scope.ServiceProvider.GetRequiredService<ChatService>();
+
+                    await WebSocketHandler.Handle(webSocket, userId, chatService);
+                }
+                catch (SecurityTokenException ex)
+                {
+                    Console.WriteLine("JWT validation failed: " + ex.Message);
+                    context.Response.StatusCode = 401;
+                }
             }
             else
             {
